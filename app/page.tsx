@@ -1,7 +1,11 @@
+import Hero from "./ui/Hero";
+import Ranking from "./ui/Ranking";
+
 export default function Home() {
   return (
-    <main className="h-[2000px]">
-      <div>hello</div>
-    </main>
+    <div className="py-[10%] px-[4%]">
+      <Hero />
+      <Ranking />
+    </div>
   );
 }

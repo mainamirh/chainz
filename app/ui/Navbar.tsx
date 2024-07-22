@@ -84,7 +84,7 @@ export default function Navbar() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <Button type="button">Get Started</Button>
+          <Button type="button">Login</Button>
           {/* <MoonStar className="w-5 h-5" />
           <SunMedium className="w-5 h-5" /> */}
           <div onClick={toggleDrawer} className="md:hidden flex">

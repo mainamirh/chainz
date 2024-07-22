@@ -17,7 +17,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} bg-background text-content`}>
         <Navbar />
-        {children}
+        <div className="w-full h-[400px] -z-10 top-[80px] absolute bg-gradient" />
+
+        <main className="py-[70px] w-full max-w-[1440px] mx-auto">
+          {children}
+        </main>
       </body>
     </html>
   );

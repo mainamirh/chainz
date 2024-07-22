@@ -28,3 +28,11 @@
     --color-content: 255 255 250;
   }
 }
+
+.bg-gradient {
+  background: linear-gradient(45deg, transparent 20%, #454ade 100%);
+  background-repeat: no-repeat;
+  background-position: 0 40%;
+  background-size: cover;
+  filter: blur(70px);
+}
