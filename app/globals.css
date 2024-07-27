@@ -10,6 +10,8 @@
     --color-content: 17 17 17;
     --color-iris-lighter: 79 85 255;
     --color-iris-darker: 69 74 222;
+    --color-up: 22 199 132;
+    --color-down: 234 57 67;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -35,4 +37,12 @@
   background-position: 0 40%;
   background-size: cover;
   filter: blur(70px);
+}
+
+.week-chart-isUp {
+  filter: hue-rotate(85deg) saturate(80%) brightness(0.85);
+}
+
+.week-chart-isDown {
+  filter: hue-rotate(300deg) saturate(210%) brightness(0.7) contrast(170%);
 }

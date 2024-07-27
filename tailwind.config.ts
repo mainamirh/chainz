@@ -17,6 +17,8 @@ const config: Config = {
           darker: "rgb(var(--color-iris-darker) / <alpha-value>)",
           lighter: "rgb(var(--color-iris-lighter) / <alpha-value>)",
         },
+        up: "rgb(var(--color-up) / <alpha-value>)",
+        down: "rgb(var(--color-down) / <alpha-value>)",
       },
     },
   },

@@ -15,7 +15,7 @@ const Drawer = ({
 
   return (
     <div
-      className={`md:hidden fixed inset-0 text-dark-baby-powder bg-dark-eerie-black transition-all duration-300 pt-[80px] ${
+      className={`md:hidden fixed inset-0 text-dark-baby-powder bg-foreground transition-all duration-300 pt-[80px] ${
         isOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
       }`}
     >

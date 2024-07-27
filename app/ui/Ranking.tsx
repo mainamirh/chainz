@@ -1,24 +1,25 @@
 import Image from "next/image";
+import type { ListingLatest } from "../lib/apis/coinmarketcap";
+import { coinLogo, coinLastWeekChart } from "../lib/definitions";
+import { roundDecimalsPlaces } from "../lib/utils";
+import PercentChange from "./PercentChange";
 
-import { CoinsRanking } from "../lib/placeholder-data";
-
-const Ranking = () => {
+const Ranking = ({ CoinsRanking }: { CoinsRanking: ListingLatest[] }) => {
   return (
     <div className="mt-[150px] border shadow-md border-border p-5 rounded-xl bg-foreground/50 overflow-auto">
       <table className="w-full table-fixed whitespace-nowrap">
         <thead>
-          <tr className="[&>th]:py-3 [&>th]:text-start [&>th]:font-medium [&>th]:text-sm">
-            <th className="pl-5 w-[50px]">#</th>
-            <th className="w-[150px]">Name</th>
-            <th className="w-[120px]">Best Buy Price</th>
-            <th className="w-[120px]">From Exchange</th>
-            <th className="w-[120px]">Best Sell Price</th>
-            <th className="w-[120px]">From Exchange</th>
-            <th className="w-[110px]">Market Cap</th>
+          <tr className="[&>th]:py-3 [&>th]:text-end [&>th]:font-semibold [&>th]:text-xs [&>th]:border-b-[1px] [&>th]:border-border">
+            <th className="pl-5 w-[50px] !text-start">#</th>
+            <th className="w-[130px] !text-start">Name</th>
+            <th className="w-[120px]">Price</th>
             <th className="w-[60px]">1h %</th>
             <th className="w-[60px]">24h %</th>
             <th className="w-[60px]">7d %</th>
-            <th className="w-[100px]">Last 7 Days</th>
+            <th className="w-[140px]">Market Cap</th>
+            <th className="w-[130px]">Volume(24h)</th>
+            <th className="w-[130px]">Circulating Supply</th>
+            <th className="w-[160px]">Last 7 Days</th>
           </tr>
         </thead>
         <tbody>
@@ -28,57 +29,78 @@ const Ranking = () => {
                 i !== CoinsRanking.length - 1
                   ? "[&>td]:border-b-[1px] [&>td]:border-border"
                   : "border-none"
-              } hover:bg-border/30 transition-colors cursor-pointer [&>td]:py-5`}
-              key={data.Name + i}
+              } hover:bg-border/30 transition-colors cursor-pointer [&>td]:text-end [&>td]:py-5 [&>td]:font-medium [&>td]:text-sm`}
+              key={data.id}
             >
-              <td className="pl-5">{i + 1}</td>
+              <td className="pl-5 !text-start">{data.cmc_rank}</td>
               <td>
                 <div className="flex items-center gap-2">
                   <Image
-                    src={data.icon}
+                    src={coinLogo(data.id)}
                     alt="coin-icon"
                     width={24}
                     height={24}
                     className="aspect-auto"
                   />
 
-                  {data.Name}
+                  {data.name}
                   <span className="text-sm font-semibold text-content/70">
                     {data.symbol}
                   </span>
                 </div>
               </td>
-              <td>${data.bestBuyPrice.toLocaleString()}</td>
               <td>
-                <Image
-                  src={data.buyExchange}
-                  alt="buy-exchange"
-                  width={1000}
-                  height={1000}
-                  className="aspect-auto w-[70px] dark:backdrop-invert"
+                ${roundDecimalsPlaces(data.quote.USD.price, 2).toLocaleString()}
+              </td>
+              <td>
+                <PercentChange
+                  price={data.quote.USD.percent_change_1h}
+                  decimalPlaces={2}
                 />
               </td>
-              <td>${data.bestSellPrice.toLocaleString()}</td>
               <td>
-                <Image
-                  src={data.sellExchange}
-                  alt="sell-exchange"
-                  width={1000}
-                  height={1000}
-                  className="aspect-auto w-[70px] dark:backdrop-invert"
+                <PercentChange
+                  price={data.quote.USD.percent_change_24h}
+                  decimalPlaces={2}
                 />
               </td>
-              <td>${data.marketCap.toLocaleString()} B</td>
-              <td>{data.lastHour}</td>
-              <td>{data.lastDay}</td>
-              <td>{data.lastWeek}</td>
+              <td>
+                <PercentChange
+                  price={data.quote.USD.percent_change_7d}
+                  decimalPlaces={2}
+                />
+              </td>
+              <td>
+                $
+                {roundDecimalsPlaces(
+                  data.quote.USD.market_cap,
+                  0
+                ).toLocaleString()}
+              </td>
+              <td>
+                {roundDecimalsPlaces(
+                  data.quote.USD.volume_24h,
+                  0
+                ).toLocaleString()}
+              </td>
+              <td>
+                {roundDecimalsPlaces(
+                  data.circulating_supply,
+                  0
+                ).toLocaleString()}
+              </td>
               <td>
                 <Image
-                  src={data.lastWeekChart}
+                  src={coinLastWeekChart(data.id)}
                   alt="last-week-chart"
                   width={1000}
                   height={1000}
-                  className="aspect-auto w-[100px] h-[40px]"
+                  className={`${
+                    roundDecimalsPlaces(data.quote.USD.percent_change_7d, 2) >=
+                    0
+                      ? "week-chart-isUp"
+                      : "week-chart-isDown"
+                  } aspect-auto h-[50px]`}
                 />
               </td>
             </tr>
