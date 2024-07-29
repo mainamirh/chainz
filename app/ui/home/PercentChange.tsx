@@ -1,5 +1,5 @@
 import React from "react";
-import { roundDecimalsPlaces } from "../lib/utils";
+import { roundDecimalsPlaces } from "../../lib/utils";
 import { ChevronUp, ChevronDown } from "lucide-react";
 
 const PercentChange = ({

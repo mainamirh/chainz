@@ -42,7 +42,7 @@ export async function getListingsLatest(
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
+        "X-CMC_PRO_API_KEY": `${process.env.NEXT_PUBLIC_CMC_API_KEY}`,
       },
     }
   );

@@ -46,3 +46,31 @@
 .week-chart-isDown {
   filter: hue-rotate(300deg) saturate(210%) brightness(0.7) contrast(170%);
 }
+
+.positive-price {
+  animation: positive-tic 3s ease-out;
+}
+
+.negative-price {
+  animation: negative-tic 3s ease-out;
+}
+
+@keyframes positive-tic {
+  0% {
+    color: rgb(22, 199, 132);
+  }
+
+  60% {
+    color: rgb(22, 199, 132);
+  }
+}
+
+@keyframes negative-tic {
+  0% {
+    color: rgb(234, 57, 67);
+  }
+
+  60% {
+    color: rgb(234, 57, 67);
+  }
+}
