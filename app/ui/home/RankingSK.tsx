@@ -1,12 +1,10 @@
-import React from "react";
-
-const RankingSK = ({ coinCount }: { coinCount: number }) => {
+const RankingSK = ({ numberOfCoins }: { numberOfCoins: number }) => {
   return (
     <>
-      {[...Array(coinCount)].map((_, i) => (
+      {[...Array(numberOfCoins)].map((_, i) => (
         <tr
           className={`${
-            i !== coinCount - 1
+            i !== numberOfCoins - 1
               ? "[&>td]:border-b-[1px] [&>td]:border-border"
               : "border-none"
           } [&>td]:py-5 [&>td>*]:bg-border [&>td>*]:rounded-md [&>td>*]:h-6 [&>td>*]:ml-5 animate-pulse`}
@@ -22,7 +20,7 @@ const RankingSK = ({ coinCount }: { coinCount: number }) => {
               <div className="w-7 h-4" />
             </div>
           </td>
-          {[...Array(coinCount - 3)].map((_, i) => (
+          {[...Array(numberOfCoins - 3)].map((_, i) => (
             <td key={i}>
               <div />
             </td>

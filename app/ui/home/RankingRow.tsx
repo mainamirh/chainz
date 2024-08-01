@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useEffect } from "react";
 
 import { coinLogo, coinLastWeekChart } from "../../lib/definitions";
 import { roundDecimalsPlaces } from "../../lib/utils";
-import PercentChange from "./PercentChange";
+import PercentChange from "../common/PercentChange";
 
 import type { ListingLatest } from "@/app/lib/apis/coinmarketcap";
 
@@ -47,7 +48,10 @@ export const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
     <>
       <td className="pl-5 !text-start">{coinRanking.cmc_rank}</td>
       <td>
-        <div className="flex items-center gap-2">
+        <Link
+          href={`/currencies/${coinRanking.name.toLowerCase()}`}
+          className="flex items-center gap-2"
+        >
           <Image
             src={coinLogo(coinRanking.id)}
             alt="coin-icon"
@@ -57,10 +61,10 @@ export const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
           />
 
           {coinRanking.name}
-          <span className="text-sm font-semibold text-content/70">
+          <span className="text-sm font-medium text-content/70">
             {coinRanking.symbol}
           </span>
-        </div>
+        </Link>
       </td>
       <td>
         <div ref={priceRef}>

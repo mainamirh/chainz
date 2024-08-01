@@ -1,22 +1,18 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getListingsLatest } from "../../lib/apis/coinmarketcap";
+import { useRouter } from "next/navigation";
+
 import RankingSK from "./RankingSK";
 import { RankingRow } from "./RankingRow";
+import useListingLatest from "@/app/lib/hooks/useListingLatest";
 
 const Ranking = () => {
-  const COIN_COUNT = 10;
+  const router = useRouter();
 
-  const { isPending, data: CoinsRanking } = useQuery({
-    queryKey: ["listings", "latest"],
-    queryFn: () => getListingsLatest(COIN_COUNT),
-    staleTime: 60 * 1000,
-    // refetchInterval: 60 * 1000,
-  });
+  const { isPending, data: CoinsRanking, numberOfCoins } = useListingLatest();
 
   return (
-    <div className="mt-[10%] border shadow-md border-border p-5 rounded-xl bg-foreground/50 overflow-auto">
+    <div className="mt-[10%] border shadow-md border-border p-5 rounded-xl bg-foreground overflow-auto">
       <table className="w-full table-fixed whitespace-nowrap">
         <thead>
           <tr className="[&>th]:py-3 [&>th]:text-end [&>th]:font-semibold [&>th]:text-xs [&>th]:border-b-[1px] [&>th]:border-border">
@@ -42,11 +38,14 @@ const Ranking = () => {
                     : "border-none"
                 } hover:bg-border/30 transition-colors cursor-pointer [&>td]:text-end [&>td]:py-5 [&>td]:font-medium [&>td]:text-sm`}
                 key={data.id}
+                onClick={() =>
+                  router.push(`/currencies/${data.name.toLowerCase()}`)
+                }
               >
                 <RankingRow coinRanking={data} />
               </tr>
             ))}
-          {isPending && <RankingSK coinCount={COIN_COUNT} />}
+          {isPending && <RankingSK numberOfCoins={numberOfCoins} />}
         </tbody>
       </table>
     </div>
