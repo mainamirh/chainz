@@ -11,7 +11,6 @@ export default function useListingLatest() {
       queryFn: () => getListingsLatest(numberOfCoins),
       staleTime: 60 * 1000,
       // refetchInterval: 60 * 1000,
-      refetchOnMount: false,
     }),
   };
 }

@@ -80,17 +80,7 @@ export const MetadataNetworkSK = () => {
   return (
     <div className="animate-pulse w-full flex flex-wrap gap-2">
       {[...Array(lines)].map((_, i) => {
-        const rand = Math.round((Math.random() * (0.5 - 0.2) + 0.2) * 100)
-          .toString()
-          .concat("%");
-
-        return (
-          <div
-            key={i}
-            style={{ width: rand }}
-            className={`h-6 bg-border rounded`}
-          />
-        );
+        return <div key={i} className="w-5/12 h-6 bg-border rounded" />;
       })}
     </div>
   );

@@ -58,9 +58,9 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed w-full z-50 flex text-xs md:text-sm justify-between items-center bg-foreground px-[5%] py-4 border-b border-border">
+      <header className="fixed z-50 flex w-full items-center justify-between border-b border-border bg-foreground px-[5%] py-4 text-xs md:text-sm">
         <div>
-          <Link href="/" className="text-xl md:text-2xl font-bold">
+          <Link href="/" className="text-xl font-bold md:text-2xl">
             Chain
             <span
               style={{ color: "transparent" }}
@@ -70,14 +70,14 @@ export default function Navbar() {
             </span>
           </Link>
         </div>
-        <nav className="items-center gap-8 hidden md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
             <Link
               href={item.url}
               key={item.label}
               className={`${
                 item.url === pathname && "text-indigo-400"
-              } hover:text-indigo-400 transition-colors`}
+              } transition-colors hover:text-indigo-400`}
             >
               {item.label}
             </Link>
@@ -87,17 +87,21 @@ export default function Navbar() {
           <Button type="button">Login</Button>
           {/* <MoonStar className="w-5 h-5" />
           <SunMedium className="w-5 h-5" /> */}
-          <div onClick={toggleDrawer} className="md:hidden flex">
+          <div onClick={toggleDrawer} className="flex md:hidden">
             {isDrawerOpen ? (
-              <X className="w-6 h-6" />
+              <X className="h-6 w-6" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="h-6 w-6" />
             )}
           </div>
         </div>
       </header>
 
-      <Drawer isOpen={isDrawerOpen} navItems={navItems} />
+      <Drawer
+        isOpen={isDrawerOpen}
+        toggleDrawer={toggleDrawer}
+        navItems={navItems}
+      />
     </>
   );
 }

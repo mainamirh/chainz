@@ -32,7 +32,7 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
   const { data: metadata } = useMetadata(currency.id);
 
   return (
-    <section className="flex flex-col w-full shadow-md items-start bg-foreground rounded-xl gap-6 border border-border p-6">
+    <section className="flex w-full flex-col items-start gap-6 rounded-xl border border-border bg-foreground p-6 shadow-md">
       <div className="flex items-center gap-2">
         <Image
           src={coinLogo(currency.id)}
@@ -50,7 +50,7 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
       </div>
 
       <div className="flex flex-col items-start gap-3">
-        <div className="font-bold text-4xl">
+        <div className="text-4xl font-bold">
           $
           {currency.quote.USD.price.toLocaleString("en-US", {
             maximumFractionDigits: currency.quote.USD.price > 1.0 ? 2 : 4,
@@ -61,7 +61,7 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
         <PercentChange
           price={currency.quote.USD.percent_change_24h}
           decimalPlaces={2}
-          className="gap-1 font-medium text-sm"
+          className="gap-1 text-sm font-medium"
         >
           <span>(1d)</span>
         </PercentChange>
@@ -69,7 +69,7 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
 
       {metadata ? (
         <p
-          className="[&>a]:text-blue-400 text-sm md:text-base text-justify hover:[&>a]:text-blue-500 [&>a]:transition-colors [&>a]:text-sm"
+          className="text-justify text-sm md:text-base [&>a]:text-sm [&>a]:text-blue-400 [&>a]:transition-colors hover:[&>a]:text-blue-500"
           dangerouslySetInnerHTML={{
             __html: linkToATag(metadata.description),
           }}
@@ -78,18 +78,18 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
         <MetadataDescriptionSK />
       )}
 
-      <div className="flex flex-col w-full gap-2 text-xs md:text-sm">
+      <div className="flex w-full flex-col gap-2 text-xs md:text-sm">
         <span>Official Links</span>
         {metadata ? (
-          <div className="flex items-center flex-wrap gap-4 text-blue-400">
+          <div className="flex flex-wrap items-center gap-4 text-blue-400">
             {metadata.urls.website.map((url) => (
               <Link
                 key={url}
                 href={url}
                 target="_blank"
-                className="flex items-center gap-1 hover:text-blue-500 transition-opacity"
+                className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <Globe className="w-4 h-4" />
+                <Globe className="h-4 w-4" />
                 {url.slice(0, url.length - 1)}
               </Link>
             ))}
@@ -98,9 +98,9 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 href={url}
                 target="_blank"
                 key={url}
-                className="flex items-center gap-1 hover:text-blue-500 transition-opacity"
+                className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <StickyNote className="w-4 h-4" />
+                <StickyNote className="h-4 w-4" />
                 Whitepaper
               </Link>
             ))}
@@ -110,9 +110,9 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 href={url}
                 target="_blank"
                 key={url}
-                className="flex items-center gap-1 hover:text-blue-500 transition-opacity"
+                className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <Github className="w-4 h-4" />
+                <Github className="h-4 w-4" />
                 Github
               </Link>
             ))}
@@ -122,18 +122,18 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
         )}
       </div>
 
-      <div className="flex flex-col w-full gap-2 text-xs md:text-sm">
+      <div className="flex w-full flex-col gap-2 text-xs md:text-sm">
         <span>Socials</span>
         {metadata ? (
-          <div className="flex items-center flex-wrap gap-4 text-blue-400">
+          <div className="flex flex-wrap items-center gap-4 text-blue-400">
             {metadata.urls.twitter.map((url) => (
               <Link
                 href={url}
                 target="_blank"
                 key={url}
-                className="flex items-center gap-1 hover:text-blue-500 transition-opacity"
+                className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <Twitter className="w-4 h-4" />
+                <Twitter className="h-4 w-4" />
                 Twitter
               </Link>
             ))}
@@ -142,9 +142,9 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 href={url}
                 target="_blank"
                 key={url}
-                className="flex items-center gap-1 hover:text-blue-500 transition-opacity"
+                className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <Bot className="w-4 h-4" />
+                <Bot className="h-4 w-4" />
                 Reddit
               </Link>
             ))}
@@ -154,9 +154,9 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 href={url}
                 target="_blank"
                 key={url}
-                className="flex items-center gap-1 hover:text-blue-500 transition-opacity"
+                className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <Facebook className="w-4 h-4" />
+                <Facebook className="h-4 w-4" />
                 Facebook
               </Link>
             ))}
@@ -166,9 +166,9 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 href={url}
                 target="_blank"
                 key={url}
-                className="flex items-center gap-1 hover:text-blue-500 transition-opacity"
+                className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="h-4 w-4" />
                 {url.split("/").indexOf("discord") !== -1 ? "Discord" : "Chat"}
               </Link>
             ))}
@@ -178,19 +178,19 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
         )}
       </div>
 
-      <div className="flex flex-col w-full gap-2 text-xs md:text-sm">
+      <div className="flex w-full flex-col gap-2 text-xs md:text-sm">
         <span>Network information</span>
         {metadata ? (
-          <div className="flex items-center flex-wrap gap-4 text-blue-400">
+          <div className="flex flex-wrap items-center gap-4 text-blue-400">
             {metadata.urls.explorer.map((url) => (
               <Link
                 href={url}
                 target="_blank"
                 key={url}
-                className="flex items-center gap-1 hover:text-blue-500 transition-opacity"
+                className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
                 {url.replace("https://", "").split("/")[0]}
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="h-4 w-4" />
               </Link>
             ))}
           </div>

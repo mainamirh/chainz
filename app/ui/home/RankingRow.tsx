@@ -21,10 +21,10 @@ export const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
       if (!mutationList[0].oldValue) return;
       const newValue = parseFloat(priceElement.innerText.replace(/[$,]/g, ""));
       const oldValue = parseFloat(
-        mutationList[0].oldValue.replace(/[$,]/g, "")
+        mutationList[0].oldValue.replace(/[$,]/g, ""),
       );
       priceElement.classList.add(
-        newValue >= oldValue ? "positive-price" : "negative-price"
+        newValue >= oldValue ? "positive-price" : "negative-price",
       );
       setTimeout(() => {
         priceElement.classList.remove(priceElement.classList[0]);
@@ -97,19 +97,19 @@ export const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
         $
         {roundDecimalsPlaces(
           coinRanking.quote.USD.market_cap,
-          0
+          0,
         ).toLocaleString()}
       </td>
       <td>
         {roundDecimalsPlaces(
           coinRanking.quote.USD.volume_24h,
-          0
+          0,
         ).toLocaleString()}
       </td>
       <td>
         {roundDecimalsPlaces(
           coinRanking.circulating_supply,
-          0
+          0,
         ).toLocaleString()}
       </td>
       <td>

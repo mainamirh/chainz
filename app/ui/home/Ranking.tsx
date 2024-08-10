@@ -12,11 +12,11 @@ const Ranking = () => {
   const { isPending, data: CoinsRanking, numberOfCoins } = useListingLatest();
 
   return (
-    <div className="mt-[10%] border shadow-md border-border p-5 rounded-xl bg-foreground overflow-auto">
+    <div className="mt-[10%] overflow-auto rounded-xl border border-border bg-foreground p-5 shadow-md">
       <table className="w-full table-fixed whitespace-nowrap">
         <thead>
-          <tr className="[&>th]:py-3 [&>th]:text-end [&>th]:font-semibold [&>th]:text-xs [&>th]:border-b-[1px] [&>th]:border-border">
-            <th className="pl-5 w-[50px] !text-start">#</th>
+          <tr className="[&>th]:border-b-[1px] [&>th]:border-border [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
+            <th className="w-[50px] pl-5 !text-start">#</th>
             <th className="w-[130px] !text-start">Name</th>
             <th className="w-[120px]">Price</th>
             <th className="w-[60px]">1h %</th>
@@ -36,10 +36,12 @@ const Ranking = () => {
                   i !== CoinsRanking.length - 1
                     ? "[&>td]:border-b-[1px] [&>td]:border-border"
                     : "border-none"
-                } hover:bg-border/30 transition-colors cursor-pointer [&>td]:text-end [&>td]:py-5 [&>td]:font-medium [&>td]:text-sm`}
+                } cursor-pointer transition-colors hover:bg-border/30 [&>td]:py-5 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
                 key={data.id}
                 onClick={() =>
-                  router.push(`/currencies/${data.name.toLowerCase()}`)
+                  router.push(
+                    `/currencies/${data.name.toLowerCase()}?category=price&range=1D`,
+                  )
                 }
               >
                 <RankingRow coinRanking={data} />

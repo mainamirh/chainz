@@ -6,6 +6,5 @@ export default function useMetadata(coinId: number) {
     queryKey: ["metadata", coinId],
     queryFn: () => getMetadataV2(coinId),
     staleTime: 24 * 60 * 60 * 1000,
-    refetchOnMount: false,
   });
 }
