@@ -32,7 +32,7 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
   const { data: metadata } = useMetadata(currency.id);
 
   return (
-    <section className="flex w-full flex-col items-start gap-6 rounded-xl border border-border bg-foreground p-6 shadow-md">
+    <section className="flex w-full flex-col items-start gap-6 rounded-md border border-border bg-foreground p-6 shadow-md">
       <div className="flex items-center gap-2">
         <Image
           src={coinLogo(currency.id)}

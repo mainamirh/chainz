@@ -45,6 +45,23 @@ export function yearMonthFormat(date: string): string {
   return formattedDate;
 }
 
+export function regularDateFormat(date: string) {
+  const formattedDate = new Intl.DateTimeFormat("en-US").format(new Date(date));
+
+  return formattedDate;
+}
+
+export function fullClockFormat(date: string) {
+  const formattedTime = new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+  }).format(new Date(date));
+
+  return formattedTime;
+}
+
 export function compactNumber(number: number): string {
   const formattedNumber = new Intl.NumberFormat("en-US", {
     notation: "compact",
@@ -54,4 +71,19 @@ export function compactNumber(number: number): string {
   }).format(number);
 
   return formattedNumber;
+}
+
+export function formatByRange(value: any, _: number, range: string): string {
+  switch (range) {
+    case "1D":
+      return twelveHourFormat(value);
+    case "7D":
+      return dayMonthFormat(value);
+    case "1M":
+      return dayMonthFormat(value);
+    case "1Y":
+      return yearMonthFormat(value);
+    default:
+      return value;
+  }
 }

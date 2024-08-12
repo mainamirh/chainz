@@ -8,15 +8,17 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-  Tooltip,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
+
+import CustomTooltip from "./CustomTooltip";
 
 import { LoaderCircle } from "lucide-react";
 
 import type { AxisDomain } from "recharts/types/util/types";
-import type { HistoricalData } from "@/app/lib/apis/coinpaprika";
-import { compactNumber } from "@/app/lib/utils";
+import type { HistoricalData, Range } from "@/app/lib/apis/coinpaprika";
+import { compactNumber, formatByRange } from "@/app/lib/utils";
 
 const Chart = ({
   data,
@@ -26,7 +28,11 @@ const Chart = ({
   isPlaceholderData: boolean;
 }) => {
   const searchParams = useSearchParams();
+  const rangeParam = (searchParams.get("range") as Range) ?? "1D";
   const key = searchParams.get("category") ?? "price";
+
+  const accentColor =
+    key === "price" ? "rgb(var(--color-up))" : "rgb(var(--color-iris-darker))";
 
   function calculateDomain(): AxisDomain | undefined {
     if (key === "price") {
@@ -48,7 +54,7 @@ const Chart = ({
         <div className="absolute -inset-[4px] z-10 flex items-center justify-center rounded-xl bg-background/50 backdrop-blur-sm">
           <div className="flex flex-col items-center gap-1">
             <LoaderCircle className="h-5 w-5 animate-spin md:h-6 md:w-6" />
-            <div className="text-base">Loading Data</div>
+            <div className="text-xs md:text-sm">Loading Data</div>
           </div>
         </div>
       )}
@@ -59,17 +65,9 @@ const Chart = ({
           margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
         >
           <defs>
-            <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-              <stop
-                offset="5%"
-                stopColor="rgb(var(--color-up))"
-                stopOpacity={0.8}
-              />
-              <stop
-                offset="95%"
-                stopColor="rgb(var(--color-up))"
-                stopOpacity={0}
-              />
+            <linearGradient id="accentColor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor={accentColor} stopOpacity={0.7} />
+              <stop offset="95%" stopColor={accentColor} stopOpacity={0} />
             </linearGradient>
           </defs>
           <XAxis
@@ -80,6 +78,9 @@ const Chart = ({
             tickMargin={10}
             minTickGap={40}
             interval={"equidistantPreserveStart"}
+            tickFormatter={(value, index) =>
+              formatByRange(value, index, rangeParam)
+            }
           />
           <YAxis
             tickLine={false}
@@ -91,13 +92,14 @@ const Chart = ({
             tickFormatter={compactNumber}
           />
           <CartesianGrid stroke="rgb(var(--color-border))" vertical={false} />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip accentColor={accentColor} />} />
           <Area
             type="monotone"
             dataKey={key}
-            stroke="rgb(var(--color-up))"
+            stroke={accentColor}
             fillOpacity={1}
-            fill="url(#colorPrice)"
+            fill="url(#accentColor)"
+            isAnimationActive={false}
           />
         </AreaChart>
       </ResponsiveContainer>

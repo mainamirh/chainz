@@ -6,12 +6,6 @@ import Chart from "./Chart";
 import { LoaderCircle } from "lucide-react";
 import useHistoricalTicks from "@/app/lib/hooks/useHistoricalTicks";
 
-import {
-  twelveHourFormat,
-  dayMonthFormat,
-  yearMonthFormat,
-} from "@/app/lib/utils";
-
 import type { Range } from "@/app/lib/apis/coinpaprika";
 
 const categories = ["price", "market_cap"];
@@ -39,7 +33,7 @@ const HistoricalChart = ({ coinId }: { coinId: string | undefined }) => {
   }
 
   return (
-    <div className="flex flex-col rounded-xl border border-border p-[3%]">
+    <div className="flex flex-col rounded-md border border-border p-[3%]">
       <div className="mb-7 flex items-center justify-between gap-7 text-[0.7rem] font-medium md:text-xs">
         <div className="flex items-center gap-1 rounded-md border border-border bg-foreground p-1">
           {categories.map((category) => (
@@ -47,7 +41,7 @@ const HistoricalChart = ({ coinId }: { coinId: string | undefined }) => {
               key={category}
               type="button"
               onClick={() => handleSearchParams("category", category)}
-              className={`${categoryParam === category && "bg-border"} rounded-md px-2 py-1 capitalize transition-colors hover:bg-border`}
+              className={`${categoryParam === category && "bg-border"} rounded-md px-2 py-1 capitalize transition-colors hover:bg-border/40`}
             >
               <span>{category.replace("_", " ")}</span>
             </button>
@@ -59,7 +53,7 @@ const HistoricalChart = ({ coinId }: { coinId: string | undefined }) => {
               key={range}
               type="button"
               onClick={() => handleSearchParams("range", range)}
-              className={`${rangeParam === range && "bg-border"} rounded-md px-2 py-1 transition-colors hover:bg-border`}
+              className={`${rangeParam === range && "bg-border"} rounded-md px-2 py-1 transition-colors hover:bg-border/40`}
             >
               <span>{range}</span>
             </button>
@@ -67,24 +61,7 @@ const HistoricalChart = ({ coinId }: { coinId: string | undefined }) => {
         </div>
       </div>
       {historicalTicks ? (
-        <Chart
-          isPlaceholderData={isPlaceholderData}
-          data={historicalTicks?.map((data) => ({
-            ...data,
-            timestamp: (() => {
-              switch (rangeParam) {
-                case "1D":
-                  return twelveHourFormat(data.timestamp);
-                case "7D":
-                  return dayMonthFormat(data.timestamp);
-                case "1M":
-                  return dayMonthFormat(data.timestamp);
-                case "1Y":
-                  return yearMonthFormat(data.timestamp);
-              }
-            })(),
-          }))}
-        />
+        <Chart isPlaceholderData={isPlaceholderData} data={historicalTicks} />
       ) : (
         <div className="relative aspect-video w-full text-xs md:text-sm">
           <div className="absolute -inset-[4px] flex items-center justify-center rounded-xl border border-border bg-foreground/50">
