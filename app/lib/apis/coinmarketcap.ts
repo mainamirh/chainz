@@ -1,3 +1,5 @@
+"use server";
+
 const apiBaseUrl = "https://pro-api.coinmarketcap.com";
 
 export interface ListingLatest {
@@ -42,7 +44,7 @@ export async function getListingsLatest(
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "X-CMC_PRO_API_KEY": `${process.env.NEXT_PUBLIC_CMC_API_KEY}`,
+        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
       },
     },
   );
@@ -109,7 +111,7 @@ export async function getMetadataV2(coinId: number): Promise<Metadata> {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "X-CMC_PRO_API_KEY": `${process.env.NEXT_PUBLIC_CMC_API_KEY}`,
+      "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
     },
   });
 
@@ -120,4 +122,94 @@ export async function getMetadataV2(coinId: number): Promise<Metadata> {
   const data = await res.json();
 
   return data.data[coinId];
+}
+
+interface ExchangeIdMap {
+  first_historical_data: string;
+  id: number;
+  is_active: number;
+  is_listed: number;
+  is_redistributable: number;
+  last_historical_data: string;
+  name: string;
+  slug: string;
+}
+
+export async function getExchangesIdMap(
+  limit: number,
+): Promise<ExchangeIdMap[]> {
+  const res = await fetch(
+    `${apiBaseUrl}/v1/exchange/map?limit=${limit}&sort=volume_24h`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
+      },
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+
+  const data = await res.json();
+
+  return data.data;
+}
+
+export interface ExchangeMetadata {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  notice: string;
+  logo: string;
+  countries: string[];
+  fiats: string[];
+  urls: {
+    fee: string[];
+    actual: string[];
+    chat: string[];
+    website: string[];
+    blog: string[];
+    twitter: string[];
+  };
+  tags: string[];
+  type: string;
+  porStatus: number;
+  porAuditStatus: number;
+  walletSourceStatus: number;
+  porSwitch: string;
+  date_launched: string;
+  is_hidden: number;
+  is_redistributable: number;
+  maker_fee: number;
+  taker_fee: number;
+  spot_volume_usd: number;
+  spot_volume_last_updated: string;
+  weekly_visits: number;
+}
+
+export async function getExchangesMetadata(
+  ids: number[],
+): Promise<{ [key: string]: ExchangeMetadata }> {
+  const res = await fetch(
+    `${apiBaseUrl}/v1/exchange/info?id=${ids.join(",")}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
+      },
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+
+  const data = await res.json();
+
+  return data.data;
 }

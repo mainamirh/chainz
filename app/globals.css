@@ -31,6 +31,21 @@
   }
 }
 
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .bg-gradient {
   background: linear-gradient(45deg, transparent 20%, #454ade 100%);
   background-repeat: no-repeat;

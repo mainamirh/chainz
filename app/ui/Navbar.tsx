@@ -58,7 +58,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed z-50 flex w-full items-center justify-between border-b border-border bg-foreground px-[5%] py-4 text-xs md:text-sm">
+      <header className="fixed z-50 flex w-full items-center justify-between border-b border-border bg-foreground px-[5%] py-4 text-xs shadow-sm md:text-sm">
         <div>
           <Link href="/" className="text-xl font-bold md:text-2xl">
             Chain
