@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 
 import RankingSK from "./RankingSK";
-import { RankingRow } from "./RankingRow";
+import RankingRow from "./RankingRow";
 import useListingLatest from "@/app/lib/hooks/useListingLatest";
 
 const Ranking = () => {

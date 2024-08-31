@@ -4,13 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useEffect } from "react";
 
-import { coinLogo, coinLastWeekChart } from "../../lib/definitions";
+import { coinLogo, coinLastWeekChart } from "../../lib/utils";
 import { roundDecimalsPlaces } from "../../lib/utils";
 import PercentChange from "../common/PercentChange";
 
 import type { ListingLatest } from "@/app/lib/apis/coinmarketcap";
 
-export const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
+const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
   const priceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -129,3 +129,5 @@ export const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
     </>
   );
 };
+
+export default RankingRow;

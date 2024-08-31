@@ -213,3 +213,37 @@ export async function getExchangesMetadata(
 
   return data.data;
 }
+
+export interface Wallet {
+  wallet_address: string;
+  balance: number;
+  platform: {
+    crypto_id: number;
+    symbol: string;
+    name: string;
+  };
+  currency: {
+    crypto_id: number;
+    price_usd: number;
+    symbol: string;
+    name: string;
+  };
+}
+
+export async function getExchangeAssets(id: number): Promise<Wallet[]> {
+  const res = await fetch(`${apiBaseUrl}/v1/exchange/assets?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+
+  const data = await res.json();
+
+  return data.data;
+}

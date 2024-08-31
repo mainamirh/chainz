@@ -13,6 +13,8 @@ import {
   HeaderSK,
   LinksSK,
 } from "@/app/ui/exchanges/exchange-page/Skeleton";
+import TokenHoldersTable from "@/app/ui/exchanges/exchange-page/TokenHoldersTable";
+import TokenAllocation from "@/app/ui/exchanges/exchange-page/TokenAllocation";
 
 export default function Exchange() {
   const { name } = useParams();
@@ -33,7 +35,7 @@ export default function Exchange() {
 
   return (
     <>
-      <div className="flex h-[4000px] flex-col gap-[1%] p-[5%] md:p-[2%]">
+      <div className="flex flex-col gap-10 p-[5%] md:p-[2%]">
         {exchange && BTC ? (
           <Header exchange={exchange} BTC={BTC} />
         ) : (
@@ -51,6 +53,33 @@ export default function Exchange() {
               <LinksSK />
               <DescriptionSK />
             </>
+          )}
+        </div>
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="financial-reserves"
+            className="text-2xl font-semibold"
+          >
+            Financial reserves
+          </label>
+          {exchange && (
+            <div
+              id="financial-reserves"
+              className="flex flex-col overflow-hidden lg:flex-row lg:gap-7"
+            >
+              <TokenHoldersTable exchangeId={exchange.id} />
+              <div className="flex flex-col gap-4 lg:w-2/6">
+                <TokenAllocation exchangeId={exchange.id} />
+                <p className="text-balance text-xs text-content/40 before:mr-1 before:content-['**']">
+                  Disclaimer: The information about holdings in third-party
+                  wallet addresses is provided by CoinMarketCap. CoinMarketCap
+                  does not verify the accuracy or timeliness of the information
+                  and provides it "as is" without warranty. CoinMarketCap is not
+                  responsible for the accuracy or completeness of the
+                  information provided by third parties.
+                </p>
+              </div>
+            </div>
           )}
         </div>
       </div>

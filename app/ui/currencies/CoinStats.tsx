@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { coinLogo } from "@/app/lib/definitions";
+import { coinLogo } from "@/app/lib/utils";
 import PercentChange from "../common/PercentChange";
 import useMetadata from "@/app/lib/hooks/useMetadata";
 
