@@ -74,9 +74,9 @@ export default function Exchange() {
                   Disclaimer: The information about holdings in third-party
                   wallet addresses is provided by CoinMarketCap. CoinMarketCap
                   does not verify the accuracy or timeliness of the information
-                  and provides it "as is" without warranty. CoinMarketCap is not
-                  responsible for the accuracy or completeness of the
-                  information provided by third parties.
+                  and provides it &#34;as is&#34; without warranty.
+                  CoinMarketCap is not responsible for the accuracy or
+                  completeness of the information provided by third parties.
                 </p>
               </div>
             </div>

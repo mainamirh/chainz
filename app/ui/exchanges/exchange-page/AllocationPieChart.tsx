@@ -6,56 +6,54 @@ import {
   PieChart,
   Pie,
   Cell,
-  Tooltip,
   ResponsiveContainer,
   Label,
+  Tooltip,
 } from "recharts";
+import PieChartTooltip from "./PieChartTooltip";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-  { name: "Group E", value: 278 },
-  { name: "Group F", value: 189 },
-];
+import type { AggregatedAllocation } from "./TokenAllocation";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-const AllocationPieChart = () => {
+const AllocationPieChart = ({ data }: { data: AggregatedAllocation[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <ResponsiveContainer
-      width="100%"
-      height="100%"
-      className="aspect-square scale-125"
-    >
+    <ResponsiveContainer width="100%" height="100%">
       <PieChart>
         <Pie
+          className="scale-150"
+          cx="32.5%"
+          cy="32.5%"
           activeIndex={activeIndex}
-          dataKey="value"
+          dataKey="percentage"
           data={data}
-          cx="50%"
-          cy="50%"
           innerRadius={40}
           outerRadius={80}
-          isAnimationActive={false}
-          onMouseEnter={(_: any, index: number) => {
+          paddingAngle={1}
+          onMouseEnter={(_, index) => {
             setActiveIndex(index);
+          }}
+          onMouseDown={(_, index) => {
+            console.log(index);
           }}
         >
           {data.map((_, index) => (
             <Cell
               key={`cell-${index}`}
-              className="outline-none"
+              className="cursor-pointer outline-none hover:brightness-110"
               fill={COLORS[index % COLORS.length]}
-              strokeWidth={0}
+              strokeWidth={activeIndex === index ? 2 : 0}
             />
           ))}
-          <Label value={data[activeIndex].name} position="center" fill="#333" />
+          <Label
+            value={data[activeIndex].symbol}
+            position="center"
+            fill="rgb(var(--color-content))"
+          />
         </Pie>
-        <Tooltip />
+        <Tooltip content={<PieChartTooltip />} />
       </PieChart>
     </ResponsiveContainer>
   );

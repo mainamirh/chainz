@@ -36,14 +36,14 @@ const TokenHoldersRow = ({ tokenHolder }: { tokenHolder: Wallet }) => {
           <div className="relative">
             <Image
               src={coinLogo(tokenHolder.currency.crypto_id)}
-              alt="currency-id"
+              alt="crypto-logo"
               width={24}
               height={24}
               quality={100}
             />
             <Image
               src={coinLogo(tokenHolder.platform.crypto_id)}
-              alt="platform-id"
+              alt="blockchain-logo"
               width={16}
               height={16}
               quality={100}
