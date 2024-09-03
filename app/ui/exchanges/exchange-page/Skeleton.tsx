@@ -79,3 +79,66 @@ export const DescriptionSK = () => {
     </div>
   );
 };
+
+export const TokenHoldersSK = ({
+  numberOfTokenPerPage,
+}: {
+  numberOfTokenPerPage: number;
+}) => {
+  return (
+    <>
+      {[...Array(numberOfTokenPerPage)].map((_, i) => (
+        <tr
+          className={`${
+            i !== numberOfTokenPerPage - 1
+              ? "[&>td]:border-b-[1px] [&>td]:border-border"
+              : "border-none"
+          } animate-pulse [&>td]:py-4`}
+          key={i}
+        >
+          <td className="pl-4">
+            <div className="flex items-center gap-4">
+              <div className="relative shrink-0">
+                <div className="aspect-square h-[24px] rounded-full bg-border" />
+
+                <div className="absolute -bottom-[7px] -right-[7px] aspect-square h-[16px] rounded-full bg-border" />
+              </div>
+              <div className="flex flex-col items-start gap-1">
+                <div className="h-[15px] w-[30px] rounded bg-border" />
+
+                <div className="flex items-center gap-1">
+                  <div className="h-[13px] w-[134px] rounded bg-border" />
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div className="ml-auto h-[22px] w-[120px] rounded bg-border" />
+          </td>
+          <td>
+            <div className="ml-auto h-[22px] w-[90px] rounded bg-border" />
+          </td>
+          <td>
+            <div className="ml-auto h-[22px] w-[140px] rounded bg-border" />
+          </td>
+        </tr>
+      ))}
+    </>
+  );
+};
+
+export const AggregatedAllocationSK = () => {
+  return (
+    <>
+      {[...Array(6)].map((_, i) => (
+        <div key={i} className="flex items-center justify-between p-2">
+          <div className="flex items-center gap-2">
+            <div className="aspect-square h-[20px] animate-pulse rounded-full bg-border" />
+            <div className="h-[15px] w-[35px] animate-pulse rounded bg-border" />
+          </div>
+          <div className="h-[17px] w-[60px] animate-pulse rounded bg-border" />
+        </div>
+      ))}
+    </>
+  );
+};

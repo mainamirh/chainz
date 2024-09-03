@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import ReactMarkdown from "react-markdown";
 
 import { Calendar, ChevronRight, Eye, PercentCircle } from "lucide-react";
@@ -11,10 +13,12 @@ import type { ExchangeMetadata } from "@/app/lib/apis/coinmarketcap";
 import { regularDateFormat, compactNumber } from "@/app/lib/utils";
 
 const ExchangeCard = ({ exchange }: { exchange: ExchangeMetadata }) => {
+  const router = useRouter();
+
   return (
-    <Link
-      href={`/exchanges/${exchange.name.toLowerCase()}`}
-      className="relative flex flex-col gap-3 overflow-hidden rounded-md border border-border bg-foreground p-[4%] shadow-md transition-colors hover:bg-foreground/40"
+    <div
+      onClick={() => router.push(`/exchanges/${exchange.name.toLowerCase()}`)}
+      className="relative flex cursor-pointer flex-col gap-3 overflow-hidden rounded-md border border-border bg-foreground p-[4%] shadow-md transition-colors hover:bg-foreground/40"
     >
       <div
         style={{
@@ -27,7 +31,10 @@ const ExchangeCard = ({ exchange }: { exchange: ExchangeMetadata }) => {
       />
 
       <div className="z-10 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
+        <Link
+          href={`/exchanges/${exchange.name.toLowerCase()}`}
+          className="flex items-center gap-2"
+        >
           <Image
             src={exchange.logo}
             alt={`${exchange.name}-icon`}
@@ -36,7 +43,7 @@ const ExchangeCard = ({ exchange }: { exchange: ExchangeMetadata }) => {
             className="aspect-auto"
           />
           <div className="text-base font-semibold">{exchange.name}</div>
-        </div>
+        </Link>
 
         {exchange.spot_volume_usd && (
           <div className="flex items-center gap-1 rounded-md bg-background/50 p-2 text-xs text-content/80">
@@ -49,7 +56,7 @@ const ExchangeCard = ({ exchange }: { exchange: ExchangeMetadata }) => {
         )}
       </div>
       <div className="relative z-10 mb-5">
-        <ReactMarkdown className="prose prose-sm prose-sky line-clamp-6 text-justify dark:prose-invert">
+        <ReactMarkdown className="prose prose-sm prose-sky pointer-events-none line-clamp-6 text-justify dark:prose-invert">
           {exchange.description}
         </ReactMarkdown>
         <div className="absolute inset-x-0 bottom-0 z-10 flex h-[50px] cursor-pointer items-end justify-center bg-gradient-to-t from-foreground/90 from-40% to-transparent text-xs text-indigo-500 backdrop-brightness-110 transition-colors hover:text-indigo-600 active:text-indigo-700 dark:text-indigo-300 dark:backdrop-brightness-90 hover:dark:text-indigo-400 active:dark:text-indigo-500">
@@ -100,7 +107,7 @@ const ExchangeCard = ({ exchange }: { exchange: ExchangeMetadata }) => {
           <span className="font-semibold">{exchange.taker_fee}</span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

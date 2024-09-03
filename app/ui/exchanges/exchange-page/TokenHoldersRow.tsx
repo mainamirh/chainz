@@ -33,7 +33,7 @@ const TokenHoldersRow = ({ tokenHolder }: { tokenHolder: Wallet }) => {
     <>
       <td className="pl-4">
         <div className="flex items-center gap-4">
-          <div className="relative">
+          <div className="relative shrink-0">
             <Image
               src={coinLogo(tokenHolder.currency.crypto_id)}
               alt="crypto-logo"
@@ -73,11 +73,12 @@ const TokenHoldersRow = ({ tokenHolder }: { tokenHolder: Wallet }) => {
       </td>
       <td>{roundDecimalsPlaces(tokenHolder.balance, 2).toLocaleString()}</td>
       <td>
-        $
-        {tokenHolder.currency.price_usd.toLocaleString("en-US", {
-          maximumFractionDigits: tokenHolder.currency.price_usd > 1.0 ? 2 : 4,
-          minimumFractionDigits: 2,
-        })}
+        {new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 4,
+          maximumSignificantDigits: 4,
+        }).format(tokenHolder.currency.price_usd)}
       </td>
       <td>
         $

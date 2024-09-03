@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useState } from "react";
 
 import useExchangesMetadata from "@/app/lib/hooks/useExchangesMetadata";
 import useListingLatest from "@/app/lib/hooks/useListingLatest";
@@ -18,6 +19,13 @@ import TokenAllocation from "@/app/ui/exchanges/exchange-page/TokenAllocation";
 
 export default function Exchange() {
   const { name } = useParams();
+
+  /**
+   * If the "other" is selected, the otherAllocation is
+   * set to the first five token from aggregatedAllocation
+   * to filter out the token holders table.
+   *  */
+  const [otherAllocations, setOtherAllocations] = useState<string[]>([]);
 
   const { data: exchangesMetadata } = useExchangesMetadata();
   const exchange =
@@ -62,25 +70,29 @@ export default function Exchange() {
           >
             Financial reserves
           </label>
-          {exchange && (
-            <div
-              id="financial-reserves"
-              className="flex flex-col overflow-hidden lg:flex-row lg:gap-7"
-            >
-              <TokenHoldersTable exchangeId={exchange.id} />
-              <div className="flex flex-col gap-4 lg:w-2/6">
-                <TokenAllocation exchangeId={exchange.id} />
-                <p className="text-balance text-xs text-content/40 before:mr-1 before:content-['**']">
-                  Disclaimer: The information about holdings in third-party
-                  wallet addresses is provided by CoinMarketCap. CoinMarketCap
-                  does not verify the accuracy or timeliness of the information
-                  and provides it &#34;as is&#34; without warranty.
-                  CoinMarketCap is not responsible for the accuracy or
-                  completeness of the information provided by third parties.
-                </p>
-              </div>
+          <div
+            id="financial-reserves"
+            className="flex flex-col-reverse gap-7 overflow-hidden lg:flex-row"
+          >
+            <TokenHoldersTable
+              exchangeId={exchange?.id}
+              otherAllocations={otherAllocations}
+            />
+            <div className="flex flex-col gap-4 lg:w-2/6">
+              <TokenAllocation
+                exchangeId={exchange?.id}
+                setOtherAllocations={setOtherAllocations}
+              />
+              <p className="text-balance text-xs text-content/40 before:mr-1 before:content-['**']">
+                Disclaimer: The information about holdings in third-party wallet
+                addresses is provided by CoinMarketCap. CoinMarketCap does not
+                verify the accuracy or timeliness of the information and
+                provides it &#34;as is&#34; without warranty. CoinMarketCap is
+                not responsible for the accuracy or completeness of the
+                information provided by third parties.
+              </p>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </>
