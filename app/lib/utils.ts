@@ -99,3 +99,6 @@ export function formatByRange(value: any, _: number, range: string): string {
 
 export const shortenedAddress = (address: string): string =>
   `${address.slice(0, 6)}...${address.slice(-6)}`;
+
+export const range = (start: number, end: number): number[] =>
+  Array.from({ length: end - start + 1 }, (_, i) => start + i);

@@ -129,7 +129,7 @@ const TokenAllocation = ({
           aggregatedAllocation.map((token) => (
             <div
               key={token.symbol}
-              className={`${token.symbol.toLowerCase() === searchParams.get("allocation") && "bg-border hover:bg-border"} flex w-full cursor-pointer items-center justify-between rounded-md p-2 transition-colors hover:bg-border/40`}
+              className={`${token.symbol.toLowerCase() === searchParams.get("allocation") ? "bg-border hover:bg-border" : "hover:bg-border/40"} flex w-full cursor-pointer items-center justify-between rounded-md p-2 transition-colors`}
               onClick={() =>
                 handleSearchParams("allocation", token.symbol.toLowerCase())
               }

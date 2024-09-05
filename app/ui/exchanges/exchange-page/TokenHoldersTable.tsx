@@ -10,6 +10,7 @@ import { roundDecimalsPlaces } from "@/app/lib/utils";
 
 import type { Wallet } from "@/app/lib/apis/coinmarketcap";
 import { TokenHoldersSK } from "./Skeleton";
+import Pagination from "../../common/Pagination";
 
 const TokenHoldersTable = ({
   exchangeId,
@@ -19,8 +20,10 @@ const TokenHoldersTable = ({
   otherAllocations: string[];
 }) => {
   const searchParams = useSearchParams();
+
   const [totalValue, setTotalValue] = useState<number>(0);
   const [tokenHoldersState, setTokenHoldersState] = useState<Wallet[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const allocationSymbol = searchParams.get("allocation");
   const {
@@ -54,10 +57,36 @@ const TokenHoldersTable = ({
         0,
       ),
     );
+
+    setCurrentPage(1);
   }, [tokenHolders, allocationSymbol, otherAllocations]);
 
+  function paginatedTokenHolders(
+    selectedTokenHolders: Wallet[],
+    start: number,
+    end: number,
+  ) {
+    return selectedTokenHolders.reduce((acc: JSX.Element[], curr, index) => {
+      if (index >= start && index <= end) {
+        acc.push(
+          <tr
+            className={`${
+              index !== selectedTokenHolders.length - 1
+                ? "[&>td]:border-b-[1px] [&>td]:border-border"
+                : "border-none"
+            } [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
+            key={curr.wallet_address.concat(index.toString())}
+          >
+            <TokenHoldersRow tokenHolder={curr} />
+          </tr>,
+        );
+      }
+      return acc;
+    }, []);
+  }
+
   return (
-    <div className="flex flex-col gap-5 rounded-xl border border-border bg-foreground p-5 shadow-md lg:w-4/6">
+    <div className="flex h-full flex-col gap-5 rounded-xl border border-border bg-foreground p-5 shadow-md lg:w-4/6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-1 text-lg font-semibold">
           Total:
@@ -86,25 +115,24 @@ const TokenHoldersTable = ({
           </thead>
           <tbody>
             {tokenHoldersState.length > 0 &&
-              tokenHoldersState.map(
-                (data, i) =>
-                  i < 10 && (
-                    <tr
-                      className={`${
-                        i !== tokenHoldersState.length - 1
-                          ? "[&>td]:border-b-[1px] [&>td]:border-border"
-                          : "border-none"
-                      } [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
-                      key={data.wallet_address.concat(i.toString())}
-                    >
-                      <TokenHoldersRow tokenHolder={data} />
-                    </tr>
-                  ),
+              paginatedTokenHolders(
+                tokenHoldersState,
+                (currentPage - 1) * 10,
+                (currentPage - 1) * 10 + 9,
               )}
             {isPending && <TokenHoldersSK numberOfTokenPerPage={10} />}
           </tbody>
         </table>
       </div>
+      {tokenHoldersState.length > 0 && (
+        <Pagination
+          items={tokenHoldersState}
+          itemsPerPage={10}
+          siblings={2}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
+      )}
     </div>
   );
 };
