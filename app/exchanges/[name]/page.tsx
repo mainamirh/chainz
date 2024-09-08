@@ -16,6 +16,7 @@ import {
 } from "@/app/ui/exchanges/exchange-page/Skeleton";
 import TokenHoldersTable from "@/app/ui/exchanges/exchange-page/TokenHoldersTable";
 import TokenAllocation from "@/app/ui/exchanges/exchange-page/TokenAllocation";
+import ExchangeMarket from "@/app/ui/exchanges/exchange-market/ExchangeMarket";
 
 export default function Exchange() {
   const { name } = useParams();
@@ -27,10 +28,10 @@ export default function Exchange() {
    *  */
   const [otherAllocations, setOtherAllocations] = useState<string[]>([]);
 
-  const { data: exchangesMetadata } = useExchangesMetadata();
+  const { data: metadata } = useExchangesMetadata();
   const exchange =
-    exchangesMetadata &&
-    Object.entries(exchangesMetadata).find(
+    metadata &&
+    Object.entries(metadata).find(
       ([_, exchange]) =>
         exchange.name.toLocaleLowerCase() ===
         decodeURIComponent(name.toString()),
@@ -94,6 +95,7 @@ export default function Exchange() {
             </div>
           </div>
         </div>
+        <ExchangeMarket exchangeName={exchange?.name} />
       </div>
     </>
   );

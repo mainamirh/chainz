@@ -24,6 +24,7 @@ const TokenHoldersTable = ({
   const [totalValue, setTotalValue] = useState<number>(0);
   const [tokenHoldersState, setTokenHoldersState] = useState<Wallet[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const allocationSymbol = searchParams.get("allocation");
   const {
@@ -117,17 +118,19 @@ const TokenHoldersTable = ({
             {tokenHoldersState.length > 0 &&
               paginatedTokenHolders(
                 tokenHoldersState,
-                (currentPage - 1) * 10,
-                (currentPage - 1) * 10 + 9,
+                (currentPage - 1) * itemsPerPage,
+                (currentPage - 1) * itemsPerPage + itemsPerPage - 1,
               )}
-            {isPending && <TokenHoldersSK numberOfTokenPerPage={10} />}
+            {isPending && (
+              <TokenHoldersSK numberOfTokenPerPage={itemsPerPage} />
+            )}
           </tbody>
         </table>
       </div>
       {tokenHoldersState.length > 0 && (
         <Pagination
           items={tokenHoldersState}
-          itemsPerPage={10}
+          itemsPerPage={itemsPerPage}
           siblings={2}
           currentPage={currentPage}
           onPageChange={setCurrentPage}

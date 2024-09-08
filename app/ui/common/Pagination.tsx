@@ -24,7 +24,7 @@ const Pagination: React.FC<PaginationProps> = ({
       type="button"
       key={key ?? number}
       onClick={() => onPageChange(number)}
-      className={`${currentPage === number ? "bg-border hover:bg-border" : "hover:bg-border/60"} inline-flex aspect-square w-8 items-center justify-center rounded-md border border-border shadow-sm transition-colors`}
+      className={`${currentPage === number ? "bg-border hover:bg-border" : "hover:bg-border/60"} inline-flex aspect-square w-7 items-center justify-center rounded-md border border-border shadow-sm transition-colors md:w-8`}
     >
       {number}
     </button>
@@ -33,7 +33,7 @@ const Pagination: React.FC<PaginationProps> = ({
   const renderEllipsis = (key: string) => (
     <div
       key={key}
-      className="inline-flex aspect-square w-8 items-center justify-center"
+      className="inline-flex aspect-square w-7 items-center justify-center md:w-8"
     >
       ...
     </div>
@@ -90,7 +90,7 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className="flex items-center justify-center gap-2 text-sm">
+    <div className="flex flex-wrap items-center justify-center gap-2 text-xs md:text-sm">
       <button
         type="button"
         onClick={() => onPageChange(currentPage - 1)}

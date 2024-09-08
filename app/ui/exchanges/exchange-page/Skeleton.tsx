@@ -93,7 +93,7 @@ export const TokenHoldersSK = ({
             i !== numberOfTokenPerPage - 1
               ? "[&>td]:border-b-[1px] [&>td]:border-border"
               : "border-none"
-          } animate-pulse [&>td]:py-4`}
+          } [&>td>div]:animate-pulse [&>td]:py-4`}
           key={i}
         >
           <td className="pl-4">

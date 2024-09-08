@@ -74,3 +74,42 @@ export async function getHistoricalTicks(
 
   return data;
 }
+
+type Quote = {
+  price: number;
+  volume_24h: number;
+};
+
+export interface ExchangeMarket {
+  pair: string;
+  base_currency_id: string;
+  base_currency_name: string;
+  quote_currency_id: string;
+  quote_currency_name: string;
+  market_url: string;
+  category: string;
+  fee_type: string;
+  outlier: boolean;
+  reported_volume_24h_share: number;
+  quotes: {
+    USD: Quote;
+    [key: string]: Quote;
+  };
+  trust_score: string;
+  last_updated: string;
+}
+
+export async function getExchangeMarkets(
+  name: string,
+): Promise<ExchangeMarket[]> {
+  const res = await fetch(`${apiBaseUrl}/v1/exchanges/${name}/markets`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await res.json();
+
+  return data;
+}
