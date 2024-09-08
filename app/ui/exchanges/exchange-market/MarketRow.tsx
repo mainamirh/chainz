@@ -56,7 +56,7 @@ export const MarketRow = ({
         <Link
           href={market.market_url}
           target="_blank"
-          className="flex items-center gap-1 font-normal text-blue-400 transition-colors hover:text-blue-500"
+          className="flex w-fit items-center gap-1 font-normal text-blue-400 transition-colors hover:text-blue-500"
         >
           {market.pair}
 

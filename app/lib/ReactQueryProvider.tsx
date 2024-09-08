@@ -16,6 +16,7 @@ export default function ReactQueryProvider({
           queries: {
             refetchOnWindowFocus: false,
             refetchOnMount: false,
+            retry: false,
           },
         },
       }),

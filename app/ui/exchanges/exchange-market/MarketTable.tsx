@@ -1,25 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MarketRow } from "./MarketRow";
 import { MarketSK } from "./MarketSK";
 import Pagination from "../../common/Pagination";
 
 import useExchangeMarkets from "@/app/lib/hooks/useExchangeMarkets";
 
+import type { ExchangeMarket } from "@/app/lib/apis/coinpaprika";
+
 const MarketTable = ({
   exchangeName,
 }: {
   exchangeName: string | undefined;
 }) => {
+  const [marketsState, setMarketsState] = useState<ExchangeMarket[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const { data: markets, isPending } = useExchangeMarkets(
-    exchangeName?.toLowerCase(),
-  );
+  const {
+    data: markets,
+    isPending,
+    isSuccess,
+  } = useExchangeMarkets(exchangeName?.toLowerCase());
 
-  markets?.sort((a, b) => b.quotes.USD.volume_24h - a.quotes.USD.volume_24h);
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    markets.sort((a, b) => b.quotes.USD.volume_24h - a.quotes.USD.volume_24h);
+
+    setMarketsState(markets);
+  }, [markets, isSuccess]);
 
   function paginatedMarkets(markets: any[], start: number, end: number) {
     return markets.reduce((acc: JSX.Element[], curr, index) => {
@@ -60,9 +71,9 @@ const MarketTable = ({
             </tr>
           </thead>
           <tbody>
-            {markets &&
+            {marketsState.length > 0 &&
               paginatedMarkets(
-                markets,
+                marketsState,
                 (currentPage - 1) * itemsPerPage,
                 (currentPage - 1) * itemsPerPage + itemsPerPage - 1,
               )}
@@ -70,9 +81,9 @@ const MarketTable = ({
           </tbody>
         </table>
       </div>
-      {markets && markets.length > 0 && (
+      {marketsState.length > 0 && (
         <Pagination
-          items={markets}
+          items={marketsState}
           itemsPerPage={itemsPerPage}
           siblings={2}
           currentPage={currentPage}

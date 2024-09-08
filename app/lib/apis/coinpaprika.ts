@@ -70,6 +70,10 @@ export async function getHistoricalTicks(
     },
   );
 
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+
   const data = await res.json();
 
   return data;
@@ -108,6 +112,10 @@ export async function getExchangeMarkets(
       "Content-Type": "application/json",
     },
   });
+
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
 
   const data = await res.json();
 
