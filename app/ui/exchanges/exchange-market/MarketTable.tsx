@@ -32,7 +32,11 @@ const MarketTable = ({
     setMarketsState(markets);
   }, [markets, isSuccess]);
 
-  function paginatedMarkets(markets: any[], start: number, end: number) {
+  function paginatedMarkets(
+    markets: ExchangeMarket[],
+    start: number,
+    end: number,
+  ) {
     return markets.reduce((acc: JSX.Element[], curr, index) => {
       if (index >= start && index <= end) {
         acc.push(

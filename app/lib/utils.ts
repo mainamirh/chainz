@@ -4,6 +4,9 @@ export const coinLogo = (id: number): string =>
 export const coinPaprikaLogo = (id: string): string =>
   `https://static.coinpaprika.com/coin/${id}/logo.png`;
 
+export const exchangePaprikaLogo = (id: string): string =>
+  `https://static.coinpaprika.com/exchanges/${id}/logo-thumb.png`;
+
 export const coinLastWeekChart = (id: number): string =>
   `https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/${id}.svg`;
 
