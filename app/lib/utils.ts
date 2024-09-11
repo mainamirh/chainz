@@ -108,3 +108,20 @@ export const shortenedAddress = (address: string): string =>
 
 export const range = (start: number, end: number): number[] =>
   Array.from({ length: end - start + 1 }, (_, i) => start + i);
+
+export function trustBadgeColor(trustScore: string) {
+  switch (trustScore) {
+    case "high":
+      return "bg-green-600";
+    case "medium":
+      return "bg-yellow-600";
+    case "low":
+      return "bg-red-600";
+    default:
+      return "bg-gray-700";
+  }
+}
+
+export function capitalize(word: string) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}

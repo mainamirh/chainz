@@ -6,7 +6,7 @@ import useListingLatest from "@/app/lib/hooks/useListingLatest";
 import CoinStats from "@/app/ui/currencies/CoinStats";
 import CoinStatsSK from "@/app/ui/currencies/CoinStatsSK";
 import HistoricalChart from "@/app/ui/currencies/HistoricalChart";
-import MarketsTable from "@/app/ui/currencies/MarketsTable";
+import CoinMarket from "@/app/ui/currencies/currency-market/CoinMarket";
 
 export default function Currency() {
   const { name } = useParams();
@@ -33,7 +33,7 @@ export default function Currency() {
           />
         </div>
       </div>
-      <MarketsTable
+      <CoinMarket
         coinId={currency?.symbol
           .toLowerCase()
           .concat("-")

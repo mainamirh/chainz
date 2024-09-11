@@ -1,4 +1,4 @@
-const MarketSK = ({
+export const MarketSK = ({
   numberOfCurrencyPerPage,
 }: {
   numberOfCurrencyPerPage: number;
@@ -49,4 +49,20 @@ const MarketSK = ({
   );
 };
 
-export default MarketSK;
+export const RecommendationSK = () => {
+  return (
+    <div className="flex w-[340px] shrink-0 flex-col gap-3 rounded-xl border border-border bg-foreground p-5 shadow-md">
+      <div className="h-[15px] w-[66px] animate-pulse rounded bg-border" />
+
+      <div className="flex animate-pulse items-center justify-between">
+        <div className="h-[35px] w-[132px] rounded bg-border" />
+
+        <div className="h-[15px] w-[65px] rounded bg-border" />
+      </div>
+
+      <div className="h-[16px] animate-pulse rounded bg-border" />
+
+      <div className="h-[20px] w-1/2 animate-pulse rounded bg-border" />
+    </div>
+  );
+};

@@ -3,7 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { coinPaprikaLogo, roundDecimalsPlaces } from "@/app/lib/utils";
+import {
+  coinPaprikaLogo,
+  roundDecimalsPlaces,
+  trustBadgeColor,
+} from "@/app/lib/utils";
 
 import type { ExchangeMarket } from "@/app/lib/apis/coinpaprika";
 import { ExternalLink } from "lucide-react";
@@ -15,19 +19,6 @@ export const MarketRow = ({
   market: ExchangeMarket;
   index: number;
 }) => {
-  function trustBadgeColor(trustScore: string) {
-    switch (trustScore) {
-      case "high":
-        return "bg-green-600";
-      case "medium":
-        return "bg-yellow-600";
-      case "low":
-        return "bg-red-600";
-      default:
-        return "";
-    }
-  }
-
   const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
   const diffInSeconds =
     (new Date().getTime() - new Date(market.last_updated).getTime()) / 1000;
@@ -65,7 +56,7 @@ export const MarketRow = ({
       </td>
       <td>
         <div
-          className={`${trustBadgeColor(market.trust_score)} float-end w-fit rounded-full px-2 py-1 text-center text-xs font-semibold capitalize text-content/90`}
+          className={`${trustBadgeColor(market.trust_score)} float-end w-fit rounded-full px-2 py-1 text-center text-xs font-semibold capitalize text-white/90`}
         >
           {market.trust_score}
         </div>

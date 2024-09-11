@@ -3,7 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { exchangePaprikaLogo, roundDecimalsPlaces } from "@/app/lib/utils";
+import {
+  exchangePaprikaLogo,
+  roundDecimalsPlaces,
+  trustBadgeColor,
+} from "@/app/lib/utils";
 
 import type { CoinMarket } from "@/app/lib/apis/coinpaprika";
 import { ExternalLink } from "lucide-react";
@@ -15,19 +19,6 @@ const MarketRow = ({
   market: CoinMarket;
   index: number;
 }) => {
-  function trustBadgeColor(trustScore: string) {
-    switch (trustScore) {
-      case "high":
-        return "bg-green-600";
-      case "medium":
-        return "bg-yellow-600";
-      case "low":
-        return "bg-red-600";
-      default:
-        return "bg-gray-700";
-    }
-  }
-
   const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
   const diffInSeconds =
     (new Date().getTime() - new Date(market.last_updated).getTime()) / 1000;
@@ -64,7 +55,7 @@ const MarketRow = ({
       </td>
       <td>
         <div
-          className={`${trustBadgeColor(market.trust_score)} float-end w-fit rounded-full px-2 py-1 text-center text-xs font-semibold capitalize text-content/90`}
+          className={`${trustBadgeColor(market.trust_score)} float-end w-fit rounded-full px-2 py-1 text-center text-xs font-semibold capitalize text-white/90`}
         >
           {market.trust_score}
         </div>
@@ -74,11 +65,11 @@ const MarketRow = ({
           style: "currency",
           currency: "USD",
           minimumFractionDigits: 4,
-          maximumSignificantDigits: 4,
+          maximumSignificantDigits: 5,
         }).format(market.quotes.USD.price)}
       </td>
       <td>
-        {roundDecimalsPlaces(market.quotes.USD.volume_24h, 2).toLocaleString()}
+        ${roundDecimalsPlaces(market.quotes.USD.volume_24h, 2).toLocaleString()}
       </td>
       <td>
         {roundDecimalsPlaces(

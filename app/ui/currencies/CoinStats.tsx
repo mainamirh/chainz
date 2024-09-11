@@ -61,7 +61,7 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
         <PercentChange
           price={currency.quote.USD.percent_change_24h}
           decimalPlaces={2}
-          className="gap-1 text-sm font-medium"
+          className="gap-1 text-sm font-semibold"
         >
           <span>(1d)</span>
         </PercentChange>
