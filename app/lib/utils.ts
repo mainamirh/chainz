@@ -23,10 +23,7 @@ export function linkToATag(text: string): string {
   return text.replace(
     urlPattern,
     (url) =>
-      `<a href="${url}" target="_blank" rel="noopener noreferrer">${url.slice(
-        0,
-        url.length - 1,
-      )}</a>`,
+      `<a href="${url}" target="_blank" rel="noopener noreferrer">${url.replace("https://", "").split("/")[0]}</a>`,
   );
 }
 

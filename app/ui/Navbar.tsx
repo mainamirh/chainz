@@ -5,19 +5,16 @@ import { usePathname } from "next/navigation";
 
 import { useState } from "react";
 
-import Button from "./common/Button";
 import Drawer from "./Drawer";
+import Theme from "./common/Theme";
 
-import {
-  Menu,
-  X,
-  Home,
-  ArrowRightLeft,
-  Coins,
-  MoonStar,
-  SunMedium,
-} from "lucide-react";
+import LogoGithub from "./common/logo-github";
+import LogoTwitterX from "./common/logo-twitter-x";
+
+import { Menu, X, ArrowRightLeft, Coins } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+
+import type { Theme as ThemeType } from "@/app/lib/actions";
 
 export type navItem = {
   label: string;
@@ -27,23 +24,18 @@ export type navItem = {
 
 const navItems: Array<navItem> = [
   {
-    label: "Home",
+    label: "Cryptocurrencies",
     url: "/",
-    icon: Home,
+    icon: Coins,
   },
   {
     label: "Exchanges",
     url: "/exchanges",
     icon: ArrowRightLeft,
   },
-  {
-    label: "Coins",
-    url: "/coins",
-    icon: Coins,
-  },
 ];
 
-export default function Navbar() {
+export default function Navbar({ theme }: { theme: ThemeType }) {
   const pathname = usePathname();
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
@@ -58,8 +50,8 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed z-50 flex w-full items-center justify-between border-b border-border bg-foreground px-[5%] py-4 text-xs shadow-sm md:text-sm">
-        <div>
+      <header className="fixed z-50 flex w-full items-center justify-between border-b border-border bg-foreground px-[5%] py-3 text-xs shadow-sm md:text-sm">
+        <div className="flex items-center gap-16">
           <Link href="/" className="text-xl font-bold md:text-2xl">
             Chain
             <span
@@ -69,24 +61,40 @@ export default function Navbar() {
               Z
             </span>
           </Link>
+          <nav className="hidden items-center gap-8 font-medium md:flex">
+            {navItems.map((item) => (
+              <Link
+                href={item.url}
+                key={item.label}
+                className={`${
+                  item.url === pathname && "text-indigo-400"
+                } transition-colors hover:text-indigo-400`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
-        <nav className="hidden items-center gap-8 md:flex">
-          {navItems.map((item) => (
-            <Link
-              href={item.url}
-              key={item.label}
-              className={`${
-                item.url === pathname && "text-indigo-400"
-              } transition-colors hover:text-indigo-400`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
         <div className="flex items-center gap-3">
-          <Button type="button">Login</Button>
-          {/* <MoonStar className="w-5 h-5" />
-          <SunMedium className="w-5 h-5" /> */}
+          <div className="flex items-center gap-1">
+            <Link
+              href={"https://github.com/mainamirh"}
+              target="_blank"
+              className="rounded-md p-2 transition-colors hover:bg-border"
+            >
+              <LogoGithub className="h-4 w-4" />
+            </Link>
+            <Link
+              href={"https://x.com/mainamirh"}
+              target="_blank"
+              className="rounded-md p-2 transition-colors hover:bg-border"
+            >
+              <LogoTwitterX className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <Theme theme={theme} />
+
           <div onClick={toggleDrawer} className="flex md:hidden">
             {isDrawerOpen ? (
               <X className="h-6 w-6" />

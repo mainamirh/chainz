@@ -90,7 +90,7 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
                 <Globe className="h-4 w-4" />
-                {url.slice(0, url.length - 1)}
+                {url.replace("https://", "").split("/")[0]}
               </Link>
             ))}
             {metadata.urls.technical_doc.map((url) => (

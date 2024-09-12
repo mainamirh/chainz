@@ -11,7 +11,7 @@ import { RecommendationSK } from "./Skeletons";
 
 import { capitalize, range } from "@/app/lib/utils";
 
-const CoinMarket = ({ coinId }: { coinId: string | undefined }) => {
+const CoinMarkets = ({ coinId }: { coinId: string | undefined }) => {
   const [recommendedMarket, setRecommendedMarket] = useState<{
     highestPrice: CoinMarket;
     lowestPrice: CoinMarket;
@@ -23,6 +23,8 @@ const CoinMarket = ({ coinId }: { coinId: string | undefined }) => {
 
   useEffect(() => {
     if (!isSuccess || !coinId) return;
+
+    const baseCurrency = coinId.split("-")[0].toUpperCase();
 
     setRecommendedMarket(
       markets.reduce(
@@ -36,7 +38,8 @@ const CoinMarket = ({ coinId }: { coinId: string | undefined }) => {
           } = current;
 
           if (
-            pair === `${coinId.split("-")[0].toUpperCase()}/USDT` &&
+            pair ===
+              `${baseCurrency === "USDT" ? pair : `${baseCurrency}/USDT`}` &&
             market_url &&
             adjusted_volume_24h_share > 0
           ) {
@@ -118,4 +121,4 @@ const CoinMarket = ({ coinId }: { coinId: string | undefined }) => {
   );
 };
 
-export default CoinMarket;
+export default CoinMarkets;

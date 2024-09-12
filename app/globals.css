@@ -23,6 +23,17 @@
     }
   }
 
+  :root[data-theme="light"] {
+    --color-background: 250 250 250;
+    --color-foreground: 255 255 255;
+    --color-border: 234 234 234;
+    --color-content: 17 17 17;
+    --color-iris-lighter: 79 85 255;
+    --color-iris-darker: 69 74 222;
+    --color-up: 22 199 132;
+    --color-down: 234 57 67;
+  }
+
   :root[data-theme="dark"] {
     --color-background: 16 16 16;
     --color-foreground: 24 24 24;
