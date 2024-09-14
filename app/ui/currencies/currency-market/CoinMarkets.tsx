@@ -71,7 +71,7 @@ const CoinMarkets = ({ coinId }: { coinId: string | undefined }) => {
         },
       ),
     );
-  }, [markets, isSuccess]);
+  }, [markets, isSuccess, coinId]);
 
   return (
     <div className="flex flex-col gap-5">

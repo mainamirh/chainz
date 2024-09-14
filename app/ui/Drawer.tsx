@@ -17,7 +17,7 @@ const Drawer = ({
 
   return (
     <div
-      className={`text-dark-baby-powder fixed inset-0 z-40 bg-foreground pt-[80px] transition-all duration-300 md:hidden ${
+      className={`text-dark-baby-powder fixed inset-0 z-40 bg-foreground pt-[95px] transition-all duration-300 md:hidden ${
         isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
       }`}
     >

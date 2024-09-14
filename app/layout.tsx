@@ -5,6 +5,7 @@ import { poppins } from "./fonts";
 import Navbar from "./ui/Navbar";
 import ReactQueryProvider from "./lib/ReactQueryProvider";
 import { getTheme } from "./lib/actions";
+import { getQuotesLatest } from "./lib/apis/coinmarketcap";
 
 export const metadata: Metadata = {
   title: "ChainZ - Compare The Best Exchanges to Buy or sell Crypto",
@@ -17,13 +18,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const theme = await getTheme();
+  const quotesLatest = await getQuotesLatest({ next: { revalidate: 60 * 60 } });
 
   return (
     <html lang="en" data-theme={theme}>
       <body className={`${poppins.className} bg-background text-content`}>
-        <Navbar theme={theme} />
+        <Navbar theme={theme} aggregatedStats={quotesLatest} />
 
-        <main className="mx-auto w-full max-w-[1440px] py-[70px]">
+        <main className="mx-auto w-full max-w-[1440px] py-[85px]">
           <ReactQueryProvider>{children}</ReactQueryProvider>
         </main>
       </body>
