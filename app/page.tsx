@@ -4,11 +4,11 @@ import PriceConverter from "./ui/PriceConverter";
 
 export default function Home() {
   return (
-    <div className="px-[4%] py-[80px] md:py-[10%]">
+    <div className="px-[4%] py-[70px] md:py-[8%]">
       <div className="bg-gradient absolute inset-x-0 top-[80px] -z-10 h-[400px] opacity-50" />
 
-      <div className="grid grid-cols-1 gap-10 px-[2%] text-base md:text-lg lg:grid-cols-12 lg:gap-7">
-        <div className="flex flex-col items-start gap-4 text-sm md:text-base lg:col-span-7">
+      <div className="grid grid-cols-1 gap-16 px-[2%] text-sm md:text-base lg:grid-cols-11 lg:gap-7">
+        <div className="flex flex-col items-start gap-4 p-[2%] text-sm md:text-base lg:col-span-6">
           <h1 className="text-3xl font-semibold md:text-5xl">
             Crypto for Everyone
           </h1>

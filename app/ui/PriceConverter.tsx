@@ -96,11 +96,14 @@ const PriceConverter = () => {
 
   return (
     <div className="flex select-none flex-col gap-1 rounded-xl border border-border bg-foreground/90 p-2 shadow-md backdrop-blur-md">
-      <label htmlFor="currency-converter" className="p-2 text-sm font-medium">
+      <label
+        htmlFor="currency-converter"
+        className="p-2 text-xs font-medium md:text-sm"
+      >
         Cryptocurrency Converter
       </label>
       <div id="currency-converter" className="relative flex flex-col gap-1">
-        <div className="flex items-center gap-3 rounded-xl bg-border/40 p-4">
+        <div className="flex items-center justify-between gap-3 rounded-xl bg-border/40 p-4">
           <input
             type="number"
             placeholder="0"
@@ -112,7 +115,7 @@ const PriceConverter = () => {
                 fromAmount: value === "" ? undefined : parseFloat(value),
               }));
             }}
-            className="no-arrow grow bg-transparent text-xl font-medium outline-none"
+            className="no-arrow w-full bg-transparent text-lg font-medium outline-none md:text-xl"
             onWheel={(e) => e.currentTarget.blur()}
           />
           <Dropdown
@@ -130,19 +133,19 @@ const PriceConverter = () => {
           className="absolute left-1/2 top-1/2 z-10 w-fit -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-foreground p-2 transition-colors hover:bg-border"
         >
           {isFetching ? (
-            <LoaderCircle className="h-5 w-5 animate-spin" />
+            <LoaderCircle className="h-4 w-4 animate-spin md:h-5 md:w-5" />
           ) : (
-            <ArrowDownUp className="h-5 w-5" />
+            <ArrowDownUp className="h-4 w-4 md:h-5 md:w-5" />
           )}
         </div>
 
-        <div className="relative flex items-center gap-3 rounded-xl bg-border/40 p-4">
+        <div className="relative flex items-center justify-between gap-3 rounded-xl bg-border/40 p-4">
           <input
             type="number"
             placeholder=""
             value={convert.toAmount ? formatInputNumber(convert.toAmount) : ""}
             disabled
-            className={`${isFetching && "animate-pulse"} no-arrow grow bg-transparent text-xl font-medium outline-none disabled:text-content/70`}
+            className={`${isFetching && "animate-pulse"} no-arrow w-full bg-transparent text-lg font-medium outline-none disabled:text-content/70 md:text-xl`}
             onWheel={(e) => e.currentTarget.blur()}
           />
 
@@ -159,8 +162,9 @@ const PriceConverter = () => {
         </div>
       </div>
       <Button
+        disabled={!convert.from || !convert.to || !convert.fromAmount}
         onClick={() => refetch()}
-        className="rounded-xl text-base"
+        className="rounded-xl disabled:pointer-events-none disabled:opacity-70"
         type="button"
       >
         Refresh

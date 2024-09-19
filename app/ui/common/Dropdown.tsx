@@ -46,11 +46,11 @@ const Dropdown: React.FC<DropdownProps> = ({
   }, []);
 
   return (
-    <div className="relative inline-block text-sm" ref={dropdownRef}>
+    <div className="relative inline-block text-xs md:text-sm" ref={dropdownRef}>
       <Button
         onClick={() => setIsOpen(!isOpen)}
         variant="custom"
-        className="flex items-center gap-2 bg-border disabled:pointer-events-none disabled:opacity-60"
+        className="flex grow items-center gap-2 whitespace-nowrap bg-border disabled:pointer-events-none disabled:opacity-60"
         type="button"
         disabled={!options}
       >
