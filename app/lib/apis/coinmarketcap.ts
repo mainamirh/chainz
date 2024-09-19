@@ -322,3 +322,42 @@ export async function getQuotesLatest(
 
   return data.data;
 }
+
+export interface PriceConversion {
+  id: number;
+  symbol: string;
+  name: string;
+  amount: number;
+  last_updated: string;
+  quote: {
+    [convertId: string]: {
+      price: number;
+      last_updated: string;
+    };
+  };
+}
+
+export async function getPriceConversionV2(
+  from: string,
+  to: string,
+  amount: number,
+): Promise<PriceConversion> {
+  const res = await fetch(
+    `${apiBaseUrl}/v2/tools/price-conversion?id=${from}&convert_id=${to}&amount=${amount}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
+      },
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+
+  const data = await res.json();
+
+  return data.data;
+}

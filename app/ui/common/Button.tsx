@@ -3,23 +3,21 @@
 import React, { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary";
+  variant?: "default" | "custom";
 }
 
 const Button: React.FC<ButtonProps> = ({
-  variant = "primary",
-  className = "",
+  variant = "default",
+  className,
   children,
   ...otherProps
 }) => {
   return (
     <button
       className={`${className} ${
-        variant === "primary"
-          ? "bg-gradient-to-r from-iris-darker to-iris-lighter text-[#FFFFFA]"
-          : "bg-white dark:border-none border border-iris-darker text-iris-darker"
-      }
-           px-4 py-2 font-medium rounded-full hover:brightness-110 active:brightness-90 active:shadow-inner transition ease-in-out`}
+        variant === "default" &&
+        "bg-gradient-to-r from-iris-darker to-iris-lighter text-[#FFFFFA]"
+      } rounded-full px-4 py-2 font-medium transition ease-in-out hover:brightness-110 active:shadow-inner active:brightness-90`}
       {...otherProps}
     >
       {children}
