@@ -129,7 +129,7 @@ const TokenHoldersTable = ({
       </div>
       {tokenHoldersState.length > 0 && (
         <Pagination
-          items={tokenHoldersState}
+          items={tokenHoldersState.length}
           itemsPerPage={itemsPerPage}
           siblings={2}
           currentPage={currentPage}

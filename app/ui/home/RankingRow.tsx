@@ -57,10 +57,9 @@ const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
             alt="coin-icon"
             width={24}
             height={24}
-            className="aspect-auto"
+            className="aspect-auto w-6"
           />
-
-          {coinRanking.name}
+          <span className="truncate">{coinRanking.name}</span>
           <span className="text-sm font-medium text-content/70">
             {coinRanking.symbol}
           </span>
@@ -123,7 +122,7 @@ const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
             roundDecimalsPlaces(coinRanking.quote.USD.percent_change_7d, 2) >= 0
               ? "week-chart-isUp"
               : "week-chart-isDown"
-          } aspect-auto h-[50px]`}
+          } aspect-auto h-[50px] pl-5`}
         />
       </td>
     </>

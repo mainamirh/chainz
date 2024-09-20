@@ -7,17 +7,17 @@ const RankingSK = ({ numberOfCoins }: { numberOfCoins: number }) => {
             i !== numberOfCoins - 1
               ? "[&>td]:border-b-[1px] [&>td]:border-border"
               : "border-none"
-          } [&>td]:py-5 [&>td>*]:bg-border [&>td>*]:rounded-md [&>td>*]:h-6 [&>td>*]:ml-5 animate-pulse`}
+          } animate-pulse [&>td>*]:ml-5 [&>td>*]:h-6 [&>td>*]:rounded-md [&>td>*]:bg-border [&>td]:py-4`}
           key={i}
         >
           <td className="pl-5">
-            <div className="w-3 h-6 !m-0" />
+            <div className="!m-0 h-6 w-3" />
           </td>
           <td>
-            <div className="!bg-transparent items-center flex gap-2 [&>*]:bg-border [&>*]:rounded-md !m-0">
-              <div className="w-6 h-6 !rounded-full" />
-              <div className="w-20 h-5" />
-              <div className="w-7 h-4" />
+            <div className="!m-0 flex items-center gap-2 !bg-transparent [&>*]:rounded-md [&>*]:bg-border">
+              <div className="h-6 w-6 !rounded-full" />
+              <div className="h-5 w-20" />
+              <div className="h-4 w-7" />
             </div>
           </td>
           {[...Array(numberOfCoins - 3)].map((_, i) => (

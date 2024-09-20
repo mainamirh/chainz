@@ -36,10 +36,11 @@ export interface ListingLatest {
 }
 
 export async function getListingsLatest(
+  start: number,
   limit: number,
 ): Promise<ListingLatest[]> {
   const res = await fetch(
-    `${apiBaseUrl}/v1/cryptocurrency/listings/latest?limit=${limit}`,
+    `${apiBaseUrl}/v1/cryptocurrency/listings/latest?start=${start}&limit=${limit}`,
     {
       method: "GET",
       headers: {

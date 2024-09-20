@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { range } from "@/app/lib/utils";
 
 interface PaginationProps {
-  items: any[];
+  items: number;
   itemsPerPage: number;
   siblings?: 1 | 2;
   currentPage: number;
@@ -17,7 +17,7 @@ const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   onPageChange,
 }) => {
-  const totalPages = Math.ceil(items.length / itemsPerPage);
+  const totalPages = Math.ceil(items / itemsPerPage);
 
   const renderButton = (number: number, key?: string) => (
     <button

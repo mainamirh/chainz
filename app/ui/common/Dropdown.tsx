@@ -46,23 +46,25 @@ const Dropdown: React.FC<DropdownProps> = ({
   }, []);
 
   return (
-    <div className="relative inline-block text-xs md:text-sm" ref={dropdownRef}>
+    <div className="relative text-xs md:text-sm" ref={dropdownRef}>
       <Button
         onClick={() => setIsOpen(!isOpen)}
         variant="custom"
-        className="flex grow items-center gap-2 whitespace-nowrap bg-border disabled:pointer-events-none disabled:opacity-60"
+        className="flex items-center gap-2 whitespace-nowrap bg-border disabled:pointer-events-none disabled:opacity-60"
         type="button"
         disabled={!options}
       >
         {selected ? (
           <span className="flex items-center gap-1.5">
-            <Image
-              src={coinLogo(selected.id)}
-              alt="coin-logo"
-              width={20}
-              height={20}
-              className="rounded-full"
-            />
+            <span className="h-5 w-5">
+              <Image
+                src={coinLogo(selected.id)}
+                alt="coin-logo"
+                width={20}
+                height={20}
+                className="rounded-full"
+              />
+            </span>
             <span className="font-medium">{selected.symbol}</span>
           </span>
         ) : (

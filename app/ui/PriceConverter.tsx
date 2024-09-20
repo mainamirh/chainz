@@ -50,7 +50,7 @@ const PriceConverter = () => {
       if (
         !convert_id ||
         !conversion.quote[convert_id] ||
-        conversion.quote[convert_id].price <= 0
+        conversion.quote[convert_id].price === 0
       )
         return prev;
 
@@ -66,7 +66,8 @@ const PriceConverter = () => {
       if (
         !convert_id ||
         !conversion.quote[convert_id] ||
-        conversion.quote[convert_id].price <= 0
+        conversion.quote[convert_id].price === 0 ||
+        conversion.quote[convert_id].price > 999999999999
       )
         return prev;
 
@@ -87,7 +88,7 @@ const PriceConverter = () => {
       new Intl.NumberFormat("en-US", {
         style: "decimal",
         minimumFractionDigits: 4,
-        maximumSignificantDigits: 7,
+        minimumIntegerDigits: 7,
       })
         .format(number)
         .replace(/[^0-9.-]+/g, ""),
@@ -110,10 +111,17 @@ const PriceConverter = () => {
             value={formatInputNumber(Number(convert.fromAmount))}
             onChange={(e) => {
               const value = e.target.value;
-              setConvert((prev) => ({
-                ...prev,
-                fromAmount: value === "" ? undefined : parseFloat(value),
-              }));
+              if (value === "") {
+                setConvert((prev) => ({
+                  ...prev,
+                  fromAmount: undefined,
+                }));
+              } else if (parseFloat(value) < 1000000000000) {
+                setConvert((prev) => ({
+                  ...prev,
+                  fromAmount: parseFloat(value),
+                }));
+              }
             }}
             className="no-arrow w-full bg-transparent text-lg font-medium outline-none md:text-xl"
             onWheel={(e) => e.currentTarget.blur()}
@@ -143,7 +151,11 @@ const PriceConverter = () => {
           <input
             type="number"
             placeholder=""
-            value={convert.toAmount ? formatInputNumber(convert.toAmount) : ""}
+            value={
+              convert.toAmount && convert.toAmount < 1000000000000
+                ? formatInputNumber(convert.toAmount)
+                : ""
+            }
             disabled
             className={`${isFetching && "animate-pulse"} no-arrow w-full bg-transparent text-lg font-medium outline-none disabled:text-content/70 md:text-xl`}
             onWheel={(e) => e.currentTarget.blur()}

@@ -87,7 +87,7 @@ const MarketTable = ({
       </div>
       {marketsState.length > 0 && (
         <Pagination
-          items={marketsState}
+          items={marketsState.length}
           itemsPerPage={itemsPerPage}
           siblings={2}
           currentPage={currentPage}
