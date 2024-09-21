@@ -20,7 +20,7 @@ const RankingSK = ({ numberOfCoins }: { numberOfCoins: number }) => {
               <div className="h-4 w-7" />
             </div>
           </td>
-          {[...Array(numberOfCoins - 3)].map((_, i) => (
+          {[...Array(7)].map((_, i) => (
             <td key={i}>
               <div />
             </td>

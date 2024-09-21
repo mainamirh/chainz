@@ -2,8 +2,12 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { poppins } from "./fonts";
-import Navbar from "./ui/Navbar";
+
 import ReactQueryProvider from "./lib/ReactQueryProvider";
+
+import Navbar from "./ui/Navbar";
+import Footer from "./ui/Footer";
+
 import { getTheme } from "./lib/actions";
 import { getQuotesLatest } from "./lib/apis/coinmarketcap";
 
@@ -25,9 +29,11 @@ export default async function RootLayout({
       <body className={`${poppins.className} bg-background text-content`}>
         <Navbar theme={theme} aggregatedStats={quotesLatest} />
 
-        <main className="mx-auto w-full max-w-[1440px] py-[85px]">
+        <main className="mx-auto w-full max-w-[1440px] pt-[85px]">
           <ReactQueryProvider>{children}</ReactQueryProvider>
         </main>
+
+        <Footer />
       </body>
     </html>
   );

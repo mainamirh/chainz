@@ -56,10 +56,10 @@ const ExchangeCard = ({ exchange }: { exchange: ExchangeMetadata }) => {
         )}
       </div>
       <div className="relative z-10 mb-5">
-        <ReactMarkdown className="prose prose-sm prose-sky pointer-events-none line-clamp-6 text-justify dark:prose-invert">
+        <ReactMarkdown className="prose prose-sm prose-sky pointer-events-none line-clamp-6 text-justify text-content prose-headings:text-content">
           {exchange.description}
         </ReactMarkdown>
-        <div className="absolute inset-x-0 bottom-0 z-10 flex h-[50px] cursor-pointer items-end justify-center bg-gradient-to-t from-foreground/90 from-40% to-transparent text-xs text-indigo-500 backdrop-brightness-110 transition-colors hover:text-indigo-600 active:text-indigo-700 dark:text-indigo-300 dark:backdrop-brightness-90 hover:dark:text-indigo-400 active:dark:text-indigo-500">
+        <div className="absolute inset-x-0 bottom-0 z-10 flex h-[50px] cursor-pointer items-end justify-center bg-gradient-to-t from-foreground/90 from-40% to-transparent text-xs text-indigo-500 backdrop-brightness-110 transition-colors hover:text-indigo-600 active:text-indigo-700">
           Read more
           <ChevronRight className="h-4 w-4" />
         </div>

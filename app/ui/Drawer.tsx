@@ -2,16 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Theme from "./common/Theme";
+
 import type { navItem } from "./Navbar";
+import type { Theme as ThemeType } from "@/app/lib/actions";
 
 const Drawer = ({
   isOpen,
   toggleDrawer,
   navItems,
+  theme,
 }: {
   isOpen: boolean;
   toggleDrawer: () => void;
   navItems: Array<navItem>;
+  theme: ThemeType;
 }) => {
   const pathname = usePathname();
 
@@ -36,6 +41,9 @@ const Drawer = ({
           </Link>
         ))}
       </nav>
+      <div className="flex items-center justify-end p-[5%]">
+        <Theme theme={theme} />
+      </div>
     </div>
   );
 };

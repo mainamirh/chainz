@@ -89,7 +89,7 @@ export default function Navbar({
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1">
               <Link
-                href={"https://github.com/mainamirh"}
+                href={"https://github.com/mainamirh/chainz"}
                 target="_blank"
                 className="rounded-md p-2 transition-colors hover:bg-border"
               >
@@ -104,7 +104,9 @@ export default function Navbar({
               </Link>
             </div>
 
-            <Theme theme={theme} />
+            <div className="hidden sm:block">
+              <Theme theme={theme} />
+            </div>
 
             <div onClick={toggleDrawer} className="flex md:hidden">
               {isDrawerOpen ? (
@@ -121,6 +123,7 @@ export default function Navbar({
         isOpen={isDrawerOpen}
         toggleDrawer={toggleDrawer}
         navItems={navItems}
+        theme={theme}
       />
     </>
   );
