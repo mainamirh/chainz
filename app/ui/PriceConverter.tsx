@@ -174,7 +174,9 @@ const PriceConverter = () => {
         </div>
       </div>
       <Button
-        disabled={!convert.from || !convert.to || !convert.fromAmount}
+        disabled={
+          !convert.from || !convert.to || !convert.fromAmount || isFetching
+        }
         onClick={() => refetch()}
         className="rounded-xl disabled:pointer-events-none disabled:opacity-70"
         type="button"
