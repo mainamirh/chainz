@@ -34,7 +34,7 @@ export default function Exchange() {
     Object.entries(metadata).find(
       ([_, exchange]) =>
         exchange.name.toLocaleLowerCase() ===
-        decodeURIComponent(name.toString()),
+        decodeURIComponent(name?.toString() ?? ""),
     )?.[1];
 
   const { data: coinRanking } = useListingLatest();

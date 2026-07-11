@@ -14,7 +14,8 @@ export default function Currency() {
   const { data: coinRanking } = useListingLatest();
   const currency = coinRanking?.find(
     (coin) =>
-      coin.name.toLocaleLowerCase() === decodeURIComponent(name.toString()),
+      coin.name.toLocaleLowerCase() ===
+      decodeURIComponent(name?.toString() ?? ""),
   );
 
   return (
