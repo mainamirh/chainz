@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import { MarketRow } from "./MarketRow";
 import { MarketSK } from "./MarketSK";
 import Pagination from "../../common/Pagination";

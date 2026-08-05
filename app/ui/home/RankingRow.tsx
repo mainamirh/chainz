@@ -33,6 +33,8 @@ const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
 
     const priceObserver = new MutationObserver(priceMutation);
 
+    if (!priceRef.current) return;
+
     priceObserver.observe(priceRef.current, {
       subtree: true,
       characterData: true,
