@@ -26,10 +26,10 @@ export default async function RootLayout({
 
   return (
     <html lang="en" data-theme={theme}>
-      <body className={`${poppins.className} bg-background text-content`}>
+      <body className={poppins.className}>
         <Navbar theme={theme} aggregatedStats={quotesLatest} />
 
-        <main className="mx-auto w-full max-w-[1440px] pt-[85px]">
+        <main className="mx-auto w-full max-w-360 pt-21.25">
           <ReactQueryProvider>{children}</ReactQueryProvider>
         </main>
 

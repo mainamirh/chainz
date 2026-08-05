@@ -48,7 +48,7 @@ const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
 
   return (
     <>
-      <td className="pl-5 !text-start">{coinRanking.cmc_rank}</td>
+      <td className="pl-5 text-start!">{coinRanking.cmc_rank}</td>
       <td>
         <Link
           href={`/currencies/${coinRanking.name.toLowerCase()}`}

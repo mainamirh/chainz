@@ -5,14 +5,14 @@ const CoinStatsSK = () => {
         <div className="w-6 h-6 rounded-full bg-border" />
 
         <div className="flex items-baseline gap-2 [&>div]:bg-border">
-          <div className="w-[65px] h-[23px] rounded" />
-          <div className="w-[32px] h-[17px] rounded" />
+          <div className="w-[65px] h-[23px] rounded-sm" />
+          <div className="w-[32px] h-[17px] rounded-sm" />
         </div>
       </div>
 
       <div className="flex flex-col items-start gap-3 animate-pulse">
-        <div className="w-[205px] h-[35px] rounded bg-border" />
-        <div className="w-[75px] h-[16px] rounded bg-border" />
+        <div className="w-[205px] h-[35px] rounded-sm bg-border" />
+        <div className="w-[75px] h-[16px] rounded-sm bg-border" />
       </div>
       <>
         <MetadataDescriptionSK />
@@ -44,9 +44,9 @@ export const MetadataDescriptionSK = () => {
     <div className="animate-pulse w-full flex flex-col gap-2">
       {[...Array(lines)].map((_, i) =>
         i === lines - 1 ? (
-          <div key={i} className="w-1/2 h-4 bg-border rounded" />
+          <div key={i} className="w-1/2 h-4 bg-border rounded-sm" />
         ) : (
-          <div key={i} className="w-full h-4 bg-border rounded" />
+          <div key={i} className="w-full h-4 bg-border rounded-sm" />
         )
       )}
     </div>
@@ -58,7 +58,7 @@ export const MetadataOfficialLinksSK = () => {
   return (
     <div className="animate-pulse w-full flex flex-wrap gap-2">
       {[...Array(lines)].map((_, i) => (
-        <div key={i} className="w-1/3 h-6 bg-border rounded" />
+        <div key={i} className="w-1/3 h-6 bg-border rounded-sm" />
       ))}
     </div>
   );
@@ -69,7 +69,7 @@ export const MetadataSocialsSK = () => {
   return (
     <div className="animate-pulse w-full flex flex-wrap gap-2">
       {[...Array(lines)].map((_, i) => (
-        <div key={i} className="w-1/4 h-6 bg-border rounded" />
+        <div key={i} className="w-1/4 h-6 bg-border rounded-sm" />
       ))}
     </div>
   );
@@ -80,7 +80,7 @@ export const MetadataNetworkSK = () => {
   return (
     <div className="animate-pulse w-full flex flex-wrap gap-2">
       {[...Array(lines)].map((_, i) => {
-        return <div key={i} className="w-5/12 h-6 bg-border rounded" />;
+        return <div key={i} className="w-5/12 h-6 bg-border rounded-sm" />;
       })}
     </div>
   );

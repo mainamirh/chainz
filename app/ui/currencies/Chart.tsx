@@ -51,7 +51,7 @@ const Chart = ({
   return (
     <div className="relative aspect-video w-full text-[0.5rem] md:text-[0.7rem]">
       {isPlaceholderData && (
-        <div className="absolute -inset-[4px] z-10 flex items-center justify-center rounded-xl bg-background/50 backdrop-blur-sm">
+        <div className="absolute inset-[-4px] z-10 flex items-center justify-center rounded-xl bg-background/50 backdrop-blur-xs">
           <div className="flex flex-col items-center gap-1">
             <LoaderCircle className="h-5 w-5 animate-spin md:h-6 md:w-6" />
             <div className="text-xs md:text-sm">Loading Data</div>

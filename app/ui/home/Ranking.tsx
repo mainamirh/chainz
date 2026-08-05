@@ -35,7 +35,7 @@ const Ranking = ({ cryptocurrencies }: { cryptocurrencies: number }) => {
 
   return (
     <>
-      <div id="ranking" className="h-[1px] w-full bg-transparent" />
+      <div id="ranking" className="h-px w-full bg-transparent" />
       <div className="relative mt-[10%] flex flex-col gap-5 overflow-auto rounded-xl border border-border bg-foreground shadow-md md:p-5">
         {isPlaceholderData && (
           <div className="absolute inset-0 z-10 overflow-hidden rounded-xl bg-background/40 md:inset-4" />
@@ -44,9 +44,9 @@ const Ranking = ({ cryptocurrencies }: { cryptocurrencies: number }) => {
         <div className="overflow-x-auto">
           <table className="w-full table-fixed whitespace-nowrap">
             <thead>
-              <tr className="[&>th]:border-y-[1px] [&>th]:border-border [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
-                <th className="w-[60px] pl-5 !text-start">#</th>
-                <th className="w-[160px] !text-start">Name</th>
+              <tr className="[&>th]:border-y [&>th]:border-border [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
+                <th className="w-[60px] pl-5 text-start!">#</th>
+                <th className="w-[160px] text-start!">Name</th>
                 <th className="w-[110px]">Price</th>
                 <th className="w-[80px]">1h %</th>
                 <th className="w-[70px]">24h %</th>
@@ -63,7 +63,7 @@ const Ranking = ({ cryptocurrencies }: { cryptocurrencies: number }) => {
                   <tr
                     className={`${
                       index !== coinsRanking.length - 1
-                        ? "[&>td]:border-b-[1px] [&>td]:border-border"
+                        ? "[&>td]:border-b [&>td]:border-border"
                         : "border-none"
                     } cursor-pointer transition-colors hover:bg-border/30 [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
                     key={coin.id}

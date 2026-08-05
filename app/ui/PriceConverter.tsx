@@ -123,7 +123,7 @@ const PriceConverter = () => {
                 }));
               }
             }}
-            className="no-arrow w-full bg-transparent text-lg font-medium outline-none md:text-xl"
+            className="no-arrow w-full bg-transparent text-lg font-medium outline-hidden md:text-xl"
             onWheel={(e) => e.currentTarget.blur()}
           />
           <Dropdown
@@ -157,12 +157,12 @@ const PriceConverter = () => {
                 : ""
             }
             disabled
-            className={`${isFetching && "animate-pulse"} no-arrow w-full bg-transparent text-lg font-medium outline-none disabled:text-content/70 md:text-xl`}
+            className={`${isFetching && "animate-pulse"} no-arrow w-full bg-transparent text-lg font-medium outline-hidden disabled:text-content/70 md:text-xl`}
             onWheel={(e) => e.currentTarget.blur()}
           />
 
           {isFetching && !convert.toAmount && (
-            <div className="absolute h-[20px] w-[100px] animate-pulse rounded bg-border" />
+            <div className="absolute h-[20px] w-[100px] animate-pulse rounded-sm bg-border" />
           )}
 
           <Dropdown

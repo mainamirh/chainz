@@ -16,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       className={`${className} ${
         variant === "default" &&
-        "bg-gradient-to-r from-iris-darker to-iris-lighter text-[#FFFFFA]"
+        "bg-linear-to-r from-iris-darker to-iris-lighter text-[#FFFFFA]"
       } rounded-full px-4 py-2 font-medium transition ease-in-out hover:brightness-110 active:shadow-inner active:brightness-90`}
       {...otherProps}
     >

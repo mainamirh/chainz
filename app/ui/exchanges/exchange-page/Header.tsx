@@ -82,7 +82,7 @@ const Header = ({
               &#36;{roundDecimalsPlaces(totalValue, 2).toLocaleString()}
             </span>
           ) : (
-            <div className="h-[30px] w-[260px] animate-pulse rounded bg-border" />
+            <div className="h-[30px] w-[260px] animate-pulse rounded-sm bg-border" />
           )}
         </div>
       </div>

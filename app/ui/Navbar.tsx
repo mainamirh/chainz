@@ -58,7 +58,7 @@ export default function Navbar({
 
   return (
     <>
-      <header className="fixed z-50 flex w-full flex-col border-b border-border bg-foreground pb-2 text-xs shadow-sm md:text-sm">
+      <header className="fixed z-50 flex w-full flex-col border-b border-border bg-foreground pb-2 text-xs shadow-xs md:text-sm">
         <AggregatedStats aggregatedStats={aggregatedStats} />
 
         <div className="flex items-center justify-between border-t border-border px-[5%] pt-2">
@@ -67,7 +67,7 @@ export default function Navbar({
               Chain
               <span
                 style={{ color: "transparent" }}
-                className="bg-gradient-to-r from-iris-darker to-iris-lighter bg-clip-text"
+                className="bg-linear-to-r from-iris-darker to-iris-lighter bg-clip-text"
               >
                 Z
               </span>

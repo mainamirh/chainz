@@ -26,7 +26,7 @@ const Description = ({ description }: { description: string }) => {
       {!readMore ? (
         <div
           onClick={() => setReadMore(!readMore)}
-          className={`${isDescriptionLong ? "flex" : "hidden"} absolute inset-x-0 -bottom-1 z-10 h-[140px] cursor-pointer items-end justify-center rounded-b-md bg-gradient-to-t from-foreground from-40% to-transparent text-base text-indigo-500 backdrop-brightness-110 transition-colors hover:text-indigo-600 active:text-indigo-700`}
+          className={`${isDescriptionLong ? "flex" : "hidden"} absolute inset-x-0 -bottom-1 z-10 h-[140px] cursor-pointer items-end justify-center rounded-b-md bg-linear-to-t from-foreground from-40% to-transparent text-base text-indigo-500 backdrop-brightness-110 transition-colors hover:text-indigo-600 active:text-indigo-700`}
         >
           <div className="mb-4 flex items-center">
             Read More
@@ -41,7 +41,7 @@ const Description = ({ description }: { description: string }) => {
             }, 500);
             window.scrollTo(0, 200);
           }}
-          className={`${isDescriptionLong ? "flex" : "hidden"} mt-4 cursor-pointer items-center justify-center rounded-md bg-foreground p-4 text-base text-indigo-500 shadow transition-colors hover:text-indigo-600 active:text-indigo-700`}
+          className={`${isDescriptionLong ? "flex" : "hidden"} mt-4 cursor-pointer items-center justify-center rounded-md bg-foreground p-4 text-base text-indigo-500 shadow-sm transition-colors hover:text-indigo-600 active:text-indigo-700`}
         >
           <div className="flex items-center">
             Read Less

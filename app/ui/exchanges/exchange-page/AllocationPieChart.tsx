@@ -64,7 +64,7 @@ const AllocationPieChart = ({ data }: { data: AggregatedAllocation[] }) => {
           {data.map((_, index) => (
             <Cell
               key={`cell-${index}`}
-              className="cursor-pointer outline-none hover:brightness-110"
+              className="cursor-pointer outline-hidden hover:brightness-110"
               fill={COLORS[index % COLORS.length]}
               strokeWidth={
                 activeIndex === index ? 4 : 0 || hoverIndex === index ? 2 : 0

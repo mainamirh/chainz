@@ -26,7 +26,7 @@ export const MarketRow = ({
 
   return (
     <>
-      <td className="pl-4 !text-start">{index}</td>
+      <td className="pl-4 text-start!">{index}</td>
       <td>
         <Link
           href={`/currencies/${market.base_currency_name.toLowerCase()}`}
@@ -43,7 +43,7 @@ export const MarketRow = ({
           {market.base_currency_name}
         </Link>
       </td>
-      <td className="!text-start">
+      <td className="text-start!">
         <Link
           href={market.market_url}
           target="_blank"

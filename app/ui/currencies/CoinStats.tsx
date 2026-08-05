@@ -69,7 +69,7 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
 
       {metadata ? (
         <p
-          className="text-justify text-sm md:text-base [&>a]:text-sm [&>a]:text-blue-400 [&>a]:transition-colors hover:[&>a]:text-blue-500"
+          className="text-justify text-sm md:text-base [&>a]:text-sm [&>a]:text-blue-400 [&>a]:transition-colors [&>a]:hover:text-blue-500"
           dangerouslySetInnerHTML={{
             __html: linkToATag(metadata.description),
           }}

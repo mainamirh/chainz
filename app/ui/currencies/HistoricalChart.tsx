@@ -64,7 +64,7 @@ const HistoricalChart = ({ coinId }: { coinId: string | undefined }) => {
         <Chart isPlaceholderData={isPlaceholderData} data={historicalTicks} />
       ) : (
         <div className="relative aspect-video w-full text-xs md:text-sm">
-          <div className="absolute -inset-[4px] flex items-center justify-center rounded-xl border border-border bg-foreground/50">
+          <div className="absolute inset-[-4px] flex items-center justify-center rounded-xl border border-border bg-foreground/50">
             <div className="flex flex-col items-center gap-1">
               <LoaderCircle className="h-5 w-5 animate-spin md:h-6 md:w-6" />
               <div>Loading Data</div>

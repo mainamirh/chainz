@@ -73,7 +73,7 @@ const TokenHoldersTable = ({
           <tr
             className={`${
               index !== selectedTokenHolders.length - 1
-                ? "[&>td]:border-b-[1px] [&>td]:border-border"
+                ? "[&>td]:border-b [&>td]:border-border"
                 : "border-none"
             } [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
             key={curr.wallet_address.concat(index.toString())}
@@ -94,7 +94,7 @@ const TokenHoldersTable = ({
           {totalValue || isFetched ? (
             <span>${roundDecimalsPlaces(totalValue, 2).toLocaleString()}</span>
           ) : (
-            <div className="h-[21px] w-[170px] animate-pulse rounded bg-border" />
+            <div className="h-[21px] w-[170px] animate-pulse rounded-sm bg-border" />
           )}
         </div>
         <ul className="text-xs font-medium text-content/40 [&>li]:before:mr-1 [&>li]:before:content-['*']">
@@ -107,8 +107,8 @@ const TokenHoldersTable = ({
       <div className="overflow-x-auto">
         <table className="w-full table-fixed whitespace-nowrap">
           <thead>
-            <tr className="[&>th]:border-y-[1px] [&>th]:border-border [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
-              <th className="w-[180px] pl-4 !text-start">Token</th>
+            <tr className="[&>th]:border-y [&>th]:border-border [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
+              <th className="w-[180px] pl-4 text-start!">Token</th>
               <th className="w-[160px]">Balance</th>
               <th className="w-[130px]">Price</th>
               <th className="w-[160px]">Value</th>

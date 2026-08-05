@@ -33,7 +33,7 @@ const MarketsTable = ({ coinId }: { coinId: string | undefined }) => {
           <tr
             className={`${
               index !== markets.length - 1
-                ? "[&>td]:border-b-[1px] [&>td]:border-border"
+                ? "[&>td]:border-b [&>td]:border-border"
                 : "border-none"
             } transition-colors hover:bg-border/30 [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
             key={curr.exchange_id
@@ -55,10 +55,10 @@ const MarketsTable = ({ coinId }: { coinId: string | undefined }) => {
       <div className="overflow-x-auto">
         <table className="w-full table-fixed whitespace-nowrap">
           <thead>
-            <tr className="[&>th]:border-y-[1px] [&>th]:border-border [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
-              <th className="w-[40px] pl-4 !text-start">#</th>
-              <th className="w-[180px] !text-start">Currency</th>
-              <th className="w-[130px] !text-start">Pair</th>
+            <tr className="[&>th]:border-y [&>th]:border-border [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
+              <th className="w-[40px] pl-4 text-start!">#</th>
+              <th className="w-[180px] text-start!">Currency</th>
+              <th className="w-[130px] text-start!">Pair</th>
               <th className="w-[80px]">Trust Score</th>
               <th className="w-[120px]">Price</th>
               <th className="w-[140px]">Volume (24h)</th>

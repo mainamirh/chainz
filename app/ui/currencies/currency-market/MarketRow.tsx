@@ -26,7 +26,7 @@ const MarketRow = ({
 
   return (
     <>
-      <td className="pl-4 !text-start">{index}</td>
+      <td className="pl-4 text-start!">{index}</td>
       <td>
         <Link
           href={`/exchanges/${market.exchange_name.toLowerCase()}`}
@@ -42,7 +42,7 @@ const MarketRow = ({
           <span className="truncate">{market.exchange_name}</span>
         </Link>
       </td>
-      <td className="!text-start">
+      <td className="text-start!">
         <Link
           href={market.market_url ?? "#"}
           target={market.market_url && "_blank"}

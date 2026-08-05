@@ -7,19 +7,19 @@ const ExchangeCardSK = () => {
         <div className="flex animate-pulse items-center gap-2">
           <div className="aspect-square w-[37px] rounded-full bg-border" />
 
-          <div className="h-[20px] w-[65px] rounded bg-border" />
+          <div className="h-[20px] w-[65px] rounded-sm bg-border" />
         </div>
 
         <div className="flex items-center gap-1 rounded-md bg-background/50 p-2 text-xs text-content/80">
           Spot Volume:
-          <div className="h-[14px] w-[40px] animate-pulse rounded bg-border" />
+          <div className="h-[14px] w-[40px] animate-pulse rounded-sm bg-border" />
         </div>
       </div>
       <div className="mb-5 flex animate-pulse flex-col gap-2">
-        <div className="h-[18px] w-1/3 rounded bg-border" />
+        <div className="h-[18px] w-1/3 rounded-sm bg-border" />
 
         {[...Array(4)].map((_, i) => (
-          <div key={i} className="h-[13px] rounded bg-border" />
+          <div key={i} className="h-[13px] rounded-sm bg-border" />
         ))}
       </div>
 
@@ -39,22 +39,22 @@ const ExchangeCardSK = () => {
         <div className="flex items-center gap-1 whitespace-nowrap text-xs text-content/70">
           <Calendar className="h-4 w-4" />
           Date Launched:
-          <div className="h-[14px] w-[56px] animate-pulse rounded bg-border" />
+          <div className="h-[14px] w-[56px] animate-pulse rounded-sm bg-border" />
         </div>
         <div className="flex items-center gap-1 text-xs text-content/70">
           <Eye className="h-4 w-4" />
           Weekly Visit:
-          <div className="h-[14px] w-[48px] animate-pulse rounded bg-border" />
+          <div className="h-[14px] w-[48px] animate-pulse rounded-sm bg-border" />
         </div>
         <div className="flex items-center gap-1 text-xs text-content/70">
           <PercentCircle className="h-4 w-4" />
           Maker Fee:
-          <div className="h-[14px] w-[30px] animate-pulse rounded bg-border" />
+          <div className="h-[14px] w-[30px] animate-pulse rounded-sm bg-border" />
         </div>
         <div className="flex items-center gap-1 text-xs text-content/70">
           <PercentCircle className="h-4 w-4" />
           Taker Fee:
-          <div className="h-[14px] w-[30px] animate-pulse rounded bg-border" />
+          <div className="h-[14px] w-[30px] animate-pulse rounded-sm bg-border" />
         </div>
       </div>
     </div>

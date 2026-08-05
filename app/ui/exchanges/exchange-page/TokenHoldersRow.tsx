@@ -47,7 +47,7 @@ const TokenHoldersRow = ({ tokenHolder }: { tokenHolder: Wallet }) => {
               width={16}
               height={16}
               quality={100}
-              className="absolute -bottom-[7px] -right-[7px]"
+              className="absolute bottom-[-7px] right-[-7px]"
             />
           </div>
           <div className="flex flex-col items-start gap-1">
@@ -56,7 +56,7 @@ const TokenHoldersRow = ({ tokenHolder }: { tokenHolder: Wallet }) => {
             </span>
             <div
               onClick={handleCopy}
-              className="flex cursor-pointer items-center gap-1 text-xs [&>svg]:hover:opacity-100"
+              className="flex cursor-pointer items-center gap-1 text-xs hover:[&>svg]:opacity-100"
             >
               <WalletMinimal className="h-4 w-4" />
               <span className="font-normal">
