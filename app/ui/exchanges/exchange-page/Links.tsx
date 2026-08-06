@@ -1,14 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
-import {
-  Link as LinkIcon,
-  MessageCircle,
-  Rss,
-  Scale,
-  Twitter,
-} from "lucide-react";
+import { Link as LinkIcon, MessageCircle, Rss, Scale } from "lucide-react";
+import { X } from "../../icons";
 
 type Url = {
   website: string[];
@@ -21,7 +17,7 @@ type Url = {
 
 const Links = ({ exchangeName, urls }: { exchangeName: string; urls: Url }) => {
   return (
-    <div className="top-[90px] flex w-full flex-col gap-2 lg:sticky lg:w-1/5">
+    <div className="top-22.5 flex w-full flex-col gap-2 lg:sticky lg:w-1/5">
       <h4 className="text-base font-medium">Links:</h4>
 
       {urls.website.length > 0 && (
@@ -33,7 +29,7 @@ const Links = ({ exchangeName, urls }: { exchangeName: string; urls: Url }) => {
               target="_blank"
               className="flex items-center gap-1 transition-colors hover:text-blue-500"
             >
-              <LinkIcon className="h-4 w-4" />
+              <LinkIcon className="size-4" />
               {url.slice(0, url.length - 1)}
             </Link>
           ))}
@@ -49,7 +45,7 @@ const Links = ({ exchangeName, urls }: { exchangeName: string; urls: Url }) => {
               target="_blank"
               className="flex items-center gap-1 transition-colors hover:text-blue-500"
             >
-              <Scale className="h-4 w-4" />
+              <Scale className="size-4" />
               Fees
             </Link>
           ))}
@@ -65,7 +61,7 @@ const Links = ({ exchangeName, urls }: { exchangeName: string; urls: Url }) => {
               target="_blank"
               className="flex items-center gap-1 transition-colors hover:text-blue-500"
             >
-              <MessageCircle className="h-4 w-4" />
+              <MessageCircle className="size-4" />
               Chat
             </Link>
           ))}
@@ -81,7 +77,7 @@ const Links = ({ exchangeName, urls }: { exchangeName: string; urls: Url }) => {
               target="_blank"
               className="flex items-center gap-1 transition-colors hover:text-blue-500"
             >
-              <Twitter className="h-4 w-4" />
+              <X className="size-4" />
               <span className="capitalize">@{exchangeName}</span>
             </Link>
           ))}
@@ -97,7 +93,7 @@ const Links = ({ exchangeName, urls }: { exchangeName: string; urls: Url }) => {
               target="_blank"
               className="flex items-center gap-1 transition-colors hover:text-blue-500"
             >
-              <Rss className="h-4 w-4" />
+              <Rss className="size-4" />
               Blog
             </Link>
           ))}
@@ -113,7 +109,7 @@ const Links = ({ exchangeName, urls }: { exchangeName: string; urls: Url }) => {
               target="_blank"
               className="flex items-center gap-1 transition-colors hover:text-blue-500"
             >
-              <Rss className="h-4 w-4" />
+              <Rss className="size-4" />
               {url.slice(0, url.length - 1)}
             </Link>
           ))}

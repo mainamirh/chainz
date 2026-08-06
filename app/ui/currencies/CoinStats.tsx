@@ -7,16 +7,7 @@ import { coinLogo } from "@/app/lib/utils";
 import PercentChange from "../common/PercentChange";
 import useMetadata from "@/app/lib/hooks/useMetadata";
 
-import {
-  Github,
-  StickyNote,
-  Globe,
-  Twitter,
-  Bot,
-  Facebook,
-  MessageCircle,
-  ExternalLink,
-} from "lucide-react";
+import { StickyNote, Globe, MessageCircle, ExternalLink } from "lucide-react";
 
 import type { ListingLatest } from "@/app/lib/apis/coinmarketcap";
 
@@ -27,12 +18,13 @@ import {
   MetadataOfficialLinksSK,
   MetadataSocialsSK,
 } from "./CoinStatsSK";
+import { Facebook, Github, Reddit, X } from "../icons";
 
 const CoinStats = ({ currency }: { currency: ListingLatest }) => {
   const { data: metadata } = useMetadata(currency.id);
 
   return (
-    <section className="flex w-full flex-col items-start gap-6 rounded-md border border-border bg-foreground p-6 shadow-md">
+    <section className="border-border bg-foreground flex w-full flex-col items-start gap-6 rounded-md border p-6 shadow-md">
       <div className="flex items-center gap-2">
         <Image
           src={coinLogo(currency.id)}
@@ -43,7 +35,7 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
         />
         <div className="flex items-baseline gap-2">
           <div className="text-lg font-semibold">{currency.name}</div>
-          <div className="text-sm font-medium text-content/70">
+          <div className="text-content/70 text-sm font-medium">
             {currency.symbol}
           </div>
         </div>
@@ -90,7 +82,9 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
                 <Globe className="h-4 w-4" />
-                {url.replace("https://", "").split("/")[0]}
+                <span className="translate-y-px">
+                  {url.replace("https://", "").split("/")[0]}
+                </span>
               </Link>
             ))}
             {metadata.urls.technical_doc.map((url) => (
@@ -101,7 +95,7 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
                 <StickyNote className="h-4 w-4" />
-                Whitepaper
+                <span className="translate-y-px">Whitepaper</span>
               </Link>
             ))}
 
@@ -112,8 +106,8 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 key={url}
                 className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <Github className="h-4 w-4" />
-                Github
+                <Github className="size-4" />
+                <span className="translate-y-px">Github</span>
               </Link>
             ))}
           </div>
@@ -133,8 +127,8 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 key={url}
                 className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <Twitter className="h-4 w-4" />
-                Twitter
+                <X className="size-4" />
+                <span className="translate-y-px">X</span>
               </Link>
             ))}
             {metadata.urls.reddit.map((url) => (
@@ -144,8 +138,8 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 key={url}
                 className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <Bot className="h-4 w-4" />
-                Reddit
+                <Reddit className="size-4" />
+                <span className="translate-y-px">Reddit</span>
               </Link>
             ))}
 
@@ -156,8 +150,8 @@ const CoinStats = ({ currency }: { currency: ListingLatest }) => {
                 key={url}
                 className="flex items-center gap-1 transition-colors hover:text-blue-500"
               >
-                <Facebook className="h-4 w-4" />
-                Facebook
+                <Facebook className="size-4" />
+                <span className="translate-y-px">Facebook</span>
               </Link>
             ))}
 

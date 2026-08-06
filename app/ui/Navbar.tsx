@@ -8,8 +8,7 @@ import { useState } from "react";
 import Drawer from "./Drawer";
 import Theme from "./common/Theme";
 
-import LogoGithub from "./common/logo-github";
-import LogoTwitterX from "./common/logo-twitter-x";
+import { Github } from "./icons";
 
 import { Menu, X, ArrowRightLeft, Coins } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -58,16 +57,16 @@ export default function Navbar({
 
   return (
     <>
-      <header className="fixed z-50 flex w-full flex-col border-b border-border bg-foreground pb-2 text-xs shadow-xs md:text-sm">
+      <header className="border-border bg-foreground fixed z-50 flex w-full flex-col border-b pb-2 text-xs shadow-xs md:text-sm">
         <AggregatedStats aggregatedStats={aggregatedStats} />
 
-        <div className="flex items-center justify-between border-t border-border px-[5%] pt-2">
+        <div className="border-border flex items-center justify-between border-t px-[5%] pt-2">
           <div className="flex items-center gap-16">
             <Link href="/" className="text-xl font-bold md:text-2xl">
               Chain
               <span
                 style={{ color: "transparent" }}
-                className="bg-linear-to-r from-iris-darker to-iris-lighter bg-clip-text"
+                className="from-iris-darker to-iris-lighter bg-linear-to-r bg-clip-text"
               >
                 Z
               </span>
@@ -91,17 +90,17 @@ export default function Navbar({
               <Link
                 href={"https://github.com/mainamirh/chainz"}
                 target="_blank"
-                className="rounded-md p-2 transition-colors hover:bg-border"
+                className="hover:bg-border rounded-md p-2 transition-colors"
               >
-                <LogoGithub className="h-4 w-4" />
+                <Github className="h-4 w-4" />
               </Link>
-              <Link
+              {/* <Link
                 href={"https://x.com/mainamirh"}
                 target="_blank"
                 className="rounded-md p-2 transition-colors hover:bg-border"
               >
-                <LogoTwitterX className="h-4 w-4" />
-              </Link>
+                <X className="h-4 w-4" />
+              </Link> */}
             </div>
 
             <div className="hidden sm:block">

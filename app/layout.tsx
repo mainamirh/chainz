@@ -25,7 +25,7 @@ export default async function RootLayout({
   const quotesLatest = await getQuotesLatest({ next: { revalidate: 60 * 60 } });
 
   return (
-    <html lang="en" data-theme={theme}>
+    <html lang="en" data-theme={theme} data-scroll-behavior="smooth">
       <body className={poppins.className}>
         <Navbar theme={theme} aggregatedStats={quotesLatest} />
 

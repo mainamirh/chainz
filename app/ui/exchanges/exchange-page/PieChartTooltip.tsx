@@ -1,22 +1,22 @@
 import Image from "next/image";
 
-import { TooltipProps } from "recharts";
-
 import { compactNumber, roundDecimalsPlaces, coinLogo } from "@/app/lib/utils";
 
 import type { AggregatedAllocation } from "./TokenAllocation";
+import type { TooltipContentProps } from "recharts";
 
 import { CircleDollarSign, CircleEllipsis } from "lucide-react";
 
-interface CustomProps extends TooltipProps<number, string> {}
-
-const PieChartTooltip: React.FC<CustomProps> = ({ active, payload }) => {
+const PieChartTooltip: React.FC<TooltipContentProps> = ({
+  active,
+  payload,
+}) => {
   if (active && payload && payload.length) {
     const { percentage, symbol, totalValue, cryptoId } = payload[0]
       .payload as AggregatedAllocation;
 
     return (
-      <div className="flex w-[150px] scale-125 flex-col gap-2 rounded-md border border-border bg-foreground/90 p-3 shadow-md">
+      <div className="border-border bg-foreground/90 flex w-[150px] scale-125 flex-col gap-2 rounded-md border p-3 shadow-md">
         <div className="flex items-center gap-1">
           <div className="flex items-center gap-1">
             {cryptoId !== -1 ? (
@@ -25,7 +25,6 @@ const PieChartTooltip: React.FC<CustomProps> = ({ active, payload }) => {
                 alt="crypto-logo"
                 width={12}
                 height={12}
-                quality={100}
               />
             ) : (
               <CircleEllipsis className="h-3 w-3" />
@@ -37,8 +36,8 @@ const PieChartTooltip: React.FC<CustomProps> = ({ active, payload }) => {
           </span>
         </div>
         <div className="flex items-center gap-1">
-          <div className="flex items-center gap-1 font-medium text-content/60">
-            <CircleDollarSign className="h-3 w-3 text-up" />
+          <div className="text-content/60 flex items-center gap-1 font-medium">
+            <CircleDollarSign className="text-up h-3 w-3" />
             Value:
           </div>
           <span className="font-semibold">${compactNumber(totalValue)}</span>

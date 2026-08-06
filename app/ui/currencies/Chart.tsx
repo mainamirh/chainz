@@ -32,7 +32,7 @@ const Chart = ({
   const key = searchParams.get("category") ?? "price";
 
   const accentColor =
-    key === "price" ? "rgb(var(--color-up))" : "rgb(var(--color-iris-darker))";
+    key === "price" ? "rgb(var(--up))" : "rgb(var(--iris-darker))";
 
   function calculateDomain(): AxisDomain | undefined {
     if (key === "price") {
@@ -51,7 +51,7 @@ const Chart = ({
   return (
     <div className="relative aspect-video w-full text-[0.5rem] md:text-[0.7rem]">
       {isPlaceholderData && (
-        <div className="absolute inset-[-4px] z-10 flex items-center justify-center rounded-xl bg-background/50 backdrop-blur-xs">
+        <div className="bg-background/50 absolute inset-[-4px] z-10 flex items-center justify-center rounded-xl backdrop-blur-xs">
           <div className="flex flex-col items-center gap-1">
             <LoaderCircle className="h-5 w-5 animate-spin md:h-6 md:w-6" />
             <div className="text-xs md:text-sm">Loading Data</div>
@@ -73,8 +73,8 @@ const Chart = ({
           <XAxis
             dataKey="timestamp"
             tickLine={false}
-            tick={{ fill: "rgb(var(--color-content))" }}
-            stroke="rgb(var(--color-border))"
+            tick={{ fill: "rgb(var(--content))" }}
+            stroke="rgb(var(--border))"
             tickMargin={10}
             minTickGap={40}
             interval={"equidistantPreserveStart"}
@@ -84,15 +84,19 @@ const Chart = ({
           />
           <YAxis
             tickLine={false}
-            tick={{ fill: "rgb(var(--color-content))" }}
-            stroke="rgb(var(--color-border))"
+            tick={{ fill: "rgb(var(--content))" }}
+            stroke="rgb(var(--border))"
             tickMargin={10}
             domain={calculateDomain()}
             tickCount={7}
             tickFormatter={compactNumber}
           />
-          <CartesianGrid stroke="rgb(var(--color-border))" vertical={false} />
-          <Tooltip content={<CustomTooltip accentColor={accentColor} />} />
+          <CartesianGrid stroke="rgb(var(--border))" vertical={false} />
+          <Tooltip
+            content={(props) => (
+              <CustomTooltip accentColor={accentColor} {...props} />
+            )}
+          />
           <Area
             type="monotone"
             dataKey={key}

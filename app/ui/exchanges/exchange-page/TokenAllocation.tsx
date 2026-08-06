@@ -108,7 +108,7 @@ const TokenAllocation = ({
   }
 
   return (
-    <div className="rounded-xl border border-border bg-foreground p-5 text-[0.5rem] shadow-md md:text-[0.6rem]">
+    <div className="border-border bg-foreground rounded-xl border p-5 text-[0.5rem] shadow-md md:text-[0.6rem]">
       <label htmlFor="token-allocation" className="text-xl font-semibold">
         Token Allocation
       </label>
@@ -124,7 +124,7 @@ const TokenAllocation = ({
           </div>
         )}
       </div>
-      <div className="mx-auto grid w-2/3 select-none grid-cols-1 gap-2 text-sm font-medium">
+      <div className="mx-auto grid w-2/3 grid-cols-1 gap-2 text-sm font-medium select-none">
         {aggregatedAllocation.length > 0 ? (
           aggregatedAllocation.map((token) => (
             <div
@@ -141,7 +141,6 @@ const TokenAllocation = ({
                     alt="crypto-logo"
                     width={20}
                     height={20}
-                    quality={100}
                   />
                 ) : (
                   <CircleEllipsis className="h-5 w-5" />

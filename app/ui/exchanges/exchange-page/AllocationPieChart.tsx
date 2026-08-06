@@ -1,19 +1,19 @@
 "use client";
 
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
-
 import { useState } from "react";
 
 import {
   PieChart,
   Pie,
-  Cell,
   ResponsiveContainer,
   Label,
   Tooltip,
+  Sector,
+  type PieSectorShapeProps,
 } from "recharts";
-import PieChartTooltip from "./PieChartTooltip";
 
+import PieChartTooltip from "./PieChartTooltip";
 import type { AggregatedAllocation } from "./TokenAllocation";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -26,14 +26,34 @@ const AllocationPieChart = ({ data }: { data: AggregatedAllocation[] }) => {
   const activeIndex = data.findIndex(
     (item) => item.symbol.toLowerCase() === searchParams.get("allocation"),
   );
+
   const [hoverIndex, setHoverIndex] = useState(-1);
 
   function handleSearchParams(query: "allocation", term: string) {
     const params = new URLSearchParams(searchParams);
-    // If the term is the same as the current value, delete the param
+
     params.get(query) === term ? params.delete(query) : params.set(query, term);
+
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
+
+  const renderShape = (props: PieSectorShapeProps) => {
+    const index = props.index ?? 0;
+
+    return (
+      <Sector
+        {...props}
+        fill={COLORS[index % COLORS.length]}
+        className="cursor-pointer outline-hidden hover:brightness-110"
+        stroke={
+          activeIndex === index
+            ? COLORS[index % COLORS.length]
+            : "rgb(var(--content))"
+        }
+        strokeWidth={activeIndex === index ? 4 : hoverIndex === index ? 2 : 0}
+      />
+    );
+  };
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -42,47 +62,33 @@ const AllocationPieChart = ({ data }: { data: AggregatedAllocation[] }) => {
           className="scale-150"
           cx="32.5%"
           cy="32.5%"
-          activeIndex={activeIndex}
           dataKey="percentage"
           data={data}
           innerRadius={40}
           outerRadius={80}
           paddingAngle={1}
+          shape={renderShape}
           onMouseEnter={(_, index) => {
             setHoverIndex(index);
           }}
           onMouseLeave={() => {
             setHoverIndex(-1);
           }}
-          onMouseDown={(data) => {
-            handleSearchParams(
-              "allocation",
-              data.payload.symbol.toLocaleLowerCase(),
-            );
+          onMouseDown={(item) => {
+            handleSearchParams("allocation", item.payload.symbol.toLowerCase());
           }}
         >
-          {data.map((_, index) => (
-            <Cell
-              key={`cell-${index}`}
-              className="cursor-pointer outline-hidden hover:brightness-110"
-              fill={COLORS[index % COLORS.length]}
-              strokeWidth={
-                activeIndex === index ? 4 : 0 || hoverIndex === index ? 2 : 0
-              }
-              stroke={
-                activeIndex === index
-                  ? COLORS[index % COLORS.length]
-                  : "rgb(var(--color-content))"
-              }
-            />
-          ))}
           <Label
             value={data[hoverIndex]?.symbol ?? data[activeIndex]?.symbol ?? ""}
             position="center"
-            fill="rgb(var(--color-content))"
+            fill="rgb(var(--content))"
           />
         </Pie>
-        <Tooltip content={<PieChartTooltip />} />
+
+        <Tooltip
+          defaultIndex={activeIndex >= 0 ? activeIndex : undefined}
+          content={(props) => <PieChartTooltip {...props} />}
+        />
       </PieChart>
     </ResponsiveContainer>
   );

@@ -1,5 +1,3 @@
-import { TooltipProps } from "recharts";
-
 import { Award, CandlestickChart, CircleDollarSign } from "lucide-react";
 
 import {
@@ -9,10 +7,11 @@ import {
 } from "@/app/lib/utils";
 
 import type { HistoricalData } from "@/app/lib/apis/coinpaprika";
+import type { TooltipContentProps } from "recharts";
 
-interface CustomProps extends TooltipProps<number, string> {
+type CustomProps = TooltipContentProps & {
   accentColor: string;
-}
+};
 
 const CustomTooltip: React.FC<CustomProps> = ({
   active,
@@ -24,16 +23,16 @@ const CustomTooltip: React.FC<CustomProps> = ({
       .payload as HistoricalData;
 
     return (
-      <div className="flex w-[260px] flex-col gap-2 rounded-md border border-border bg-foreground/90 p-3 shadow-md">
+      <div className="border-border bg-foreground/90 flex w-[260px] flex-col gap-2 rounded-md border p-3 shadow-md">
         <div className="mb-2 flex justify-between font-medium">
-          <div className="text-xs text-content">
+          <div className="text-content text-xs">
             {regularDateFormat(timestamp)}
           </div>
           <div className="text-content/60">{fullClockFormat(timestamp)}</div>
         </div>
         <div className="flex items-center">
           {payload[0].value === price ? (
-            <span className="flex items-center gap-1 text-xs font-medium text-content/60">
+            <span className="text-content/60 flex items-center gap-1 text-xs font-medium">
               <CircleDollarSign
                 style={{ color: accentColor }}
                 className="h-4 w-4"
@@ -41,7 +40,7 @@ const CustomTooltip: React.FC<CustomProps> = ({
               Price:&nbsp;
             </span>
           ) : (
-            <span className="flex items-center gap-1 text-xs font-medium text-content/60">
+            <span className="text-content/60 flex items-center gap-1 text-xs font-medium">
               <Award style={{ color: accentColor }} className="h-4 w-4" />
               Market Cap:&nbsp;
             </span>
@@ -54,7 +53,7 @@ const CustomTooltip: React.FC<CustomProps> = ({
           </span>
         </div>
         <div className="flex items-center">
-          <span className="flex items-center gap-1 text-xs font-medium text-content/60">
+          <span className="text-content/60 flex items-center gap-1 text-xs font-medium">
             <CandlestickChart className="h-4 w-4 text-sky-200" />
             Vol 24h:&nbsp;
           </span>

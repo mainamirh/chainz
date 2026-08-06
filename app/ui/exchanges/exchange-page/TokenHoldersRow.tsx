@@ -39,15 +39,13 @@ const TokenHoldersRow = ({ tokenHolder }: { tokenHolder: Wallet }) => {
               alt="crypto-logo"
               width={24}
               height={24}
-              quality={100}
             />
             <Image
               src={coinLogo(tokenHolder.platform.crypto_id)}
               alt="blockchain-logo"
               width={16}
               height={16}
-              quality={100}
-              className="absolute bottom-[-7px] right-[-7px]"
+              className="absolute right-[-7px] bottom-[-7px]"
             />
           </div>
           <div className="flex flex-col items-start gap-1">

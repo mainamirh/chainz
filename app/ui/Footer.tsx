@@ -3,10 +3,10 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="flex items-center px-[4%] py-10 md:px-[3%]">
-      <p className="text-center text-sm text-content/70">
+      <p className="text-content/70 text-center text-sm">
         Built by
         <Link
-          href="https://twitter.com/mainamirh"
+          href="https://github.com/mainamirh"
           target="_blank"
           className="ml-1 underline underline-offset-2"
         >

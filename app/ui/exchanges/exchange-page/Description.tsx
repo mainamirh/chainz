@@ -12,21 +12,23 @@ const Description = ({ description }: { description: string }) => {
 
   return (
     <div className="relative z-10 w-full lg:w-4/5">
-      <ReactMarkdown
-        components={{
-          a(props) {
-            const { node, ...rest } = props;
-            return <a {...rest} target="_blank" />;
-          },
-        }}
-        className={`${isDescriptionLong && !readMore ? "h-[500px]" : "h-auto"} prose prose-sm prose-sky max-w-full overflow-hidden text-justify text-content md:prose-base prose-headings:text-content`}
+      <div
+        className={`${isDescriptionLong && !readMore ? "h-125" : "h-auto"} prose prose-sm prose-sky text-content md:prose-base prose-headings:text-content max-w-full overflow-hidden text-justify`}
       >
-        {description}
-      </ReactMarkdown>
+        <ReactMarkdown
+          components={{
+            a(props) {
+              return <a {...props} target="_blank" rel="noopener noreferrer" />;
+            },
+          }}
+        >
+          {description}
+        </ReactMarkdown>
+      </div>
       {!readMore ? (
         <div
           onClick={() => setReadMore(!readMore)}
-          className={`${isDescriptionLong ? "flex" : "hidden"} absolute inset-x-0 -bottom-1 z-10 h-[140px] cursor-pointer items-end justify-center rounded-b-md bg-linear-to-t from-foreground from-40% to-transparent text-base text-indigo-500 backdrop-brightness-110 transition-colors hover:text-indigo-600 active:text-indigo-700`}
+          className={`${isDescriptionLong ? "flex" : "hidden"} from-foreground absolute inset-x-0 -bottom-1 z-10 h-35 cursor-pointer items-end justify-center rounded-b-md bg-linear-to-t from-40% to-transparent text-base text-indigo-500 backdrop-brightness-110 transition-colors hover:text-indigo-600 active:text-indigo-700`}
         >
           <div className="mb-4 flex items-center">
             Read More
@@ -41,7 +43,7 @@ const Description = ({ description }: { description: string }) => {
             }, 500);
             window.scrollTo(0, 200);
           }}
-          className={`${isDescriptionLong ? "flex" : "hidden"} mt-4 cursor-pointer items-center justify-center rounded-md bg-foreground p-4 text-base text-indigo-500 shadow-sm transition-colors hover:text-indigo-600 active:text-indigo-700`}
+          className={`${isDescriptionLong ? "flex" : "hidden"} bg-foreground mt-4 cursor-pointer items-center justify-center rounded-md p-4 text-base text-indigo-500 shadow-sm transition-colors hover:text-indigo-600 active:text-indigo-700`}
         >
           <div className="flex items-center">
             Read Less
