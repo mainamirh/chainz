@@ -8,9 +8,9 @@ import ReactMarkdown from "react-markdown";
 
 import { Calendar, ChevronRight, Eye, PercentCircle } from "lucide-react";
 
-import type { ExchangeMetadata } from "@/app/lib/apis/coinmarketcap";
+import type { ExchangeMetadata } from "@/lib/apis/coinmarketcap";
 
-import { regularDateFormat, compactNumber } from "@/app/lib/utils";
+import { regularDateFormat, compactNumber } from "@/lib/utils";
 
 const ExchangeCard = ({ exchange }: { exchange: ExchangeMetadata }) => {
   const router = useRouter();

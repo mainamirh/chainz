@@ -3,15 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { coinLogo } from "@/app/lib/utils";
+import { coinLogo } from "@/lib/utils";
 import PercentChange from "../common/PercentChange";
-import useMetadata from "@/app/lib/hooks/useMetadata";
+import useMetadata from "@/lib/hooks/useMetadata";
 
 import { StickyNote, Globe, MessageCircle, ExternalLink } from "lucide-react";
 
-import type { ListingLatest } from "@/app/lib/apis/coinmarketcap";
+import type { ListingLatest } from "@/lib/apis/coinmarketcap";
 
-import { linkToATag } from "@/app/lib/utils";
+import { linkToATag } from "@/lib/utils";
 import {
   MetadataDescriptionSK,
   MetadataNetworkSK,

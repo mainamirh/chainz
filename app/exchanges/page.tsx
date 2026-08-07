@@ -1,6 +1,6 @@
 "use client";
 
-import useExchangesMetadata from "../lib/hooks/useExchangesMetadata";
+import useExchangesMetadata from "@/lib/hooks/useExchangesMetadata";
 import ExchangeCard from "../ui/exchanges/ExchangeCard";
 import ExchangeCardSK from "../ui/exchanges/ExchangeCardSK";
 

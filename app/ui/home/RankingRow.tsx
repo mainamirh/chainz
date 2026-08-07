@@ -4,11 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useEffect } from "react";
 
-import { coinLogo, coinLastWeekChart } from "../../lib/utils";
-import { roundDecimalsPlaces } from "../../lib/utils";
+import { coinLogo, coinLastWeekChart } from "@/lib/utils";
+import { roundDecimalsPlaces } from "@/lib/utils";
 import PercentChange from "../common/PercentChange";
 
-import type { ListingLatest } from "@/app/lib/apis/coinmarketcap";
+import type { ListingLatest } from "@/lib/apis/coinmarketcap";
 
 const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
   const priceRef = useRef<HTMLDivElement>(null);
@@ -62,7 +62,7 @@ const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
             className="aspect-auto w-6"
           />
           <span className="truncate">{coinRanking.name}</span>
-          <span className="text-sm font-medium text-content/70">
+          <span className="text-content/70 text-sm font-medium">
             {coinRanking.symbol}
           </span>
         </Link>

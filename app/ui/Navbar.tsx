@@ -13,9 +13,9 @@ import { Github } from "./icons";
 import { Menu, X, ArrowRightLeft, Coins } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import type { Theme as ThemeType } from "@/app/lib/actions";
+import type { Theme as ThemeType } from "@/lib/actions";
 import AggregatedStats from "./AggregatedStats";
-import type { QuotesLatest } from "../lib/apis/coinmarketcap";
+import type { QuotesLatest } from "@/lib/apis/coinmarketcap";
 
 export type navItem = {
   label: string;

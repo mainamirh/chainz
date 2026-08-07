@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Theme from "./common/Theme";
 
 import type { navItem } from "./Navbar";
-import type { Theme as ThemeType } from "@/app/lib/actions";
+import type { Theme as ThemeType } from "@/lib/actions";
 
 const Drawer = ({
   isOpen,
@@ -22,7 +22,7 @@ const Drawer = ({
 
   return (
     <div
-      className={`text-dark-baby-powder fixed inset-0 z-40 bg-foreground pt-[95px] transition-all duration-300 md:hidden ${
+      className={`text-dark-baby-powder bg-foreground fixed inset-0 z-40 pt-[95px] transition-all duration-300 md:hidden ${
         isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
       }`}
     >

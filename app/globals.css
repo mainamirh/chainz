@@ -38,7 +38,7 @@
   --content: 255 255 250;
 }
 
-@theme {
+@theme inline {
   --color-background: rgb(var(--background));
   --color-foreground: rgb(var(--foreground));
   --color-border: rgb(var(--border));

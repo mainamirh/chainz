@@ -5,9 +5,9 @@ import MarketRow from "./MarketRow";
 import { MarketSK } from "./Skeletons";
 import Pagination from "../../common/Pagination";
 
-import useCoinMarkets from "@/app/lib/hooks/useCoinMarkets";
+import useCoinMarkets from "@/lib/hooks/useCoinMarkets";
 
-import type { CoinMarket } from "@/app/lib/apis/coinpaprika";
+import type { CoinMarket } from "@/lib/apis/coinpaprika";
 
 const MarketsTable = ({ coinId }: { coinId: string | undefined }) => {
   const [marketsState, setMarketsState] = useState<CoinMarket[]>([]);
@@ -33,9 +33,9 @@ const MarketsTable = ({ coinId }: { coinId: string | undefined }) => {
           <tr
             className={`${
               index !== markets.length - 1
-                ? "[&>td]:border-b [&>td]:border-border"
+                ? "[&>td]:border-border [&>td]:border-b"
                 : "border-none"
-            } transition-colors hover:bg-border/30 [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
+            } hover:bg-border/30 transition-colors [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
             key={curr.exchange_id
               .concat("_")
               .concat(curr.base_currency_id)
@@ -51,11 +51,11 @@ const MarketsTable = ({ coinId }: { coinId: string | undefined }) => {
   }
 
   return (
-    <div className="flex flex-col gap-5 rounded-xl border border-border bg-foreground p-5 shadow-md">
+    <div className="border-border bg-foreground flex flex-col gap-5 rounded-xl border p-5 shadow-md">
       <div className="overflow-x-auto">
         <table className="w-full table-fixed whitespace-nowrap">
           <thead>
-            <tr className="[&>th]:border-y [&>th]:border-border [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
+            <tr className="[&>th]:border-border [&>th]:border-y [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
               <th className="w-[40px] pl-4 text-start!">#</th>
               <th className="w-[180px] text-start!">Currency</th>
               <th className="w-[130px] text-start!">Pair</th>

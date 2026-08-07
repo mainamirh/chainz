@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import Button from "./common/Button";
 import Dropdown from "./common/Dropdown";
 
-import useListingLatest from "../lib/hooks/useListingLatest";
-import usePriceConversion from "../lib/hooks/usePriceConversion";
+import useListingLatest from "@/lib/hooks/useListingLatest";
+import usePriceConversion from "@/lib/hooks/usePriceConversion";
 import { useDebounce } from "use-debounce";
 
 import { ArrowDownUp, LoaderCircle } from "lucide-react";
@@ -96,7 +96,7 @@ const PriceConverter = () => {
   }
 
   return (
-    <div className="flex select-none flex-col gap-1 rounded-xl border border-border bg-foreground/90 p-2 shadow-md backdrop-blur-md">
+    <div className="border-border bg-foreground/90 flex flex-col gap-1 rounded-xl border p-2 shadow-md backdrop-blur-md select-none">
       <label
         htmlFor="currency-converter"
         className="p-2 text-xs font-medium md:text-sm"
@@ -104,7 +104,7 @@ const PriceConverter = () => {
         Cryptocurrency Converter
       </label>
       <div id="currency-converter" className="relative flex flex-col gap-1">
-        <div className="flex items-center justify-between gap-3 rounded-xl bg-border/40 p-4">
+        <div className="bg-border/40 flex items-center justify-between gap-3 rounded-xl p-4">
           <input
             type="number"
             placeholder="0"
@@ -138,7 +138,7 @@ const PriceConverter = () => {
 
         <div
           onClick={reverseConversion}
-          className="absolute left-1/2 top-1/2 z-10 w-fit -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-foreground p-2 transition-colors hover:bg-border"
+          className="bg-foreground hover:bg-border absolute top-1/2 left-1/2 z-10 w-fit -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full p-2 transition-colors"
         >
           {isFetching ? (
             <LoaderCircle className="h-4 w-4 animate-spin md:h-5 md:w-5" />
@@ -147,7 +147,7 @@ const PriceConverter = () => {
           )}
         </div>
 
-        <div className="relative flex items-center justify-between gap-3 rounded-xl bg-border/40 p-4">
+        <div className="bg-border/40 relative flex items-center justify-between gap-3 rounded-xl p-4">
           <input
             type="number"
             placeholder=""
@@ -157,12 +157,12 @@ const PriceConverter = () => {
                 : ""
             }
             disabled
-            className={`${isFetching && "animate-pulse"} no-arrow w-full bg-transparent text-lg font-medium outline-hidden disabled:text-content/70 md:text-xl`}
+            className={`${isFetching && "animate-pulse"} no-arrow disabled:text-content/70 w-full bg-transparent text-lg font-medium outline-hidden md:text-xl`}
             onWheel={(e) => e.currentTarget.blur()}
           />
 
           {isFetching && !convert.toAmount && (
-            <div className="absolute h-[20px] w-[100px] animate-pulse rounded-sm bg-border" />
+            <div className="bg-border absolute h-[20px] w-[100px] animate-pulse rounded-sm" />
           )}
 
           <Dropdown

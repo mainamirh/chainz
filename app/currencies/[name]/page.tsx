@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 
-import useListingLatest from "@/app/lib/hooks/useListingLatest";
+import useListingLatest from "@/lib/hooks/useListingLatest";
 import CoinStats from "@/app/ui/currencies/CoinStats";
 import CoinStatsSK from "@/app/ui/currencies/CoinStatsSK";
 import HistoricalChart from "@/app/ui/currencies/HistoricalChart";

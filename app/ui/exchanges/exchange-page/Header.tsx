@@ -4,11 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import { roundDecimalsPlaces } from "@/app/lib/utils";
+import { roundDecimalsPlaces } from "@/lib/utils";
 
-import type { ExchangeMetadata } from "@/app/lib/apis/coinmarketcap";
-import type { ListingLatest as Coin } from "@/app/lib/apis/coinmarketcap";
-import useExchangeAssets from "@/app/lib/hooks/useExchangeAssets";
+import type { ExchangeMetadata } from "@/lib/apis/coinmarketcap";
+import type { ListingLatest as Coin } from "@/lib/apis/coinmarketcap";
+import useExchangeAssets from "@/lib/hooks/useExchangeAssets";
 
 const Header = ({
   exchange,
@@ -66,7 +66,7 @@ const Header = ({
             &#36;
             {roundDecimalsPlaces(exchange.spot_volume_usd, 2).toLocaleString()}
           </span>
-          <span className="text-base text-content/70">
+          <span className="text-content/70 text-base">
             {roundDecimalsPlaces(
               exchange.spot_volume_usd / BTC.quote.USD.price,
               0,
@@ -82,7 +82,7 @@ const Header = ({
               &#36;{roundDecimalsPlaces(totalValue, 2).toLocaleString()}
             </span>
           ) : (
-            <div className="h-[30px] w-[260px] animate-pulse rounded-sm bg-border" />
+            <div className="bg-border h-[30px] w-[260px] animate-pulse rounded-sm" />
           )}
         </div>
       </div>

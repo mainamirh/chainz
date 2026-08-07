@@ -1,8 +1,8 @@
 "use client";
 
 import PercentChange from "./common/PercentChange";
-import type { QuotesLatest } from "../lib/apis/coinmarketcap";
-import { compactNumber } from "../lib/utils";
+import type { QuotesLatest } from "@/lib/apis/coinmarketcap";
+import { compactNumber } from "@/lib/utils";
 
 const AggregatedStats = ({
   aggregatedStats,
@@ -10,7 +10,7 @@ const AggregatedStats = ({
   aggregatedStats: QuotesLatest;
 }) => {
   return (
-    <div className="no-scrollbar flex items-center gap-5 overflow-x-auto px-[14px] py-2 text-[11px] font-medium text-content/80 shadow-[inset_25px_0px_25px_-25px,inset_-25px_0px_25px_-25px] shadow-border md:shadow-none [&>div]:shrink-0">
+    <div className="no-scrollbar text-content/80 shadow-border flex items-center gap-5 overflow-x-auto px-[14px] py-2 text-[11px] font-medium shadow-[inset_25px_0px_25px_-25px,inset_-25px_0px_25px_-25px] md:shadow-none [&>div]:shrink-0">
       <div className="flex items-center gap-1">
         Cryptos:
         <span className="text-iris-lighter brightness-150">

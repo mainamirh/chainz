@@ -3,13 +3,13 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { poppins } from "./fonts";
 
-import ReactQueryProvider from "./lib/ReactQueryProvider";
+import ReactQueryProvider from "@/lib/ReactQueryProvider";
 
 import Navbar from "./ui/Navbar";
 import Footer from "./ui/Footer";
 
-import { getTheme } from "./lib/actions";
-import { getQuotesLatest } from "./lib/apis/coinmarketcap";
+import { getTheme } from "@/lib/actions";
+import { getQuotesLatest } from "@/lib/apis/coinmarketcap";
 
 export const metadata: Metadata = {
   title: "ChainZ - Compare The Best Exchanges to Buy or sell Crypto",

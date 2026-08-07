@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { coinLogo } from "@/app/lib/utils";
+import { coinLogo } from "@/lib/utils";
 import Button from "./Button";
 
 type Option = { id: number; name: string; symbol: string };
@@ -50,7 +50,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       <Button
         onClick={() => setIsOpen(!isOpen)}
         variant="custom"
-        className="flex items-center gap-2 whitespace-nowrap bg-border disabled:pointer-events-none disabled:opacity-60"
+        className="bg-border flex items-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-60"
         type="button"
         disabled={!options}
       >
@@ -74,12 +74,12 @@ const Dropdown: React.FC<DropdownProps> = ({
       </Button>
 
       {isOpen && options && (
-        <div className="absolute top-[-100px] right-[70px] z-50 h-[300px] w-56 overflow-auto rounded-md bg-border p-1 shadow-lg">
+        <div className="bg-border absolute top-[-100px] right-[70px] z-50 h-[300px] w-56 overflow-auto rounded-md p-1 shadow-lg">
           {options.map((option) => (
             <div
               key={option.id}
               onClick={() => handleOptionClick(option)}
-              className="flex cursor-pointer items-center gap-2 rounded-md bg-border p-3 transition-all hover:brightness-125"
+              className="bg-border flex cursor-pointer items-center gap-2 rounded-md p-3 transition-all hover:brightness-125"
             >
               <Image
                 src={coinLogo(option.id)}
@@ -90,7 +90,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               />
               <div className="flex flex-col gap-0.5">
                 <span>{option.name}</span>
-                <span className="text-xs text-content/70">{option.symbol}</span>
+                <span className="text-content/70 text-xs">{option.symbol}</span>
               </div>
             </div>
           ))}

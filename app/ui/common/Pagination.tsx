@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { range } from "@/app/lib/utils";
+import { range } from "@/lib/utils";
 
 interface PaginationProps {
   items: number;
@@ -24,7 +24,7 @@ const Pagination: React.FC<PaginationProps> = ({
       type="button"
       key={key ?? number}
       onClick={() => onPageChange(number)}
-      className={`${currentPage === number ? "bg-border hover:bg-border" : "hover:bg-border/60"} inline-flex aspect-square w-7 items-center justify-center rounded-md border border-border shadow-xs transition-colors md:w-8`}
+      className={`${currentPage === number ? "bg-border hover:bg-border" : "hover:bg-border/60"} border-border inline-flex aspect-square w-7 items-center justify-center rounded-md border shadow-xs transition-colors md:w-8`}
     >
       {number}
     </button>

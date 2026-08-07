@@ -7,9 +7,9 @@ import {
   coinPaprikaLogo,
   roundDecimalsPlaces,
   trustBadgeColor,
-} from "@/app/lib/utils";
+} from "@/lib/utils";
 
-import type { ExchangeMarket } from "@/app/lib/apis/coinpaprika";
+import type { ExchangeMarket } from "@/lib/apis/coinpaprika";
 import { ExternalLink } from "lucide-react";
 
 export const MarketRow = ({
@@ -56,7 +56,7 @@ export const MarketRow = ({
       </td>
       <td>
         <div
-          className={`${trustBadgeColor(market.trust_score)} float-end w-fit rounded-full px-2 py-1 text-center text-xs font-semibold capitalize text-white/90`}
+          className={`${trustBadgeColor(market.trust_score)} float-end w-fit rounded-full px-2 py-1 text-center text-xs font-semibold text-white/90 capitalize`}
         >
           {market.trust_score}
         </div>

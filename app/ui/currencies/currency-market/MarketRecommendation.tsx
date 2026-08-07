@@ -9,9 +9,9 @@ import {
   exchangePaprikaLogo,
   compactNumber,
   trustBadgeColor,
-} from "@/app/lib/utils";
+} from "@/lib/utils";
 
-import type { CoinMarket } from "@/app/lib/apis/coinpaprika";
+import type { CoinMarket } from "@/lib/apis/coinpaprika";
 
 const MarketRecommendation = ({
   market,
@@ -22,7 +22,7 @@ const MarketRecommendation = ({
   label: string;
 }) => {
   return (
-    <div className="flex w-[340px] shrink-0 flex-col gap-3 overflow-hidden rounded-xl border border-border bg-foreground p-5 shadow-md">
+    <div className="border-border bg-foreground flex w-[340px] shrink-0 flex-col gap-3 overflow-hidden rounded-xl border p-5 shadow-md">
       <div>
         <Link
           href={market.market_url ?? "#"}
@@ -42,7 +42,7 @@ const MarketRecommendation = ({
           maximumSignificantDigits: 5,
         }).format(market.quotes.USD.price)}
 
-        <div className="flex items-center gap-1 text-xs text-content/80">
+        <div className="text-content/80 flex items-center gap-1 text-xs">
           <span>Vol:</span>$
           {compactNumber(market.quotes.USD.volume_24h).toLocaleString()}
         </div>
@@ -63,10 +63,10 @@ const MarketRecommendation = ({
           <span className="w-[110px] truncate">{market.exchange_name}</span>
         </Link>
       </div>
-      <div className="flex items-center gap-1 text-xs font-medium text-content/80">
+      <div className="text-content/80 flex items-center gap-1 text-xs font-medium">
         Trust Score:
         <div
-          className={`${trustBadgeColor(market.trust_score)} rounded-full px-2 py-1 text-center font-semibold capitalize text-white/90`}
+          className={`${trustBadgeColor(market.trust_score)} rounded-full px-2 py-1 text-center font-semibold text-white/90 capitalize`}
         >
           {market.trust_score}
         </div>

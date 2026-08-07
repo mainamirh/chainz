@@ -6,9 +6,9 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import AllocationPieChart from "./AllocationPieChart";
 
-import useExchangeAssets from "@/app/lib/hooks/useExchangeAssets";
+import useExchangeAssets from "@/lib/hooks/useExchangeAssets";
 
-import { coinLogo, roundDecimalsPlaces } from "@/app/lib/utils";
+import { coinLogo, roundDecimalsPlaces } from "@/lib/utils";
 import { CircleEllipsis, LoaderCircle } from "lucide-react";
 import { AggregatedAllocationSK } from "./Skeleton";
 

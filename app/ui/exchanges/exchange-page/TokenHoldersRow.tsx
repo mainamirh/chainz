@@ -3,13 +3,9 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import {
-  roundDecimalsPlaces,
-  coinLogo,
-  shortenedAddress,
-} from "@/app/lib/utils";
+import { roundDecimalsPlaces, coinLogo, shortenedAddress } from "@/lib/utils";
 
-import type { Wallet } from "@/app/lib/apis/coinmarketcap";
+import type { Wallet } from "@/lib/apis/coinmarketcap";
 import { Check, Copy, WalletMinimal } from "lucide-react";
 
 const TokenHoldersRow = ({ tokenHolder }: { tokenHolder: Wallet }) => {

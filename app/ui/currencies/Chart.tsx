@@ -17,8 +17,8 @@ import CustomTooltip from "./CustomTooltip";
 import { LoaderCircle } from "lucide-react";
 
 import type { AxisDomain } from "recharts/types/util/types";
-import type { HistoricalData, Range } from "@/app/lib/apis/coinpaprika";
-import { compactNumber, formatByRange } from "@/app/lib/utils";
+import type { HistoricalData, Range } from "@/lib/apis/coinpaprika";
+import { compactNumber, formatByRange } from "@/lib/utils";
 
 const Chart = ({
   data,

@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 
-import useCoinMarkets from "@/app/lib/hooks/useCoinMarkets";
+import useCoinMarkets from "@/lib/hooks/useCoinMarkets";
 import MarketsTable from "./MarketsTable";
 
-import type { CoinMarket } from "@/app/lib/apis/coinpaprika";
+import type { CoinMarket } from "@/lib/apis/coinpaprika";
 import MarketRecommendation from "./MarketRecommendation";
 import { RecommendationSK } from "./Skeletons";
 
-import { capitalize, range } from "@/app/lib/utils";
+import { capitalize, range } from "@/lib/utils";
 
 const CoinMarkets = ({ coinId }: { coinId: string | undefined }) => {
   const [recommendedMarket, setRecommendedMarket] = useState<{
@@ -79,12 +79,12 @@ const CoinMarkets = ({ coinId }: { coinId: string | undefined }) => {
         {coinId ? (
           <span className="capitalize">{coinId.split("-")[1]} Markets</span>
         ) : (
-          <div className="h-[30px] w-[180px] animate-pulse rounded-md bg-border" />
+          <div className="bg-border h-[30px] w-[180px] animate-pulse rounded-md" />
         )}
       </label>
       <div className="relative overflow-hidden rounded-xl">
         <div className="no-scrollbar flex items-center gap-5 overflow-x-auto p-3">
-          <div className="pointer-events-none absolute inset-0 shadow-[inset_25px_0px_25px_-25px,inset_-25px_0px_25px_-25px] shadow-border" />
+          <div className="shadow-border pointer-events-none absolute inset-0 shadow-[inset_25px_0px_25px_-25px,inset_-25px_0px_25px_-25px]" />
           {coinId && recommendedMarket ? (
             <>
               <MarketRecommendation

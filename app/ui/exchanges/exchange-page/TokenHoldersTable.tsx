@@ -5,10 +5,10 @@ import { JSX, useEffect, useState } from "react";
 
 import TokenHoldersRow from "./TokenHoldersRow";
 
-import useExchangeAssets from "@/app/lib/hooks/useExchangeAssets";
-import { roundDecimalsPlaces } from "@/app/lib/utils";
+import useExchangeAssets from "@/lib/hooks/useExchangeAssets";
+import { roundDecimalsPlaces } from "@/lib/utils";
 
-import type { Wallet } from "@/app/lib/apis/coinmarketcap";
+import type { Wallet } from "@/lib/apis/coinmarketcap";
 import { TokenHoldersSK } from "./Skeleton";
 import Pagination from "../../common/Pagination";
 
@@ -73,7 +73,7 @@ const TokenHoldersTable = ({
           <tr
             className={`${
               index !== selectedTokenHolders.length - 1
-                ? "[&>td]:border-b [&>td]:border-border"
+                ? "[&>td]:border-border [&>td]:border-b"
                 : "border-none"
             } [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
             key={curr.wallet_address.concat(index.toString())}
@@ -87,17 +87,17 @@ const TokenHoldersTable = ({
   }
 
   return (
-    <div className="flex h-full flex-col gap-5 rounded-xl border border-border bg-foreground p-5 shadow-md lg:w-4/6">
+    <div className="border-border bg-foreground flex h-full flex-col gap-5 rounded-xl border p-5 shadow-md lg:w-4/6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-1 text-lg font-semibold">
           Total:
           {totalValue || isFetched ? (
             <span>${roundDecimalsPlaces(totalValue, 2).toLocaleString()}</span>
           ) : (
-            <div className="h-[21px] w-[170px] animate-pulse rounded-sm bg-border" />
+            <div className="bg-border h-[21px] w-[170px] animate-pulse rounded-sm" />
           )}
         </div>
-        <ul className="text-xs font-medium text-content/40 [&>li]:before:mr-1 [&>li]:before:content-['*']">
+        <ul className="text-content/40 text-xs font-medium [&>li]:before:mr-1 [&>li]:before:content-['*']">
           <li>
             Only wallets containing at least 100,000 USD in balance are shown
           </li>
@@ -107,7 +107,7 @@ const TokenHoldersTable = ({
       <div className="overflow-x-auto">
         <table className="w-full table-fixed whitespace-nowrap">
           <thead>
-            <tr className="[&>th]:border-y [&>th]:border-border [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
+            <tr className="[&>th]:border-border [&>th]:border-y [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
               <th className="w-[180px] pl-4 text-start!">Token</th>
               <th className="w-[160px]">Balance</th>
               <th className="w-[130px]">Price</th>

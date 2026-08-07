@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { compactNumber, roundDecimalsPlaces, coinLogo } from "@/app/lib/utils";
+import { compactNumber, roundDecimalsPlaces, coinLogo } from "@/lib/utils";
 
 import type { AggregatedAllocation } from "./TokenAllocation";
 import type { TooltipContentProps } from "recharts";

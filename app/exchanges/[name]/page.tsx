@@ -3,8 +3,8 @@
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
-import useExchangesMetadata from "@/app/lib/hooks/useExchangesMetadata";
-import useListingLatest from "@/app/lib/hooks/useListingLatest";
+import useExchangesMetadata from "@/lib/hooks/useExchangesMetadata";
+import useListingLatest from "@/lib/hooks/useListingLatest";
 
 import Header from "@/app/ui/exchanges/exchange-page/Header";
 import Links from "@/app/ui/exchanges/exchange-page/Links";
@@ -84,7 +84,7 @@ export default function Exchange() {
                 exchangeId={exchange?.id}
                 setOtherAllocations={setOtherAllocations}
               />
-              <p className="text-balance text-xs text-content/40 before:mr-1 before:content-['**']">
+              <p className="text-content/40 text-xs text-balance before:mr-1 before:content-['**']">
                 Disclaimer: The information about holdings in third-party wallet
                 addresses is provided by CoinMarketCap. CoinMarketCap does not
                 verify the accuracy or timeliness of the information and

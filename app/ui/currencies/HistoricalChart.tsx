@@ -4,9 +4,9 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import Chart from "./Chart";
 import { LoaderCircle } from "lucide-react";
-import useHistoricalTicks from "@/app/lib/hooks/useHistoricalTicks";
+import useHistoricalTicks from "@/lib/hooks/useHistoricalTicks";
 
-import type { Range } from "@/app/lib/apis/coinpaprika";
+import type { Range } from "@/lib/apis/coinpaprika";
 
 const categories = ["price", "market_cap"];
 const ranges = ["1D", "7D", "1M", "1Y"];
@@ -33,27 +33,27 @@ const HistoricalChart = ({ coinId }: { coinId: string | undefined }) => {
   }
 
   return (
-    <div className="flex flex-col rounded-md border border-border p-[3%]">
+    <div className="border-border flex flex-col rounded-md border p-[3%]">
       <div className="mb-7 flex items-center justify-between gap-7 text-[0.7rem] font-medium md:text-xs">
-        <div className="flex items-center gap-1 rounded-md border border-border bg-foreground p-1">
+        <div className="border-border bg-foreground flex items-center gap-1 rounded-md border p-1">
           {categories.map((category) => (
             <button
               key={category}
               type="button"
               onClick={() => handleSearchParams("category", category)}
-              className={`${categoryParam === category && "bg-border"} rounded-md px-2 py-1 capitalize transition-colors hover:bg-border/40`}
+              className={`${categoryParam === category && "bg-border"} hover:bg-border/40 rounded-md px-2 py-1 capitalize transition-colors`}
             >
               <span>{category.replace("_", " ")}</span>
             </button>
           ))}
         </div>
-        <div className="flex items-center gap-1 rounded-md border border-border bg-foreground p-1">
+        <div className="border-border bg-foreground flex items-center gap-1 rounded-md border p-1">
           {ranges.map((range) => (
             <button
               key={range}
               type="button"
               onClick={() => handleSearchParams("range", range)}
-              className={`${rangeParam === range && "bg-border"} rounded-md px-2 py-1 transition-colors hover:bg-border/40`}
+              className={`${rangeParam === range && "bg-border"} hover:bg-border/40 rounded-md px-2 py-1 transition-colors`}
             >
               <span>{range}</span>
             </button>
@@ -64,7 +64,7 @@ const HistoricalChart = ({ coinId }: { coinId: string | undefined }) => {
         <Chart isPlaceholderData={isPlaceholderData} data={historicalTicks} />
       ) : (
         <div className="relative aspect-video w-full text-xs md:text-sm">
-          <div className="absolute inset-[-4px] flex items-center justify-center rounded-xl border border-border bg-foreground/50">
+          <div className="border-border bg-foreground/50 absolute inset-[-4px] flex items-center justify-center rounded-xl border">
             <div className="flex flex-col items-center gap-1">
               <LoaderCircle className="h-5 w-5 animate-spin md:h-6 md:w-6" />
               <div>Loading Data</div>

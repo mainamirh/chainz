@@ -4,7 +4,7 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import RankingSK from "./RankingSK";
 import RankingRow from "./RankingRow";
-import useListingLatest from "@/app/lib/hooks/useListingLatest";
+import useListingLatest from "@/lib/hooks/useListingLatest";
 import Pagination from "../common/Pagination";
 
 const Ranking = ({ cryptocurrencies }: { cryptocurrencies: number }) => {
@@ -36,15 +36,15 @@ const Ranking = ({ cryptocurrencies }: { cryptocurrencies: number }) => {
   return (
     <>
       <div id="ranking" className="h-px w-full bg-transparent" />
-      <div className="relative mt-[10%] flex flex-col gap-5 overflow-auto rounded-xl border border-border bg-foreground shadow-md md:p-5">
+      <div className="border-border bg-foreground relative mt-[10%] flex flex-col gap-5 overflow-auto rounded-xl border shadow-md md:p-5">
         {isPlaceholderData && (
-          <div className="absolute inset-0 z-10 overflow-hidden rounded-xl bg-background/40 md:inset-4" />
+          <div className="bg-background/40 absolute inset-0 z-10 overflow-hidden rounded-xl md:inset-4" />
         )}
 
         <div className="overflow-x-auto">
           <table className="w-full table-fixed whitespace-nowrap">
             <thead>
-              <tr className="[&>th]:border-y [&>th]:border-border [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
+              <tr className="[&>th]:border-border [&>th]:border-y [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
                 <th className="w-[60px] pl-5 text-start!">#</th>
                 <th className="w-[160px] text-start!">Name</th>
                 <th className="w-[110px]">Price</th>
@@ -63,9 +63,9 @@ const Ranking = ({ cryptocurrencies }: { cryptocurrencies: number }) => {
                   <tr
                     className={`${
                       index !== coinsRanking.length - 1
-                        ? "[&>td]:border-b [&>td]:border-border"
+                        ? "[&>td]:border-border [&>td]:border-b"
                         : "border-none"
-                    } cursor-pointer transition-colors hover:bg-border/30 [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
+                    } hover:bg-border/30 cursor-pointer transition-colors [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
                     key={coin.id}
                     onClick={() =>
                       router.push(
