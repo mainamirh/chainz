@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import useCoinMarkets from "@/lib/hooks/useCoinMarkets";
+import { useCoinMarkets } from "@/lib/hooks/queries/coinpaprika";
 import MarketsTable from "./MarketsTable";
 
 import MarketRecommendation from "./MarketRecommendation";
@@ -19,7 +19,7 @@ const CoinMarkets = ({ coinId }: { coinId: string | undefined }) => {
     forSelling: CoinMarket;
   }>();
 
-  const { data: markets, isSuccess } = useCoinMarkets(coinId);
+  const { data: markets, isSuccess } = useCoinMarkets(coinId ?? "");
 
   useEffect(() => {
     if (!isSuccess || !coinId) return;

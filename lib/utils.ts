@@ -1,4 +1,4 @@
-import type { Interval, Range } from "./types";
+import type { Interval, Range, QueryParams } from "./types";
 
 export const coinLogo = (id: number): string =>
   `https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`;
@@ -152,4 +152,33 @@ export function parseRange(range: Range): {
     default:
       throw new Error("Invalid range");
   }
+}
+
+export function buildQueryParams(params: QueryParams) {
+  const query = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value != null) {
+      query.append(key, value.toString());
+    }
+  });
+
+  return query.toString();
+}
+
+export async function fetcher<T>(
+  url: string,
+  options?: RequestInit,
+): Promise<T> {
+  const res = await fetch(url, {
+    ...options,
+    method: options?.method ?? "GET",
+  });
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message);
+  }
+
+  return res.json();
 }

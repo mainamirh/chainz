@@ -2,7 +2,8 @@
 
 import { useParams } from "next/navigation";
 
-import useListingLatest from "@/lib/hooks/useListingLatest";
+import { useListingLatest } from "@/lib/hooks/queries/coinmarketcap";
+
 import CoinStats from "@/components/currencies/CoinStats";
 import CoinStatsSK from "@/components/currencies/CoinStatsSK";
 import HistoricalChart from "@/components/currencies/HistoricalChart";

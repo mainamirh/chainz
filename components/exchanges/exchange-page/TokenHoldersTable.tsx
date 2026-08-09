@@ -5,7 +5,7 @@ import { JSX, useEffect, useState } from "react";
 
 import TokenHoldersRow from "./TokenHoldersRow";
 
-import useExchangeAssets from "@/lib/hooks/useExchangeAssets";
+import { useExchangeAssets } from "@/lib/hooks/queries/coinmarketcap";
 import { roundDecimalsPlaces } from "@/lib/utils";
 
 import type { Wallet } from "@/lib/types";
@@ -31,7 +31,7 @@ const TokenHoldersTable = ({
     data: tokenHolders,
     isPending,
     isFetched,
-  } = useExchangeAssets(exchangeId);
+  } = useExchangeAssets(exchangeId ?? 0);
 
   useEffect(() => {
     if (!tokenHolders) return;

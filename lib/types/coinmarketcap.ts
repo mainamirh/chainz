@@ -1,3 +1,83 @@
+// ─────────────────────────────────────────────
+// Query Parameters
+// ─────────────────────────────────────────────
+
+export type GetListingsLatestQuery = {
+  start: number;
+  limit: number;
+};
+
+export type GetMetadataV2Query = {
+  id: number;
+};
+
+export type GetExchangeIdMapQuery = {
+  limit: number;
+  sort: "volume_24h";
+};
+
+export type GetExchangesMetadataQuery = {
+  id: number[];
+};
+
+export type GetExchangeAssetsQuery = {
+  id: number;
+};
+
+export type GetPriceConversionV2Query = {
+  id: string;
+  convert_id: string;
+  amount: number;
+};
+
+// ─────────────────────────────────────────────
+// Common Types
+// ─────────────────────────────────────────────
+
+export type Quote = {
+  total_market_cap: number;
+  total_volume_24h: number;
+  total_volume_24h_reported: number;
+  altcoin_volume_24h: number;
+  altcoin_volume_24h_reported: number;
+  altcoin_market_cap: number;
+  defi_volume_24h: number;
+  defi_volume_24h_reported: number;
+  defi_24h_percentage_change: number;
+  defi_market_cap: number;
+  stablecoin_volume_24h: number;
+  stablecoin_volume_24h_reported: number;
+  stablecoin_24h_percentage_change: number;
+  stablecoin_market_cap: number;
+  derivatives_volume_24h: number;
+  derivatives_volume_24h_reported: number;
+  derivatives_24h_percentage_change: number;
+  total_market_cap_yesterday: number;
+  total_volume_24h_yesterday: number;
+  total_market_cap_yesterday_percentage_change: number;
+  total_volume_24h_yesterday_percentage_change: number;
+  last_updated: string;
+};
+
+export type CryptoPlatform = {
+  id: number;
+  name: string;
+  symbol: string;
+  slug: string;
+};
+
+export type ContractAddress = {
+  contract_address: string;
+  platform: {
+    name: string;
+    coin: CryptoPlatform;
+  };
+};
+
+// ─────────────────────────────────────────────
+// Cryptocurrency
+// ─────────────────────────────────────────────
+
 export type ListingLatest = {
   id: number;
   name: string;
@@ -12,9 +92,10 @@ export type ListingLatest = {
   last_updated: string;
   date_added: string;
   tags: string[];
-  platform: any;
-  self_reported_circulating_supply: any;
-  self_reported_market_cap: any;
+  platform: unknown;
+  self_reported_circulating_supply: number | null;
+  self_reported_market_cap: number | null;
+
   quote: {
     USD: {
       price: number;
@@ -44,6 +125,7 @@ export type Metadata = {
   tags: string[];
   tagNames: string[];
   tagGroups: string[];
+
   urls: {
     website: string[];
     twitter: string[];
@@ -56,28 +138,22 @@ export type Metadata = {
     source_code: string[];
     announcement: string[];
   };
-  platform: null | string;
+
+  platform: string | null;
   date_added: string;
   twitter_username: string;
   is_hidden: number;
-  date_launched: null | string;
-  contract_address: {
-    contract_address: string;
-    platform: {
-      name: string;
-      coin: {
-        id: string;
-        name: string;
-        symbol: string;
-        slug: string;
-      };
-    };
-  }[];
-  self_reported_circulating_supply: null | number;
-  self_reported_tags: null | string[];
-  self_reported_market_cap: null | number;
+  date_launched: string | null;
+  contract_address: ContractAddress[];
+  self_reported_circulating_supply: number | null;
+  self_reported_tags: string[] | null;
+  self_reported_market_cap: number | null;
   infinite_supply: boolean;
 };
+
+// ─────────────────────────────────────────────
+// Exchange
+// ─────────────────────────────────────────────
 
 export type ExchangeMetadata = {
   id: number;
@@ -88,6 +164,7 @@ export type ExchangeMetadata = {
   logo: string;
   countries: string[];
   fiats: string[];
+
   urls: {
     fee: string[];
     actual: string[];
@@ -96,6 +173,7 @@ export type ExchangeMetadata = {
     blog: string[];
     twitter: string[];
   };
+
   tags: string[];
   type: string;
   porStatus: number;
@@ -111,6 +189,21 @@ export type ExchangeMetadata = {
   spot_volume_last_updated: string;
   weekly_visits: number;
 };
+
+export type ExchangeIdMap = {
+  first_historical_data: string;
+  id: number;
+  is_active: number;
+  is_listed: number;
+  is_redistributable: number;
+  last_historical_data: string;
+  name: string;
+  slug: string;
+};
+
+// ─────────────────────────────────────────────
+// Wallet
+// ─────────────────────────────────────────────
 
 export type Wallet = {
   wallet_address: string;
@@ -128,30 +221,9 @@ export type Wallet = {
   };
 };
 
-export type Quote = {
-  total_market_cap: number;
-  total_volume_24h: number;
-  total_volume_24h_reported: number;
-  altcoin_volume_24h: number;
-  altcoin_volume_24h_reported: number;
-  altcoin_market_cap: number;
-  defi_volume_24h: number;
-  defi_volume_24h_reported: number;
-  defi_24h_percentage_change: number;
-  defi_market_cap: number;
-  stablecoin_volume_24h: number;
-  stablecoin_volume_24h_reported: number;
-  stablecoin_24h_percentage_change: number;
-  stablecoin_market_cap: number;
-  derivatives_volume_24h: number;
-  derivatives_volume_24h_reported: number;
-  derivatives_24h_percentage_change: number;
-  total_market_cap_yesterday: number;
-  total_volume_24h_yesterday: number;
-  total_market_cap_yesterday_percentage_change: number;
-  total_volume_24h_yesterday_percentage_change: number;
-  last_updated: string;
-};
+// ─────────────────────────────────────────────
+// Market Quotes
+// ─────────────────────────────────────────────
 
 export type QuotesLatest = {
   active_cryptocurrencies: number;
@@ -175,13 +247,20 @@ export type QuotesLatest = {
   stablecoin_24h_percentage_change: number;
   derivatives_volume_24h: number;
   derivatives_volume_24h_reported: number;
+  derivatives_market_cap: number;
   derivatives_24h_percentage_change: number;
+
   quote: {
     USD: Quote;
     [key: string]: Quote;
   };
+
   last_updated: string;
 };
+
+// ─────────────────────────────────────────────
+// Price Conversion
+// ─────────────────────────────────────────────
 
 export type PriceConversion = {
   id: number;
@@ -189,21 +268,11 @@ export type PriceConversion = {
   name: string;
   amount: number;
   last_updated: string;
+
   quote: {
     [convertId: string]: {
       price: number;
       last_updated: string;
     };
   };
-};
-
-export type ExchangeIdMap = {
-  first_historical_data: string;
-  id: number;
-  is_active: number;
-  is_listed: number;
-  is_redistributable: number;
-  last_historical_data: string;
-  name: string;
-  slug: string;
 };

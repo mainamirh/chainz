@@ -4,7 +4,7 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import Chart from "./Chart";
 import { LoaderCircle } from "lucide-react";
-import useHistoricalTicks from "@/lib/hooks/useHistoricalTicks";
+import useHistoricalTicks from "@/lib/hooks/queries/coinpaprika";
 
 import type { Range } from "@/lib/types";
 
@@ -19,7 +19,7 @@ const HistoricalChart = ({ coinId }: { coinId: string | undefined }) => {
   const categoryParam = searchParams.get("category") ?? "Price";
 
   const { data: historicalTicks, isPlaceholderData } = useHistoricalTicks(
-    coinId,
+    coinId ?? "",
     rangeParam,
   );
 

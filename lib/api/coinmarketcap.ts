@@ -1,10 +1,18 @@
 "use server";
 
+import { fetcher, buildQueryParams } from "../utils";
+
 import { CMCApiBaseUrl } from "../constants";
 
 import type {
   ExchangeIdMap,
   ExchangeMetadata,
+  GetExchangeAssetsQuery,
+  GetExchangeIdMapQuery,
+  GetExchangesMetadataQuery,
+  GetListingsLatestQuery,
+  GetMetadataV2Query,
+  GetPriceConversionV2Query,
   ListingLatest,
   Metadata,
   PriceConversion,
@@ -13,11 +21,12 @@ import type {
 } from "../types";
 
 export async function getListingsLatest(
-  start: number,
-  limit: number,
+  query: GetListingsLatestQuery,
 ): Promise<ListingLatest[]> {
-  const res = await fetch(
-    `${CMCApiBaseUrl}/v1/cryptocurrency/listings/latest?start=${start}&limit=${limit}`,
+  const params = buildQueryParams(query);
+
+  const res = await fetcher<{ data: ListingLatest[] }>(
+    `${CMCApiBaseUrl}/v1/cryptocurrency/listings/latest?${params}`,
     {
       method: "GET",
       headers: {
@@ -27,18 +36,16 @@ export async function getListingsLatest(
     },
   );
 
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
+  return res.data;
 }
 
-export async function getMetadataV2(coinId: number): Promise<Metadata> {
-  const res = await fetch(
-    `${CMCApiBaseUrl}/v2/cryptocurrency/info?id=${coinId}`,
+export async function getMetadataV2(
+  query: GetMetadataV2Query,
+): Promise<Metadata> {
+  const params = buildQueryParams(query);
+
+  const res = await fetcher<{ data: Record<string, Metadata> }>(
+    `${CMCApiBaseUrl}/v2/cryptocurrency/info?${params}`,
     {
       method: "GET",
       headers: {
@@ -48,20 +55,16 @@ export async function getMetadataV2(coinId: number): Promise<Metadata> {
     },
   );
 
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data[coinId];
+  return res.data[query.id];
 }
 
 export async function getExchangesIdMap(
-  limit: number,
+  query: GetExchangeIdMapQuery,
 ): Promise<ExchangeIdMap[]> {
-  const res = await fetch(
-    `${CMCApiBaseUrl}/v1/exchange/map?limit=${limit}&sort=volume_24h`,
+  const params = buildQueryParams(query);
+
+  const res = await fetcher<{ data: ExchangeIdMap[] }>(
+    `${CMCApiBaseUrl}/v1/exchange/map?${params}`,
     {
       method: "GET",
       headers: {
@@ -71,20 +74,16 @@ export async function getExchangesIdMap(
     },
   );
 
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
+  return res.data;
 }
 
 export async function getExchangesMetadata(
-  ids: number[],
+  query: GetExchangesMetadataQuery,
 ): Promise<{ [key: string]: ExchangeMetadata }> {
-  const res = await fetch(
-    `${CMCApiBaseUrl}/v1/exchange/info?id=${ids.join(",")}`,
+  const params = buildQueryParams(query);
+
+  const res = await fetcher<{ data: { [key: string]: ExchangeMetadata } }>(
+    `${CMCApiBaseUrl}/v1/exchange/info?${params}`,
     {
       method: "GET",
       headers: {
@@ -94,61 +93,53 @@ export async function getExchangesMetadata(
     },
   );
 
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
+  return res.data;
 }
 
-export async function getExchangeAssets(id: number): Promise<Wallet[]> {
-  const res = await fetch(`${CMCApiBaseUrl}/v1/exchange/assets?id=${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
+export async function getExchangeAssets(
+  query: GetExchangeAssetsQuery,
+): Promise<Wallet[]> {
+  const params = buildQueryParams(query);
+
+  const res = await fetcher<{ data: Wallet[] }>(
+    `${CMCApiBaseUrl}/v1/exchange/assets?${params}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
+      },
     },
-  });
+  );
 
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
+  return res.data;
 }
 
 export async function getQuotesLatest(
-  init?: RequestInit,
+  options: RequestInit,
 ): Promise<QuotesLatest> {
-  const res = await fetch(`${CMCApiBaseUrl}/v1/global-metrics/quotes/latest`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
+  const res = await fetcher<{ data: QuotesLatest }>(
+    `${CMCApiBaseUrl}/v1/global-metrics/quotes/latest`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
+      },
+      ...options,
     },
-    ...init,
-  });
+  );
 
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
+  return res.data;
 }
 
 export async function getPriceConversionV2(
-  from: string,
-  to: string,
-  amount: number,
+  query: GetPriceConversionV2Query,
 ): Promise<PriceConversion> {
-  const res = await fetch(
-    `${CMCApiBaseUrl}/v2/tools/price-conversion?id=${from}&convert_id=${to}&amount=${amount}`,
+  const params = buildQueryParams(query);
+
+  const res = await fetcher<{ data: PriceConversion }>(
+    `${CMCApiBaseUrl}/v2/tools/price-conversion?${params}`,
     {
       method: "GET",
       headers: {
@@ -158,11 +149,5 @@ export async function getPriceConversionV2(
     },
   );
 
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
+  return res.data;
 }

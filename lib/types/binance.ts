@@ -1,3 +1,7 @@
+export type GetSymbolsOrderbookQuery = {
+  symbols: string[];
+};
+
 export type SymbolOrderbook = {
   symbol: string;
   bidPrice: number;

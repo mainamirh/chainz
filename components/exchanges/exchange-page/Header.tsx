@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { roundDecimalsPlaces } from "@/lib/utils";
 
-import useExchangeAssets from "@/lib/hooks/useExchangeAssets";
+import { useExchangeAssets } from "@/lib/hooks/queries/coinmarketcap";
 
 import type { ListingLatest as Coin, ExchangeMetadata } from "@/lib/types";
 

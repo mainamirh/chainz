@@ -5,7 +5,7 @@ import { MarketRow } from "./MarketRow";
 import { MarketSK } from "./MarketSK";
 import Pagination from "../../common/Pagination";
 
-import useExchangeMarkets from "@/lib/hooks/useExchangeMarkets";
+import { useExchangeMarkets } from "@/lib/hooks/queries/coinpaprika";
 
 import type { ExchangeMarket } from "@/lib/types";
 
@@ -22,7 +22,7 @@ const MarketTable = ({
     data: markets,
     isPending,
     isSuccess,
-  } = useExchangeMarkets(exchangeName?.toLowerCase());
+  } = useExchangeMarkets(exchangeName?.toLowerCase() ?? "");
 
   useEffect(() => {
     if (!isSuccess) return;

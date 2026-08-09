@@ -3,8 +3,10 @@
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
-import useExchangesMetadata from "@/lib/hooks/useExchangesMetadata";
-import useListingLatest from "@/lib/hooks/useListingLatest";
+import {
+  useExchangesMetadata,
+  useListingLatest,
+} from "@/lib/hooks/queries/coinmarketcap";
 
 import Header from "@/components/exchanges/exchange-page/Header";
 import Links from "@/components/exchanges/exchange-page/Links";

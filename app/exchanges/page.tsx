@@ -1,8 +1,8 @@
 "use client";
 
-import useExchangesMetadata from "@/lib/hooks/useExchangesMetadata";
-import ExchangeCard from "../../components/exchanges/ExchangeCard";
-import ExchangeCardSK from "../../components/exchanges/ExchangeCardSK";
+import { useExchangesMetadata } from "@/lib/hooks/queries/coinmarketcap";
+import ExchangeCard from "@/components/exchanges/ExchangeCard";
+import ExchangeCardSK from "@/components/exchanges/ExchangeCardSK";
 
 export default function Exchanges() {
   const { data: exchangesMetadata } = useExchangesMetadata();

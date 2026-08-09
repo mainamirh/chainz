@@ -4,8 +4,9 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import RankingSK from "./RankingSK";
 import RankingRow from "./RankingRow";
-import useListingLatest from "@/lib/hooks/useListingLatest";
 import Pagination from "../common/Pagination";
+
+import { useListingLatest } from "@/lib/hooks/queries/coinmarketcap";
 
 const Ranking = ({ cryptocurrencies }: { cryptocurrencies: number }) => {
   const router = useRouter();

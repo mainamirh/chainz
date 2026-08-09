@@ -6,7 +6,7 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import AllocationPieChart from "./AllocationPieChart";
 
-import useExchangeAssets from "@/lib/hooks/useExchangeAssets";
+import { useExchangeAssets } from "@/lib/hooks/queries/coinmarketcap";
 
 import { coinLogo, roundDecimalsPlaces } from "@/lib/utils";
 import { CircleEllipsis, LoaderCircle } from "lucide-react";
@@ -42,7 +42,7 @@ const TokenAllocation = ({
     AggregatedAllocation[]
   >([]);
 
-  const { data: tokenHolders } = useExchangeAssets(exchangeId);
+  const { data: tokenHolders } = useExchangeAssets(exchangeId ?? 0);
 
   useEffect(() => {
     if (!tokenHolders) return;

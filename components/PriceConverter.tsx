@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import Button from "./common/Button";
 import Dropdown from "./common/Dropdown";
 
-import useListingLatest from "@/lib/hooks/useListingLatest";
-import usePriceConversion from "@/lib/hooks/usePriceConversion";
+import {
+  useListingLatest,
+  usePriceConversion,
+} from "@/lib/hooks/queries/coinmarketcap";
+
 import { useDebounce } from "use-debounce";
 
 import { ArrowDownUp, LoaderCircle } from "lucide-react";
