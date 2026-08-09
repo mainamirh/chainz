@@ -1,3 +1,5 @@
+"use server";
+
 import { coinPaprikaApiBaseUrl } from "../constants";
 
 import { parseRange } from "@/lib/utils";

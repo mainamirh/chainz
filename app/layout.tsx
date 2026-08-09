@@ -1,15 +1,20 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { poppins } from "./fonts";
+import { Poppins } from "next/font/google";
 
-import ReactQueryProvider from "@/lib/ReactQueryProvider";
+import Providers from "@/lib/providers";
 
-import Navbar from "./ui/Navbar";
-import Footer from "./ui/Footer";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 import { getTheme } from "@/lib/theme";
 import { getQuotesLatest } from "@/lib/api/coinmarketcap";
+
+export const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "ChainZ - Compare The Best Exchanges to Buy or sell Crypto",
@@ -30,7 +35,7 @@ export default async function RootLayout({
         <Navbar theme={theme} aggregatedStats={quotesLatest} />
 
         <main className="mx-auto w-full max-w-360 pt-21.25">
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <Providers>{children}</Providers>
         </main>
 
         <Footer />

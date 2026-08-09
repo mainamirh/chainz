@@ -3,10 +3,10 @@
 import { useParams } from "next/navigation";
 
 import useListingLatest from "@/lib/hooks/useListingLatest";
-import CoinStats from "@/app/ui/currencies/CoinStats";
-import CoinStatsSK from "@/app/ui/currencies/CoinStatsSK";
-import HistoricalChart from "@/app/ui/currencies/HistoricalChart";
-import CoinMarkets from "@/app/ui/currencies/currency-market/CoinMarkets";
+import CoinStats from "@/components/currencies/CoinStats";
+import CoinStatsSK from "@/components/currencies/CoinStatsSK";
+import HistoricalChart from "@/components/currencies/HistoricalChart";
+import CoinMarkets from "@/components/currencies/currency-market/CoinMarkets";
 
 export default function Currency() {
   const { name } = useParams();

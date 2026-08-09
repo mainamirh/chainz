@@ -6,17 +6,17 @@ import { useState } from "react";
 import useExchangesMetadata from "@/lib/hooks/useExchangesMetadata";
 import useListingLatest from "@/lib/hooks/useListingLatest";
 
-import Header from "@/app/ui/exchanges/exchange-page/Header";
-import Links from "@/app/ui/exchanges/exchange-page/Links";
-import Description from "@/app/ui/exchanges/exchange-page/Description";
+import Header from "@/components/exchanges/exchange-page/Header";
+import Links from "@/components/exchanges/exchange-page/Links";
+import Description from "@/components/exchanges/exchange-page/Description";
 import {
   DescriptionSK,
   HeaderSK,
   LinksSK,
-} from "@/app/ui/exchanges/exchange-page/Skeleton";
-import TokenHoldersTable from "@/app/ui/exchanges/exchange-page/TokenHoldersTable";
-import TokenAllocation from "@/app/ui/exchanges/exchange-page/TokenAllocation";
-import ExchangeMarket from "@/app/ui/exchanges/exchange-market/ExchangeMarket";
+} from "@/components/exchanges/exchange-page/Skeleton";
+import TokenHoldersTable from "@/components/exchanges/exchange-page/TokenHoldersTable";
+import TokenAllocation from "@/components/exchanges/exchange-page/TokenAllocation";
+import ExchangeMarket from "@/components/exchanges/exchange-market/ExchangeMarket";
 
 export default function Exchange() {
   const { name } = useParams();

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Button from "./ui/common/Button";
-import Ranking from "./ui/home/Ranking";
-import PriceConverter from "./ui/PriceConverter";
+import Button from "../components/common/Button";
+import Ranking from "../components/home/Ranking";
+import PriceConverter from "../components/PriceConverter";
 
 import { getQuotesLatest } from "@/lib/api/coinmarketcap";
 
@@ -9,8 +9,8 @@ export default async function Home() {
   const quotesLatest = await getQuotesLatest({ next: { revalidate: 60 * 60 } });
 
   return (
-    <div className="px-[3%] pt-[60px] md:pt-[8%]">
-      <div className="bg-gradient absolute inset-x-0 top-[80px] -z-10 h-[400px] opacity-50" />
+    <div className="px-[3%] pt-15 md:pt-[8%]">
+      <div className="bg-gradient absolute inset-x-0 top-20 -z-10 h-100 opacity-50" />
 
       <div className="grid grid-cols-1 gap-16 px-[2%] text-sm md:text-base lg:grid-cols-11 lg:gap-7">
         <div className="flex flex-col items-start gap-4 p-[3%] text-sm md:text-base lg:col-span-6">

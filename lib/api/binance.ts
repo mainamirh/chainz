@@ -1,3 +1,5 @@
+"use server";
+
 import type { SymbolOrderbook } from "../types";
 
 import { binanceApiBaseUrl } from "../constants";
