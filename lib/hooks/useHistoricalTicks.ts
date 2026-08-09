@@ -1,5 +1,7 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { getHistoricalTicks, Range } from "../apis/coinpaprika";
+import { getHistoricalTicks } from "../api/coinpaprika";
+
+import type { Range } from "../types";
 
 export default function useHistoricalTicks(coinId = "", range: Range) {
   return useQuery({

@@ -1,5 +1,5 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { getListingsLatest } from "@/lib/apis/coinmarketcap";
+import { getListingsLatest } from "../api/coinmarketcap";
 
 export default function useListingLatest(page = 1, limit = 20) {
   const startOffset = (page - 1) * limit + 1;

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCoinMarkets } from "../apis/coinpaprika";
+import { getCoinMarkets } from "../api/coinpaprika";
 
 export default function useCoinMarkets(id = "") {
   return useQuery({

@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import useCoinMarkets from "@/lib/hooks/useCoinMarkets";
 import MarketsTable from "./MarketsTable";
 
-import type { CoinMarket } from "@/lib/apis/coinpaprika";
 import MarketRecommendation from "./MarketRecommendation";
 import { RecommendationSK } from "./Skeletons";
-
 import { capitalize, range } from "@/lib/utils";
+
+import type { CoinMarket } from "@/lib/types";
 
 const CoinMarkets = ({ coinId }: { coinId: string | undefined }) => {
   const [recommendedMarket, setRecommendedMarket] = useState<{

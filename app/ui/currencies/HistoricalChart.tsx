@@ -6,7 +6,7 @@ import Chart from "./Chart";
 import { LoaderCircle } from "lucide-react";
 import useHistoricalTicks from "@/lib/hooks/useHistoricalTicks";
 
-import type { Range } from "@/lib/apis/coinpaprika";
+import type { Range } from "@/lib/types";
 
 const categories = ["price", "market_cap"];
 const ranges = ["1D", "7D", "1M", "1Y"];

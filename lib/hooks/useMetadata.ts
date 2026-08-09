@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMetadataV2 } from "../apis/coinmarketcap";
+import { getMetadataV2 } from "../api/coinmarketcap";
 
 export default function useMetadata(coinId: number) {
   return useQuery({

@@ -9,7 +9,7 @@ import {
   trustBadgeColor,
 } from "@/lib/utils";
 
-import type { CoinMarket } from "@/lib/apis/coinpaprika";
+import type { CoinMarket } from "@/lib/types";
 import { ExternalLink } from "lucide-react";
 
 const MarketRow = ({

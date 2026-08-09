@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 
 import { Link as LinkIcon, MessageCircle, Rss, Scale } from "lucide-react";
 import { X } from "../../icons";

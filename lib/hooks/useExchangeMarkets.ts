@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getExchangeMarkets } from "../apis/coinpaprika";
+import { getExchangeMarkets } from "../api/coinpaprika";
 
 export default function useExchangeMarkets(name = "") {
   return useQuery({

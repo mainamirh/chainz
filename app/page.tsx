@@ -3,7 +3,7 @@ import Button from "./ui/common/Button";
 import Ranking from "./ui/home/Ranking";
 import PriceConverter from "./ui/PriceConverter";
 
-import { getQuotesLatest } from "@/lib/apis/coinmarketcap";
+import { getQuotesLatest } from "@/lib/api/coinmarketcap";
 
 export default async function Home() {
   const quotesLatest = await getQuotesLatest({ next: { revalidate: 60 * 60 } });

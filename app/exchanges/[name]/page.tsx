@@ -32,7 +32,7 @@ export default function Exchange() {
   const exchange =
     metadata &&
     Object.entries(metadata).find(
-      ([_, exchange]) =>
+      ([, exchange]) =>
         exchange.name.toLocaleLowerCase() ===
         decodeURIComponent(name?.toString() ?? ""),
     )?.[1];

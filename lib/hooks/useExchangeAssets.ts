@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getExchangeAssets } from "../apis/coinmarketcap";
+import { getExchangeAssets } from "../api/coinmarketcap";
 
 export default function useExchangeAssets(id = 0) {
   return useQuery({

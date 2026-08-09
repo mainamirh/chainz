@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getExchangesIdMap, getExchangesMetadata } from "../apis/coinmarketcap";
+import { getExchangesIdMap, getExchangesMetadata } from "../api/coinmarketcap";
 
 export default function useExchangesMetadata() {
   const limit = 10;

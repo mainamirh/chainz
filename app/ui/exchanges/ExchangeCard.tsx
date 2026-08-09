@@ -8,7 +8,7 @@ import ReactMarkdown from "react-markdown";
 
 import { Calendar, ChevronRight, Eye, PercentCircle } from "lucide-react";
 
-import type { ExchangeMetadata } from "@/lib/apis/coinmarketcap";
+import type { ExchangeMetadata } from "@/lib/types";
 
 import { regularDateFormat, compactNumber } from "@/lib/utils";
 

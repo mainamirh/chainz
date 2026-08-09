@@ -11,11 +11,10 @@ import Theme from "./common/Theme";
 import { Github } from "./icons";
 
 import { Menu, X, ArrowRightLeft, Coins } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
-import type { Theme as ThemeType } from "@/lib/actions";
 import AggregatedStats from "./AggregatedStats";
-import type { QuotesLatest } from "@/lib/apis/coinmarketcap";
+
+import type { LucideIcon } from "lucide-react";
+import type { QuotesLatest, Theme as ThemeType } from "@/lib/types";
 
 export type navItem = {
   label: string;

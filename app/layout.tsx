@@ -8,8 +8,8 @@ import ReactQueryProvider from "@/lib/ReactQueryProvider";
 import Navbar from "./ui/Navbar";
 import Footer from "./ui/Footer";
 
-import { getTheme } from "@/lib/actions";
-import { getQuotesLatest } from "@/lib/apis/coinmarketcap";
+import { getTheme } from "@/lib/theme";
+import { getQuotesLatest } from "@/lib/api/coinmarketcap";
 
 export const metadata: Metadata = {
   title: "ChainZ - Compare The Best Exchanges to Buy or sell Crypto",

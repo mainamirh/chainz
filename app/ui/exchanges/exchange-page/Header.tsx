@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 
 import { roundDecimalsPlaces } from "@/lib/utils";
 
-import type { ExchangeMetadata } from "@/lib/apis/coinmarketcap";
-import type { ListingLatest as Coin } from "@/lib/apis/coinmarketcap";
 import useExchangeAssets from "@/lib/hooks/useExchangeAssets";
+
+import type { ListingLatest as Coin, ExchangeMetadata } from "@/lib/types";
 
 const Header = ({
   exchange,

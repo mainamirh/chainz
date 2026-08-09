@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPriceConversionV2 } from "../apis/coinmarketcap";
+import { getPriceConversionV2 } from "../api/coinmarketcap";
 
 export default function usePriceConversion(
   from_id = "",

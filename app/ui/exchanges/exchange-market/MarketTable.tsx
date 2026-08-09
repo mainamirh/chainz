@@ -7,7 +7,7 @@ import Pagination from "../../common/Pagination";
 
 import useExchangeMarkets from "@/lib/hooks/useExchangeMarkets";
 
-import type { ExchangeMarket } from "@/lib/apis/coinpaprika";
+import type { ExchangeMarket } from "@/lib/types";
 
 const MarketTable = ({
   exchangeName,

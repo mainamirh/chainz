@@ -1,8 +1,8 @@
 "use client";
 
 import PercentChange from "./common/PercentChange";
-import type { QuotesLatest } from "@/lib/apis/coinmarketcap";
 import { compactNumber } from "@/lib/utils";
+import type { QuotesLatest } from "@/lib/types";
 
 const AggregatedStats = ({
   aggregatedStats,

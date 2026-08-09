@@ -1,3 +1,5 @@
+import type { Interval, Range } from "./types";
+
 export const coinLogo = (id: number): string =>
   `https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`;
 
@@ -121,4 +123,33 @@ export function trustBadgeColor(trustScore: string) {
 
 export function capitalize(word: string) {
   return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+export function parseRange(range: Range): {
+  start: EpochTimeStamp;
+  interval: Interval;
+} {
+  const now = new Date();
+  let start: Date;
+
+  switch (range) {
+    case "1D":
+      start = new Date(now.getTime() - 24 * 60 * 59 * 1000);
+      return { start: Math.floor(start.getTime() / 1000), interval: "1h" };
+
+    case "7D":
+      start = new Date(now.getTime() - 7 * 24 * 60 * 59 * 1000);
+      return { start: Math.floor(start.getTime() / 1000), interval: "1d" };
+
+    case "1M":
+      start = new Date(now.getTime() - 30 * 24 * 60 * 59 * 1000);
+      return { start: Math.floor(start.getTime() / 1000), interval: "1d" };
+
+    case "1Y":
+      start = new Date(now.getTime() - 365 * 24 * 60 * 59 * 1000);
+      return { start: Math.floor(start.getTime() / 1000), interval: "1d" };
+
+    default:
+      throw new Error("Invalid range");
+  }
 }

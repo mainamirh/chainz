@@ -1,8 +1,4 @@
-"use server";
-
-const apiBaseUrl = "https://pro-api.coinmarketcap.com";
-
-export interface ListingLatest {
+export type ListingLatest = {
   id: number;
   name: string;
   symbol: string;
@@ -16,9 +12,9 @@ export interface ListingLatest {
   last_updated: string;
   date_added: string;
   tags: string[];
-  platform: any; // Adjust as needed
-  self_reported_circulating_supply: any; // Adjust as needed
-  self_reported_market_cap: any; // Adjust as needed
+  platform: any;
+  self_reported_circulating_supply: any;
+  self_reported_market_cap: any;
   quote: {
     USD: {
       price: number;
@@ -33,33 +29,9 @@ export interface ListingLatest {
       last_updated: string;
     };
   };
-}
+};
 
-export async function getListingsLatest(
-  start: number,
-  limit: number,
-): Promise<ListingLatest[]> {
-  const res = await fetch(
-    `${apiBaseUrl}/v1/cryptocurrency/listings/latest?start=${start}&limit=${limit}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
-      },
-    },
-  );
-
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
-}
-
-export interface Metadata {
+export type Metadata = {
   id: number;
   name: string;
   symbol: string;
@@ -105,61 +77,9 @@ export interface Metadata {
   self_reported_tags: null | string[];
   self_reported_market_cap: null | number;
   infinite_supply: boolean;
-}
+};
 
-export async function getMetadataV2(coinId: number): Promise<Metadata> {
-  const res = await fetch(`${apiBaseUrl}/v2/cryptocurrency/info?id=${coinId}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data[coinId];
-}
-
-interface ExchangeIdMap {
-  first_historical_data: string;
-  id: number;
-  is_active: number;
-  is_listed: number;
-  is_redistributable: number;
-  last_historical_data: string;
-  name: string;
-  slug: string;
-}
-
-export async function getExchangesIdMap(
-  limit: number,
-): Promise<ExchangeIdMap[]> {
-  const res = await fetch(
-    `${apiBaseUrl}/v1/exchange/map?limit=${limit}&sort=volume_24h`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
-      },
-    },
-  );
-
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
-}
-
-export interface ExchangeMetadata {
+export type ExchangeMetadata = {
   id: number;
   name: string;
   slug: string;
@@ -190,32 +110,9 @@ export interface ExchangeMetadata {
   spot_volume_usd: number;
   spot_volume_last_updated: string;
   weekly_visits: number;
-}
+};
 
-export async function getExchangesMetadata(
-  ids: number[],
-): Promise<{ [key: string]: ExchangeMetadata }> {
-  const res = await fetch(
-    `${apiBaseUrl}/v1/exchange/info?id=${ids.join(",")}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
-      },
-    },
-  );
-
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
-}
-
-export interface Wallet {
+export type Wallet = {
   wallet_address: string;
   balance: number;
   platform: {
@@ -229,26 +126,9 @@ export interface Wallet {
     symbol: string;
     name: string;
   };
-}
+};
 
-export async function getExchangeAssets(id: number): Promise<Wallet[]> {
-  const res = await fetch(`${apiBaseUrl}/v1/exchange/assets?id=${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
-}
-interface Quote {
+export type Quote = {
   total_market_cap: number;
   total_volume_24h: number;
   total_volume_24h_reported: number;
@@ -271,9 +151,9 @@ interface Quote {
   total_market_cap_yesterday_percentage_change: number;
   total_volume_24h_yesterday_percentage_change: number;
   last_updated: string;
-}
+};
 
-export interface QuotesLatest {
+export type QuotesLatest = {
   active_cryptocurrencies: number;
   total_cryptocurrencies: number;
   active_market_pairs: number;
@@ -301,30 +181,9 @@ export interface QuotesLatest {
     [key: string]: Quote;
   };
   last_updated: string;
-}
+};
 
-export async function getQuotesLatest(
-  init?: RequestInit,
-): Promise<QuotesLatest> {
-  const res = await fetch(`${apiBaseUrl}/v1/global-metrics/quotes/latest`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
-    },
-    ...init,
-  });
-
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
-}
-
-export interface PriceConversion {
+export type PriceConversion = {
   id: number;
   symbol: string;
   name: string;
@@ -336,29 +195,15 @@ export interface PriceConversion {
       last_updated: string;
     };
   };
-}
+};
 
-export async function getPriceConversionV2(
-  from: string,
-  to: string,
-  amount: number,
-): Promise<PriceConversion> {
-  const res = await fetch(
-    `${apiBaseUrl}/v2/tools/price-conversion?id=${from}&convert_id=${to}&amount=${amount}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CMC_PRO_API_KEY": `${process.env.CMC_API_KEY}`,
-      },
-    },
-  );
-
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-
-  const data = await res.json();
-
-  return data.data;
-}
+export type ExchangeIdMap = {
+  first_historical_data: string;
+  id: number;
+  is_active: number;
+  is_listed: number;
+  is_redistributable: number;
+  last_historical_data: string;
+  name: string;
+  slug: string;
+};

@@ -8,7 +8,7 @@ import { coinLogo, coinLastWeekChart } from "@/lib/utils";
 import { roundDecimalsPlaces } from "@/lib/utils";
 import PercentChange from "../common/PercentChange";
 
-import type { ListingLatest } from "@/lib/apis/coinmarketcap";
+import type { ListingLatest } from "@/lib/types";
 
 const RankingRow = ({ coinRanking }: { coinRanking: ListingLatest }) => {
   const priceRef = useRef<HTMLDivElement>(null);

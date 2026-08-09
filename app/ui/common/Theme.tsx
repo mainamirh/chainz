@@ -1,9 +1,9 @@
 "use client";
 
-import { setTheme } from "@/lib/actions";
+import { setTheme } from "@/lib/theme";
 import { Monitor, Sun, Moon } from "lucide-react";
 
-import type { Theme as ThemeType } from "@/lib/actions";
+import type { Theme as ThemeType } from "@/lib/types";
 
 const Theme = ({ theme }: { theme: ThemeType }) => {
   return (
