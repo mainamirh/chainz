@@ -1,4 +1,11 @@
-import type { Interval, Range, QueryParams } from "./types";
+import type {
+  AggregatedAllocation,
+  TokenMap,
+  Interval,
+  Range,
+  QueryParams,
+  Wallet,
+} from "./types";
 
 export const coinLogo = (id: number): string =>
   `https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`;
@@ -87,7 +94,7 @@ export function compactNumber(number: number): string {
   return formattedNumber;
 }
 
-export function formatByRange(value: any, _: number, range: string): string {
+export function formatByRange(value: string, range: string): string {
   switch (range) {
     case "1D":
       return twelveHourFormat(value);
@@ -152,6 +159,55 @@ export function parseRange(range: Range): {
     default:
       throw new Error("Invalid range");
   }
+}
+
+export function getAggregatedAllocation(
+  tokenHolders: Wallet[] | undefined,
+): AggregatedAllocation[] {
+  if (!tokenHolders) return [];
+
+  const tokenMap: TokenMap = {};
+
+  for (const { currency, balance } of tokenHolders) {
+    const { name, symbol, price_usd, crypto_id } = currency;
+    const value = balance * price_usd;
+
+    tokenMap[name] ??= {
+      symbol,
+      totalValue: 0,
+      cryptoId: crypto_id,
+    };
+
+    tokenMap[name].totalValue += value;
+  }
+
+  const allocations = Object.values(tokenMap);
+  const totalValue = allocations.reduce(
+    (sum, token) => sum + token.totalValue,
+    0,
+  );
+
+  const sorted = allocations
+    .map((token) => ({
+      ...token,
+      percentage: roundDecimalsPlaces((token.totalValue / totalValue) * 100, 2),
+    }))
+    .sort((a, b) => b.percentage - a.percentage);
+
+  const topFive = sorted.slice(0, 5);
+  const others = sorted.slice(5);
+
+  if (!others.length) return topFive;
+
+  return [
+    ...topFive,
+    {
+      symbol: "Others",
+      cryptoId: -1,
+      totalValue: others.reduce((sum, token) => sum + token.totalValue, 0),
+      percentage: others.reduce((sum, token) => sum + token.percentage, 0),
+    },
+  ];
 }
 
 export function buildQueryParams(params: QueryParams) {

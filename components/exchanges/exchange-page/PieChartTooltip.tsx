@@ -2,10 +2,10 @@ import Image from "next/image";
 
 import { compactNumber, roundDecimalsPlaces, coinLogo } from "@/lib/utils";
 
-import type { AggregatedAllocation } from "./TokenAllocation";
 import type { TooltipContentProps } from "recharts";
 
 import { CircleDollarSign, CircleEllipsis } from "lucide-react";
+import type { AggregatedAllocation } from "@/lib/types";
 
 const PieChartTooltip: React.FC<TooltipContentProps> = ({
   active,
@@ -16,7 +16,7 @@ const PieChartTooltip: React.FC<TooltipContentProps> = ({
       .payload as AggregatedAllocation;
 
     return (
-      <div className="border-border bg-foreground/90 flex w-[150px] scale-125 flex-col gap-2 rounded-md border p-3 shadow-md">
+      <div className="border-border bg-foreground/90 flex w-37.5 scale-125 flex-col gap-2 rounded-md border p-3 shadow-md">
         <div className="flex items-center gap-1">
           <div className="flex items-center gap-1">
             {cryptoId !== -1 ? (

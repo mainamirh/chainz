@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Button from "./common/Button";
 import Dropdown from "./common/Dropdown";
@@ -15,11 +15,11 @@ import { useDebounce } from "use-debounce";
 import { ArrowDownUp, LoaderCircle } from "lucide-react";
 
 type Option = { id: number; name: string; symbol: string };
+
 type Convert = {
   from?: Option;
   to?: Option;
   fromAmount?: number;
-  toAmount?: number;
 };
 
 const PriceConverter = () => {
@@ -33,9 +33,9 @@ const PriceConverter = () => {
     isFetching,
     refetch,
   } = usePriceConversion(
-    debouncedConvert?.from?.id.toString(),
-    debouncedConvert?.to?.id.toString(),
-    debouncedConvert?.fromAmount,
+    debouncedConvert.from?.id.toString(),
+    debouncedConvert.to?.id.toString(),
+    debouncedConvert.fromAmount,
   );
 
   const dropDownOptions = listingLatest?.map((coin) => ({
@@ -44,38 +44,14 @@ const PriceConverter = () => {
     symbol: coin.symbol,
   }));
 
-  useEffect(() => {
-    if (!conversion) return;
-
-    setConvert((prev) => {
-      const convert_id = prev.to?.id;
-
-      if (
-        !convert_id ||
-        !conversion.quote[convert_id] ||
-        conversion.quote[convert_id].price === 0
-      )
-        return prev;
-
-      return { ...prev, toAmount: conversion.quote[convert_id].price };
-    });
-  }, [conversion]);
-
   function reverseConversion() {
     if (!conversion) return;
 
     setConvert((prev) => {
       const convert_id = prev.to?.id;
-      if (
-        !convert_id ||
-        !conversion.quote[convert_id] ||
-        conversion.quote[convert_id].price === 0 ||
-        conversion.quote[convert_id].price > 999999999999
-      )
-        return prev;
+      if (!convert_id) return prev;
 
       return {
-        ...prev,
         from: prev.to,
         to: prev.from,
         fromAmount: conversion.quote[convert_id].price,
@@ -90,11 +66,8 @@ const PriceConverter = () => {
     return parseFloat(
       new Intl.NumberFormat("en-US", {
         style: "decimal",
-        minimumFractionDigits: 4,
-        minimumIntegerDigits: 7,
-      })
-        .format(number)
-        .replace(/[^0-9.-]+/g, ""),
+        maximumFractionDigits: 5,
+      }).format(number),
     );
   }
 
@@ -111,20 +84,12 @@ const PriceConverter = () => {
           <input
             type="number"
             placeholder="0"
-            value={formatInputNumber(Number(convert.fromAmount))}
+            value={formatInputNumber(convert.fromAmount)}
             onChange={(e) => {
-              const value = e.target.value;
-              if (value === "") {
-                setConvert((prev) => ({
-                  ...prev,
-                  fromAmount: undefined,
-                }));
-              } else if (parseFloat(value) < 1000000000000) {
-                setConvert((prev) => ({
-                  ...prev,
-                  fromAmount: parseFloat(value),
-                }));
-              }
+              setConvert((prev) => ({
+                ...prev,
+                fromAmount: parseFloat(e.target.value),
+              }));
             }}
             className="no-arrow w-full bg-transparent text-lg font-medium outline-hidden md:text-xl"
             onWheel={(e) => e.currentTarget.blur()}
@@ -151,22 +116,11 @@ const PriceConverter = () => {
         </div>
 
         <div className="bg-border/40 relative flex items-center justify-between gap-3 rounded-xl p-4">
-          <input
-            type="number"
-            placeholder=""
-            value={
-              convert.toAmount && convert.toAmount < 1000000000000
-                ? formatInputNumber(convert.toAmount)
-                : ""
-            }
-            disabled
-            className={`${isFetching && "animate-pulse"} no-arrow disabled:text-content/70 w-full bg-transparent text-lg font-medium outline-hidden md:text-xl`}
-            onWheel={(e) => e.currentTarget.blur()}
-          />
-
-          {isFetching && !convert.toAmount && (
-            <div className="bg-border absolute h-[20px] w-[100px] animate-pulse rounded-sm" />
-          )}
+          <div className="text-content/70 w-full bg-transparent text-lg font-medium md:text-xl">
+            <span className={isFetching ? "animate-pulse" : "animate-none"}>
+              {formatInputNumber(conversion?.quote[convert.to?.id ?? 0]?.price)}
+            </span>
+          </div>
 
           <Dropdown
             options={dropDownOptions}

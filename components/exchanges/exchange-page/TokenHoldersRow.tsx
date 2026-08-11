@@ -41,7 +41,7 @@ const TokenHoldersRow = ({ tokenHolder }: { tokenHolder: Wallet }) => {
               alt="blockchain-logo"
               width={16}
               height={16}
-              className="absolute right-[-7px] bottom-[-7px]"
+              className="absolute -right-1.75 -bottom-1.75"
             />
           </div>
           <div className="flex flex-col items-start gap-1">

@@ -1,6 +1,6 @@
 "use client";
 
-import { JSX, useEffect, useState } from "react";
+import { useState } from "react";
 import { MarketRow } from "./MarketRow";
 import { MarketSK } from "./MarketSK";
 import Pagination from "../../common/Pagination";
@@ -14,48 +14,35 @@ const MarketTable = ({
 }: {
   exchangeName: string | undefined;
 }) => {
-  const [marketsState, setMarketsState] = useState<ExchangeMarket[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const {
-    data: markets,
-    isPending,
-    isSuccess,
-  } = useExchangeMarkets(exchangeName?.toLowerCase() ?? "");
+  const { data: markets, isPending } = useExchangeMarkets(
+    exchangeName?.toLowerCase() ?? "",
+  );
 
-  useEffect(() => {
-    if (!isSuccess) return;
-
-    markets.sort((a, b) => b.quotes.USD.volume_24h - a.quotes.USD.volume_24h);
-
-    setMarketsState(markets);
-  }, [markets, isSuccess]);
+  const sortedMarkets =
+    markets?.sort(
+      (a, b) => b.quotes.USD.volume_24h - a.quotes.USD.volume_24h,
+    ) ?? [];
 
   function paginatedMarkets(
     markets: ExchangeMarket[],
     start: number,
     end: number,
   ) {
-    return markets.reduce((acc: JSX.Element[], curr, index) => {
-      if (index >= start && index <= end) {
-        acc.push(
-          <tr
-            className={`${
-              index !== markets.length - 1
-                ? "[&>td]:border-border [&>td]:border-b"
-                : "border-none"
-            } hover:bg-border/30 transition-colors [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
-            key={curr.base_currency_id
-              .concat("_")
-              .concat(curr.quote_currency_id)}
-          >
-            <MarketRow market={curr} index={index + 1} />
-          </tr>,
-        );
-      }
-      return acc;
-    }, []);
+    return markets.slice(start, end + 1).map((market, index, page) => (
+      <tr
+        key={`${market.base_currency_id}_${market.quote_currency_id}`}
+        className={`hover:bg-border/30 transition-colors ${
+          index !== page.length - 1
+            ? "[&>td]:border-border [&>td]:border-b"
+            : "border-none"
+        } [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
+      >
+        <MarketRow market={market} index={start + index + 1} />
+      </tr>
+    ));
   }
 
   return (
@@ -64,20 +51,20 @@ const MarketTable = ({
         <table className="w-full table-fixed whitespace-nowrap">
           <thead>
             <tr className="[&>th]:border-border [&>th]:border-y [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
-              <th className="w-[40px] pl-4 text-start!">#</th>
-              <th className="w-[180px] text-start!">Currency</th>
-              <th className="w-[130px] text-start!">Pair</th>
-              <th className="w-[80px]">Trust Score</th>
-              <th className="w-[120px]">Price</th>
-              <th className="w-[140px]">Volume</th>
-              <th className="w-[100px]">Volume %</th>
-              <th className="w-[130px]">Updated</th>
+              <th className="w-10 pl-4 text-start!">#</th>
+              <th className="w-45 text-start!">Currency</th>
+              <th className="w-32.5 text-start!">Pair</th>
+              <th className="w-20">Trust Score</th>
+              <th className="w-30">Price</th>
+              <th className="w-35">Volume</th>
+              <th className="w-25">Volume %</th>
+              <th className="w-32.5">Updated</th>
             </tr>
           </thead>
           <tbody>
-            {marketsState.length > 0 &&
+            {sortedMarkets.length > 0 &&
               paginatedMarkets(
-                marketsState,
+                sortedMarkets,
                 (currentPage - 1) * itemsPerPage,
                 (currentPage - 1) * itemsPerPage + itemsPerPage - 1,
               )}
@@ -85,9 +72,9 @@ const MarketTable = ({
           </tbody>
         </table>
       </div>
-      {marketsState.length > 0 && (
+      {sortedMarkets.length > 0 && (
         <Pagination
-          items={marketsState.length}
+          items={sortedMarkets.length}
           itemsPerPage={itemsPerPage}
           siblings={2}
           currentPage={currentPage}

@@ -78,9 +78,7 @@ const Chart = ({
             tickMargin={10}
             minTickGap={40}
             interval={"equidistantPreserveStart"}
-            tickFormatter={(value, index) =>
-              formatByRange(value, index, rangeParam)
-            }
+            tickFormatter={(value) => formatByRange(value, rangeParam)}
           />
           <YAxis
             tickLine={false}

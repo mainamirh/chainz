@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { JSX, useEffect, useState } from "react";
+import { useState } from "react";
 
 import TokenHoldersRow from "./TokenHoldersRow";
 
@@ -20,70 +20,55 @@ const TokenHoldersTable = ({
   otherAllocations: string[];
 }) => {
   const searchParams = useSearchParams();
-
-  const [totalValue, setTotalValue] = useState<number>(0);
-  const [tokenHoldersState, setTokenHoldersState] = useState<Wallet[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
 
+  const itemsPerPage = 10;
   const allocationSymbol = searchParams.get("allocation");
+
   const {
     data: tokenHolders,
     isPending,
     isFetched,
   } = useExchangeAssets(exchangeId ?? 0);
 
-  useEffect(() => {
-    if (!tokenHolders) return;
-
-    const filteredHolders = allocationSymbol
-      ? tokenHolders.filter((wallet) =>
-          allocationSymbol === "others"
-            ? !otherAllocations.includes(wallet.currency.symbol)
-            : wallet.currency.symbol.toLowerCase() ===
-              allocationSymbol.toLowerCase(),
+  const selectedTokenHolders = tokenHolders
+    ? tokenHolders
+        .filter((wallet) =>
+          allocationSymbol
+            ? allocationSymbol === "others"
+              ? !otherAllocations.includes(wallet.currency.symbol)
+              : wallet.currency.symbol.toLowerCase() ===
+                allocationSymbol.toLowerCase()
+            : true,
         )
-      : tokenHolders;
+        .toSorted(
+          (a, b) =>
+            b.balance * b.currency.price_usd - a.balance * a.currency.price_usd,
+        )
+    : [];
 
-    const sortedHolders = filteredHolders.sort(
-      (a, b) =>
-        b.balance * b.currency.price_usd - a.balance * a.currency.price_usd,
-    );
-
-    setTokenHoldersState(sortedHolders);
-
-    setTotalValue(
-      sortedHolders.reduce(
-        (acc, curr) => acc + curr.balance * curr.currency.price_usd,
-        0,
-      ),
-    );
-
-    setCurrentPage(1);
-  }, [tokenHolders, allocationSymbol, otherAllocations]);
+  const totalValue = selectedTokenHolders.reduce(
+    (total, wallet) => total + wallet.balance * wallet.currency.price_usd,
+    0,
+  );
 
   function paginatedTokenHolders(
-    selectedTokenHolders: Wallet[],
+    wallets: Wallet[],
     start: number,
     end: number,
   ) {
-    return selectedTokenHolders.reduce((acc: JSX.Element[], curr, index) => {
-      if (index >= start && index <= end) {
-        acc.push(
-          <tr
-            className={`${
-              index !== selectedTokenHolders.length - 1
-                ? "[&>td]:border-border [&>td]:border-b"
-                : "border-none"
-            } [&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium`}
-            key={curr.wallet_address.concat(index.toString())}
-          >
-            <TokenHoldersRow tokenHolder={curr} />
-          </tr>,
-        );
-      }
-      return acc;
-    }, []);
+    return wallets.slice(start, end + 1).map((wallet, index, page) => (
+      <tr
+        key={`${wallet.wallet_address}${start + index}`}
+        className={`[&>td]:py-4 [&>td]:text-end [&>td]:text-sm [&>td]:font-medium ${
+          index !== page.length - 1
+            ? "[&>td]:border-border [&>td]:border-b"
+            : "border-none"
+        }`}
+      >
+        <TokenHoldersRow tokenHolder={wallet} />
+      </tr>
+    ));
   }
 
   return (
@@ -94,7 +79,7 @@ const TokenHoldersTable = ({
           {totalValue || isFetched ? (
             <span>${roundDecimalsPlaces(totalValue, 2).toLocaleString()}</span>
           ) : (
-            <div className="bg-border h-[21px] w-[170px] animate-pulse rounded-sm" />
+            <div className="bg-border h-5.25 w-42.5 animate-pulse rounded-sm" />
           )}
         </div>
         <ul className="text-content/40 text-xs font-medium [&>li]:before:mr-1 [&>li]:before:content-['*']">
@@ -108,16 +93,16 @@ const TokenHoldersTable = ({
         <table className="w-full table-fixed whitespace-nowrap">
           <thead>
             <tr className="[&>th]:border-border [&>th]:border-y [&>th]:py-3 [&>th]:text-end [&>th]:text-xs [&>th]:font-semibold">
-              <th className="w-[180px] pl-4 text-start!">Token</th>
-              <th className="w-[160px]">Balance</th>
-              <th className="w-[130px]">Price</th>
-              <th className="w-[160px]">Value</th>
+              <th className="w-45 pl-4 text-start!">Token</th>
+              <th className="w-40">Balance</th>
+              <th className="w-32.5">Price</th>
+              <th className="w-40">Value</th>
             </tr>
           </thead>
           <tbody>
-            {tokenHoldersState.length > 0 &&
+            {selectedTokenHolders.length > 0 &&
               paginatedTokenHolders(
-                tokenHoldersState,
+                selectedTokenHolders,
                 (currentPage - 1) * itemsPerPage,
                 (currentPage - 1) * itemsPerPage + itemsPerPage - 1,
               )}
@@ -127,9 +112,9 @@ const TokenHoldersTable = ({
           </tbody>
         </table>
       </div>
-      {tokenHoldersState.length > 0 && (
+      {selectedTokenHolders.length > 0 && (
         <Pagination
-          items={tokenHoldersState.length}
+          items={selectedTokenHolders.length}
           itemsPerPage={itemsPerPage}
           siblings={2}
           currentPage={currentPage}

@@ -3,18 +3,11 @@
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-import {
-  PieChart,
-  Pie,
-  ResponsiveContainer,
-  Label,
-  Tooltip,
-  Sector,
-  type PieSectorShapeProps,
-} from "recharts";
+import { PieChart, Pie, ResponsiveContainer, Label, Tooltip } from "recharts";
 
 import PieChartTooltip from "./PieChartTooltip";
-import type { AggregatedAllocation } from "./TokenAllocation";
+import PieShape from "./PieShape";
+import type { AggregatedAllocation } from "@/lib/types";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -32,28 +25,14 @@ const AllocationPieChart = ({ data }: { data: AggregatedAllocation[] }) => {
   function handleSearchParams(query: "allocation", term: string) {
     const params = new URLSearchParams(searchParams);
 
-    params.get(query) === term ? params.delete(query) : params.set(query, term);
+    if (params.get(query) === term) {
+      params.delete(query);
+    } else {
+      params.set(query, term);
+    }
 
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
-
-  const renderShape = (props: PieSectorShapeProps) => {
-    const index = props.index ?? 0;
-
-    return (
-      <Sector
-        {...props}
-        fill={COLORS[index % COLORS.length]}
-        className="cursor-pointer outline-hidden hover:brightness-110"
-        stroke={
-          activeIndex === index
-            ? COLORS[index % COLORS.length]
-            : "rgb(var(--content))"
-        }
-        strokeWidth={activeIndex === index ? 4 : hoverIndex === index ? 2 : 0}
-      />
-    );
-  };
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -67,7 +46,9 @@ const AllocationPieChart = ({ data }: { data: AggregatedAllocation[] }) => {
           innerRadius={40}
           outerRadius={80}
           paddingAngle={1}
-          shape={renderShape}
+          shape={(props) =>
+            PieShape({ ...props, colors: COLORS, activeIndex, hoverIndex })
+          }
           onMouseEnter={(_, index) => {
             setHoverIndex(index);
           }}

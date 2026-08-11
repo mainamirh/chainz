@@ -1,9 +1,9 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useParams, useSearchParams } from "next/navigation";
 
 import {
+  useExchangeAssets,
   useExchangesMetadata,
   useListingLatest,
 } from "@/lib/hooks/queries/coinmarketcap";
@@ -19,16 +19,11 @@ import {
 import TokenHoldersTable from "@/components/exchanges/exchange-page/TokenHoldersTable";
 import TokenAllocation from "@/components/exchanges/exchange-page/TokenAllocation";
 import ExchangeMarket from "@/components/exchanges/exchange-market/ExchangeMarket";
+import { getAggregatedAllocation } from "@/lib/utils";
 
 export default function Exchange() {
   const { name } = useParams();
-
-  /**
-   * If the "other" is selected, the otherAllocation is
-   * set to the first five token from aggregatedAllocation
-   * to filter out the token holders table.
-   *  */
-  const [otherAllocations, setOtherAllocations] = useState<string[]>([]);
+  const searchParams = useSearchParams();
 
   const { data: metadata } = useExchangesMetadata();
   const exchange =
@@ -43,6 +38,22 @@ export default function Exchange() {
   const BTC = coinRanking?.find(
     (coin) => coin.symbol.toLocaleLowerCase() === "btc",
   );
+
+  const { data: tokenHolders } = useExchangeAssets(exchange?.id ?? 0);
+
+  const aggregatedAllocation = getAggregatedAllocation(tokenHolders);
+  /**
+   * If the "other" is selected, the otherAllocation is
+   * set to the first five token from aggregatedAllocation
+   * to filter out the token holders table.
+   *  */
+  let otherAllocations: string[] = [];
+
+  if (searchParams.get("allocation") === "others") {
+    otherAllocations = aggregatedAllocation
+      .slice(0, 5)
+      .map((item) => item.symbol);
+  }
 
   return (
     <>
@@ -82,10 +93,7 @@ export default function Exchange() {
               otherAllocations={otherAllocations}
             />
             <div className="flex flex-col gap-4 lg:w-2/6">
-              <TokenAllocation
-                exchangeId={exchange?.id}
-                setOtherAllocations={setOtherAllocations}
-              />
+              <TokenAllocation exchangeId={exchange?.id} />
               <p className="text-content/40 text-xs text-balance before:mr-1 before:content-['**']">
                 Disclaimer: The information about holdings in third-party wallet
                 addresses is provided by CoinMarketCap. CoinMarketCap does not

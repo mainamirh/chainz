@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import { useCoinMarkets } from "@/lib/hooks/queries/coinpaprika";
 import MarketsTable from "./MarketsTable";
 
@@ -11,67 +9,63 @@ import { capitalize, range } from "@/lib/utils";
 
 import type { CoinMarket } from "@/lib/types";
 
+type RecommendedMarkets = {
+  highestPrice: CoinMarket;
+  lowestPrice: CoinMarket;
+  forBuying: CoinMarket;
+  forSelling: CoinMarket;
+};
+
+const recommendations = [
+  ["forBuying", "Best to Buy", "on"],
+  ["forSelling", "Best to Sell", "on"],
+  ["lowestPrice", "Lowest Price", "at"],
+  ["highestPrice", "Highest Price", "at"],
+] as const;
+
 const CoinMarkets = ({ coinId }: { coinId: string | undefined }) => {
-  const [recommendedMarket, setRecommendedMarket] = useState<{
-    highestPrice: CoinMarket;
-    lowestPrice: CoinMarket;
-    forBuying: CoinMarket;
-    forSelling: CoinMarket;
-  }>();
+  const { data: markets } = useCoinMarkets(coinId ?? "");
 
-  const { data: markets, isSuccess } = useCoinMarkets(coinId ?? "");
+  const baseCurrency = coinId?.split("-")[0].toUpperCase();
 
-  useEffect(() => {
-    if (!isSuccess || !coinId) return;
+  const validMarkets = markets?.filter(
+    ({ market_url, adjusted_volume_24h_share, pair }) =>
+      market_url &&
+      adjusted_volume_24h_share > 0 &&
+      pair === `${baseCurrency}/USDT`,
+  );
 
-    const baseCurrency = coinId.split("-")[0].toUpperCase();
+  const recommendedMarkets = validMarkets?.reduce<RecommendedMarkets>(
+    (result, market) => {
+      const price = market.quotes.USD.price;
+      const isTrusted =
+        market.trust_score === "high" && market.adjusted_volume_24h_share > 0.1;
 
-    setRecommendedMarket(
-      markets.reduce(
-        (result, current) => {
-          const {
-            quotes,
-            trust_score,
-            adjusted_volume_24h_share,
-            market_url,
-            pair,
-          } = current;
+      if (price < result.lowestPrice.quotes.USD.price) {
+        result.lowestPrice = market;
+      }
 
-          if (
-            pair ===
-              `${baseCurrency === "USDT" ? pair : `${baseCurrency}/USDT`}` &&
-            market_url &&
-            adjusted_volume_24h_share > 0
-          ) {
-            const isBetterForBuying =
-              quotes.USD.price < result.lowestPrice.quotes.USD.price;
-            const isBetterForSelling =
-              quotes.USD.price > result.highestPrice.quotes.USD.price;
-            const isTrusted =
-              trust_score === "high" && adjusted_volume_24h_share > 0.1;
+      if (price > result.highestPrice.quotes.USD.price) {
+        result.highestPrice = market;
+      }
 
-            if (isBetterForBuying) {
-              result.lowestPrice = current;
-              if (isTrusted) result.forBuying = current;
-            }
+      if (isTrusted && price < result.forBuying.quotes.USD.price) {
+        result.forBuying = market;
+      }
 
-            if (isBetterForSelling) {
-              result.highestPrice = current;
-              if (isTrusted) result.forSelling = current;
-            }
-          }
+      if (isTrusted && price > result.forSelling.quotes.USD.price) {
+        result.forSelling = market;
+      }
 
-          return result;
-        },
-        {
-          highestPrice: markets[0],
-          lowestPrice: markets[0],
-          forBuying: markets[0],
-          forSelling: markets[0],
-        },
-      ),
-    );
-  }, [markets, isSuccess, coinId]);
+      return result;
+    },
+    {
+      highestPrice: validMarkets?.[0],
+      lowestPrice: validMarkets?.[0],
+      forBuying: validMarkets?.[0],
+      forSelling: validMarkets?.[0],
+    },
+  );
 
   return (
     <div className="flex flex-col gap-5">
@@ -79,41 +73,20 @@ const CoinMarkets = ({ coinId }: { coinId: string | undefined }) => {
         {coinId ? (
           <span className="capitalize">{coinId.split("-")[1]} Markets</span>
         ) : (
-          <div className="bg-border h-[30px] w-[180px] animate-pulse rounded-md" />
+          <div className="bg-border h-7.5 w-45 animate-pulse rounded-md" />
         )}
       </label>
-      <div className="relative overflow-hidden rounded-xl">
-        <div className="no-scrollbar flex items-center gap-5 overflow-x-auto p-3">
-          <div className="shadow-border pointer-events-none absolute inset-0 shadow-[inset_25px_0px_25px_-25px,inset_-25px_0px_25px_-25px]" />
-          {coinId && recommendedMarket ? (
-            <>
+      <div className="no-scrollbar flex items-center gap-5 overflow-x-auto">
+        {coinId && recommendedMarkets
+          ? recommendations.map(([type, label, preposition]) => (
               <MarketRecommendation
+                key={type}
                 coinId={coinId}
-                market={recommendedMarket.forBuying}
-                label={`Best to Buy ${capitalize(coinId.split("-")[1])} on`}
+                market={recommendedMarkets[type]}
+                label={`${label} ${capitalize(coinId.split("-")[1])} ${preposition}`}
               />
-              <MarketRecommendation
-                coinId={coinId}
-                market={recommendedMarket.forSelling}
-                label={`Best to Sell ${capitalize(coinId.split("-")[1])} on`}
-              />
-
-              <MarketRecommendation
-                coinId={coinId}
-                market={recommendedMarket.lowestPrice}
-                label={`Lowest Price for ${capitalize(coinId.split("-")[1])} at`}
-              />
-
-              <MarketRecommendation
-                coinId={coinId}
-                market={recommendedMarket.highestPrice}
-                label={`Highest Price for ${capitalize(coinId.split("-")[1])} at`}
-              />
-            </>
-          ) : (
-            range(1, 4).map((_, i) => <RecommendationSK key={i} />)
-          )}
-        </div>
+            ))
+          : range(1, 4).map((_, i) => <RecommendationSK key={i} />)}
       </div>
 
       <MarketsTable coinId={coinId} />

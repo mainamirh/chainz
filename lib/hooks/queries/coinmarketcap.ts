@@ -83,5 +83,6 @@ export function usePriceConversion(from_id = "", to_id = "", amount = 0) {
       getPriceConversionV2({ id: from_id, convert_id: to_id, amount }),
     staleTime: 1 * 60 * 1000,
     enabled: !!from_id && !!to_id && !!amount,
+    placeholderData: keepPreviousData,
   });
 }
