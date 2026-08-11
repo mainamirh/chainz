@@ -3,7 +3,7 @@
 import { setTheme } from "@/lib/theme";
 import { Monitor, Sun, Moon } from "lucide-react";
 
-import type { Theme as ThemeType } from "@/lib/types";
+import type { Theme as ThemeType } from "@/types";
 
 const Theme = ({ theme }: { theme: ThemeType }) => {
   return (

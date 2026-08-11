@@ -51,6 +51,7 @@
 
 html {
   scroll-behavior: smooth !important;
+  scroll-padding-top: 85px;
 }
 
 body {

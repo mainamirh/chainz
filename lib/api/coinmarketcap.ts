@@ -18,7 +18,7 @@ import type {
   PriceConversion,
   QuotesLatest,
   Wallet,
-} from "../types";
+} from "../../types";
 
 export async function getListingsLatest(
   query: GetListingsLatestQuery,

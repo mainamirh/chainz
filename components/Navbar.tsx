@@ -14,7 +14,7 @@ import { Menu, X, ArrowRightLeft, Coins } from "lucide-react";
 import AggregatedStats from "./AggregatedStats";
 
 import type { LucideIcon } from "lucide-react";
-import type { QuotesLatest, Theme as ThemeType } from "@/lib/types";
+import type { QuotesLatest, Theme as ThemeType } from "@/types";
 
 export type navItem = {
   label: string;

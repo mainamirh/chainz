@@ -5,7 +5,7 @@ import {
   getHistoricalTicks,
 } from "@/lib/api/coinpaprika";
 
-import type { Range } from "@/lib/types";
+import type { Range } from "@/types";
 
 const fetchKeys = {
   coin: (id: string) => ["coin", id, "markets"],

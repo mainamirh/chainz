@@ -7,7 +7,7 @@ import { PieChart, Pie, ResponsiveContainer, Label, Tooltip } from "recharts";
 
 import PieChartTooltip from "./PieChartTooltip";
 import PieShape from "./PieShape";
-import type { AggregatedAllocation } from "@/lib/types";
+import type { AggregatedAllocation } from "@/types";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 

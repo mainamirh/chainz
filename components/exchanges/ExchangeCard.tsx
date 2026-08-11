@@ -8,7 +8,7 @@ import ReactMarkdown from "react-markdown";
 
 import { Calendar, ChevronRight, Eye, PercentCircle } from "lucide-react";
 
-import type { ExchangeMetadata } from "@/lib/types";
+import type { ExchangeMetadata } from "@/types";
 
 import { regularDateFormat, compactNumber } from "@/lib/utils";
 

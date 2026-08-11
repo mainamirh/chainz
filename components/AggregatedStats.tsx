@@ -2,7 +2,7 @@
 
 import PercentChange from "./common/PercentChange";
 import { compactNumber } from "@/lib/utils";
-import type { QuotesLatest } from "@/lib/types";
+import type { QuotesLatest } from "@/types";
 
 const AggregatedStats = ({
   aggregatedStats,

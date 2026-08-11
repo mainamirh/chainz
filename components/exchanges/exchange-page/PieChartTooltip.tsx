@@ -5,7 +5,7 @@ import { compactNumber, roundDecimalsPlaces, coinLogo } from "@/lib/utils";
 import type { TooltipContentProps } from "recharts";
 
 import { CircleDollarSign, CircleEllipsis } from "lucide-react";
-import type { AggregatedAllocation } from "@/lib/types";
+import type { AggregatedAllocation } from "@/types";
 
 const PieChartTooltip: React.FC<TooltipContentProps> = ({
   active,

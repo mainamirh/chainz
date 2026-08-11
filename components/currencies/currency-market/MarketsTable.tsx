@@ -7,7 +7,7 @@ import Pagination from "../../common/Pagination";
 
 import { useCoinMarkets } from "@/lib/hooks/queries/coinpaprika";
 
-import type { CoinMarket } from "@/lib/types";
+import type { CoinMarket } from "@/types";
 
 const MarketsTable = ({ coinId }: { coinId: string | undefined }) => {
   const [currentPage, setCurrentPage] = useState(1);

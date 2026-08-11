@@ -7,7 +7,7 @@ import MarketRecommendation from "./MarketRecommendation";
 import { RecommendationSK } from "./Skeletons";
 import { capitalize, range } from "@/lib/utils";
 
-import type { CoinMarket } from "@/lib/types";
+import type { CoinMarket } from "@/types";
 
 type RecommendedMarkets = {
   highestPrice: CoinMarket;

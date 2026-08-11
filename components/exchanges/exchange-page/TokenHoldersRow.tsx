@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { roundDecimalsPlaces, coinLogo, shortenedAddress } from "@/lib/utils";
 
-import type { Wallet } from "@/lib/types";
+import type { Wallet } from "@/types";
 import { Check, Copy, WalletMinimal } from "lucide-react";
 
 const TokenHoldersRow = ({ tokenHolder }: { tokenHolder: Wallet }) => {

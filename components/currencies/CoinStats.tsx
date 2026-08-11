@@ -9,7 +9,7 @@ import { useMetadata } from "@/lib/hooks/queries/coinmarketcap";
 
 import { StickyNote, Globe, MessageCircle, ExternalLink } from "lucide-react";
 
-import type { ListingLatest } from "@/lib/types";
+import type { ListingLatest } from "@/types";
 
 import { linkToATag } from "@/lib/utils";
 import {

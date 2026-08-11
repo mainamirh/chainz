@@ -8,7 +8,7 @@ import TokenHoldersRow from "./TokenHoldersRow";
 import { useExchangeAssets } from "@/lib/hooks/queries/coinmarketcap";
 import { roundDecimalsPlaces } from "@/lib/utils";
 
-import type { Wallet } from "@/lib/types";
+import type { Wallet } from "@/types";
 import { TokenHoldersSK } from "./Skeleton";
 import Pagination from "../../common/Pagination";
 

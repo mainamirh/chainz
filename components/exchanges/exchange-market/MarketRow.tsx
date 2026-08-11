@@ -9,7 +9,7 @@ import {
   trustBadgeColor,
 } from "@/lib/utils";
 
-import type { ExchangeMarket } from "@/lib/types";
+import type { ExchangeMarket } from "@/types";
 import { ExternalLink } from "lucide-react";
 
 export const MarketRow = ({

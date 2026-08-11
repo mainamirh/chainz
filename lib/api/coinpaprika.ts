@@ -9,7 +9,7 @@ import type {
   ExchangeMarket,
   HistoricalData,
   Range,
-} from "../types";
+} from "../../types";
 
 export async function getHistoricalTicks(coinId: string, range: Range) {
   const params = buildQueryParams(parseRange(range));

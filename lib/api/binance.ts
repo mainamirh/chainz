@@ -2,7 +2,7 @@
 
 import { fetcher, buildQueryParams } from "../utils";
 import { binanceApiBaseUrl } from "../constants";
-import type { SymbolOrderbook, GetSymbolsOrderbookQuery } from "../types";
+import type { SymbolOrderbook, GetSymbolsOrderbookQuery } from "../../types";
 
 export async function getSymbolsOrderbook(query: GetSymbolsOrderbookQuery) {
   const params = buildQueryParams(query);

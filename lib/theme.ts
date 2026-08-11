@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-import type { Theme } from "./types";
+import type { Theme } from "../types";
 
 export async function setTheme(theme: Theme) {
   const cookieStore = await cookies();

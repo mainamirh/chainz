@@ -18,7 +18,7 @@ import { LoaderCircle } from "lucide-react";
 
 import type { AxisDomain } from "recharts/types/util/types";
 import { compactNumber, formatByRange } from "@/lib/utils";
-import type { HistoricalData, Range } from "@/lib/types";
+import type { HistoricalData, Range } from "@/types";
 
 const Chart = ({
   data,

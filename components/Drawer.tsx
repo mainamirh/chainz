@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Theme from "./common/Theme";
 
 import type { navItem } from "./Navbar";
-import type { Theme as ThemeType } from "@/lib/types";
+import type { Theme as ThemeType } from "@/types";
 
 const Drawer = ({
   isOpen,

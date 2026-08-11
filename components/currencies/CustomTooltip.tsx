@@ -2,7 +2,7 @@ import { Award, CandlestickChart, CircleDollarSign } from "lucide-react";
 
 import { compactNumber, regularDateFormat, fullClockFormat } from "@/lib/utils";
 
-import type { HistoricalData } from "@/lib/types";
+import type { HistoricalData } from "@/types";
 import type { TooltipContentProps } from "recharts";
 
 type CustomProps = TooltipContentProps & {

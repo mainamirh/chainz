@@ -5,7 +5,7 @@ import type {
   Range,
   QueryParams,
   Wallet,
-} from "./types";
+} from "../types";
 
 export const coinLogo = (id: number): string =>
   `https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`;
