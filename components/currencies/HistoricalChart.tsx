@@ -4,7 +4,7 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import Chart from "./Chart";
 import { LoaderCircle } from "lucide-react";
-import useHistoricalTicks from "@/lib/hooks/queries/coinpaprika";
+import { useHistoricalTicks } from "@/hooks/queries";
 
 import type { Range } from "@/types";
 

@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import TokenHoldersRow from "./TokenHoldersRow";
 
-import { useExchangeAssets } from "@/lib/hooks/queries/coinmarketcap";
+import { useExchangeAssets } from "@/hooks/queries";
 import { roundDecimalsPlaces } from "@/lib/utils";
 
 import type { Wallet } from "@/types";

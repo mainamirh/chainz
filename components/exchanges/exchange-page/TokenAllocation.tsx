@@ -5,7 +5,7 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import AllocationPieChart from "./AllocationPieChart";
 
-import { useExchangeAssets } from "@/lib/hooks/queries/coinmarketcap";
+import { useExchangeAssets } from "@/hooks/queries";
 
 import {
   coinLogo,

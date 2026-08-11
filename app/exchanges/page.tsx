@@ -1,6 +1,6 @@
 "use client";
 
-import { useExchangesMetadata } from "@/lib/hooks/queries/coinmarketcap";
+import { useExchangesMetadata } from "@/hooks/queries";
 import ExchangeCard from "@/components/exchanges/ExchangeCard";
 import ExchangeCardSK from "@/components/exchanges/ExchangeCardSK";
 

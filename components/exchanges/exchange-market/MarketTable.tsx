@@ -5,7 +5,7 @@ import { MarketRow } from "./MarketRow";
 import { MarketSK } from "./MarketSK";
 import Pagination from "../../common/Pagination";
 
-import { useExchangeMarkets } from "@/lib/hooks/queries/coinpaprika";
+import { useExchangeMarkets } from "@/hooks/queries";
 
 import type { ExchangeMarket } from "@/types";
 

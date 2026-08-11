@@ -1,6 +1,6 @@
 "use client";
 
-import { useCoinMarkets } from "@/lib/hooks/queries/coinpaprika";
+import { useCoinMarkets } from "@/hooks/queries";
 import MarketsTable from "./MarketsTable";
 
 import MarketRecommendation from "./MarketRecommendation";

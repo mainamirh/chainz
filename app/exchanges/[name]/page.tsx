@@ -6,7 +6,7 @@ import {
   useExchangeAssets,
   useExchangesMetadata,
   useListingLatest,
-} from "@/lib/hooks/queries/coinmarketcap";
+} from "@/hooks/queries";
 
 import Header from "@/components/exchanges/exchange-page/Header";
 import Links from "@/components/exchanges/exchange-page/Links";

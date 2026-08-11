@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { coinLogo } from "@/lib/utils";
 import PercentChange from "../common/PercentChange";
-import { useMetadata } from "@/lib/hooks/queries/coinmarketcap";
+import { useMetadata } from "@/hooks/queries";
 
 import { StickyNote, Globe, MessageCircle, ExternalLink } from "lucide-react";
 

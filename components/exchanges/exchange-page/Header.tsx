@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { roundDecimalsPlaces } from "@/lib/utils";
 
-import { useExchangeAssets } from "@/lib/hooks/queries/coinmarketcap";
+import { useExchangeAssets } from "@/hooks/queries";
 
 import type { ListingLatest as Coin, ExchangeMetadata } from "@/types";
 

@@ -6,7 +6,7 @@ import RankingSK from "./RankingSK";
 import RankingRow from "./RankingRow";
 import Pagination from "../common/Pagination";
 
-import { useListingLatest } from "@/lib/hooks/queries/coinmarketcap";
+import { useListingLatest } from "@/hooks/queries";
 
 const Ranking = ({ cryptocurrencies }: { cryptocurrencies: number }) => {
   const router = useRouter();

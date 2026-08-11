@@ -35,7 +35,7 @@ export function useExchangeMarkets(name: string) {
   });
 }
 
-export default function useHistoricalTicks(coinId: string, range: Range) {
+export function useHistoricalTicks(coinId: string, range: Range) {
   return useQuery({
     queryKey: [fetchKeys.historicalTicks(range, coinId)],
     queryFn: () => getHistoricalTicks(coinId, range),

@@ -5,10 +5,7 @@ import { useState } from "react";
 import Button from "./common/Button";
 import Dropdown from "./common/Dropdown";
 
-import {
-  useListingLatest,
-  usePriceConversion,
-} from "@/lib/hooks/queries/coinmarketcap";
+import { useListingLatest, usePriceConversion } from "@/hooks/queries";
 
 import { useDebounce } from "use-debounce";
 
