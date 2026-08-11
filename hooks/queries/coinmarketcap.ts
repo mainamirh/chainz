@@ -8,6 +8,8 @@ import {
   getPriceConversionV2,
 } from "@/lib/api/coinmarketcap";
 
+import type { GetExchangesMetadataQuery } from "@/types";
+
 const fetchKeys = {
   exchange: (id: number) => ["exchange", id, "assets"],
   idMap: "exchanges/id_map",
@@ -35,7 +37,7 @@ export function useExchangeAssets(id: number) {
   });
 }
 
-function useExchangesIdMap(limit: number) {
+export function useExchangesIdMap(limit: number) {
   return useQuery({
     queryKey: [fetchKeys.idMap],
     queryFn: () => getExchangesIdMap({ limit, sort: "volume_24h" }),
@@ -43,16 +45,14 @@ function useExchangesIdMap(limit: number) {
   });
 }
 
-export function useExchangesMetadata() {
-  const { data: exchangesIdMap } = useExchangesIdMap(10);
-
-  const ids = exchangesIdMap?.map((exchanges) => exchanges.id) ?? [];
+export function useExchangesMetadata(query: GetExchangesMetadataQuery) {
+  const { id, slug } = query;
 
   return useQuery({
-    queryKey: [fetchKeys.exchangeMetadata],
-    queryFn: () => getExchangesMetadata({ id: ids }),
+    queryKey: [fetchKeys.exchangeMetadata, slug],
+    queryFn: () => getExchangesMetadata(query),
     staleTime: 24 * 60 * 60 * 1000,
-    enabled: !!ids.length,
+    enabled: !!id?.length || !!slug?.length,
   });
 }
 

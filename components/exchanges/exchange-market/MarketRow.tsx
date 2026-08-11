@@ -45,7 +45,7 @@ export const MarketRow = ({
       </td>
       <td className="text-start!">
         <Link
-          href={market.market_url}
+          href={market.market_url ?? "#"}
           target="_blank"
           className="flex w-fit items-center gap-1 font-normal text-blue-400 transition-colors hover:text-blue-500"
         >

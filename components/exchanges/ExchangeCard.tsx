@@ -27,7 +27,7 @@ const ExchangeCard = ({ exchange }: { exchange: ExchangeMetadata }) => {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-        className="absolute inset-x-0 top-0 h-[30px] blur-[70px]"
+        className="absolute inset-x-0 top-0 h-7.5 blur-[70px]"
       />
 
       <div className="z-10 flex items-center justify-between gap-2">
@@ -59,7 +59,7 @@ const ExchangeCard = ({ exchange }: { exchange: ExchangeMetadata }) => {
         <div className="prose prose-sm prose-sky text-content prose-headings:text-content pointer-events-none line-clamp-6 text-justify">
           <ReactMarkdown>{exchange.description}</ReactMarkdown>
         </div>
-        <div className="from-foreground/90 absolute inset-x-0 bottom-0 z-10 flex h-[50px] cursor-pointer items-end justify-center bg-linear-to-t from-40% to-transparent text-xs text-indigo-500 backdrop-brightness-110 transition-colors hover:text-indigo-600 active:text-indigo-700">
+        <div className="from-foreground/90 absolute inset-x-0 bottom-0 z-10 flex h-12.5 cursor-pointer items-end justify-center bg-linear-to-t from-40% to-transparent text-xs text-indigo-500 backdrop-brightness-110 transition-colors hover:text-indigo-600 active:text-indigo-700">
           Read more
           <ChevronRight className="h-4 w-4" />
         </div>

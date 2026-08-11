@@ -16,9 +16,15 @@ export type GetExchangeIdMapQuery = {
   sort: "volume_24h";
 };
 
-export type GetExchangesMetadataQuery = {
-  id: number[];
-};
+export type GetExchangesMetadataQuery =
+  | {
+      id: number[];
+      slug?: never;
+    }
+  | {
+      slug: string;
+      id?: never;
+    };
 
 export type GetExchangeAssetsQuery = {
   id: number;

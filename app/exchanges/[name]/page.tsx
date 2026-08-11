@@ -25,7 +25,10 @@ export default function Exchange() {
   const { name } = useParams();
   const searchParams = useSearchParams();
 
-  const { data: metadata } = useExchangesMetadata();
+  const { data: metadata } = useExchangesMetadata({
+    slug: name?.toString() ?? "",
+  });
+
   const exchange =
     metadata &&
     Object.entries(metadata).find(
