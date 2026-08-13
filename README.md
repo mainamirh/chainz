@@ -1,6 +1,6 @@
 # ChainZ
 
-A modern cryptocurrency market analysis platform built with **Next.js**, inspired by platforms like CoinMarketCap.
+A cryptocurrency market analysis platform built with **Next.js**, inspired by platforms like CoinMarketCap.
 
 ChainZ aggregates cryptocurrency and exchange data from the **CoinMarketCap** and **CoinPaprika** APIs and presents it through a responsive, interactive interface.
 
